@@ -42,6 +42,9 @@
               </div>
             </div>
             <div class="p-4">
+              <div  class='text-danger m--4'>
+                <?= validation_errors();?>
+              </div>
               <form method="post" action=<?= base_url('InputSDM/tambah_sdm') ?> enctype="multipart/form-data">
                 <div class="pl-lg-4">
                   <div class="row">

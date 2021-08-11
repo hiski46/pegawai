@@ -31,7 +31,7 @@
     <div class="container-fluid mt-0">
       <div class="row">
         <div class="col-xl-8 order-xl-1">
-          <?= $this->session->flashdata('message') ?>
+          
           <div class="" id="formInput">
             <div class="">
               <div class="row align-items-center">
@@ -41,8 +41,12 @@
                 </div>
               </div>
             </div>
+            <?= $this->session->flashdata('message') ?>
             <div class="p-4">
-              <form method="post" action=<?= base_url('InputSDM/tambah_sdm') ?> enctype="multipart/form-data">
+              <div  class='text-danger m--4'>
+                <?= validation_errors();?>
+              </div>
+              <form method="post" action=<?= base_url('InputPorto/tambah_porto') ?> enctype="multipart/form-data">
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-12">
@@ -65,10 +69,14 @@
                         <div class=" row p-2">
                           <label class="col-3" for="sertifikat">Upload Evaluasi (Format Pdf): </label> <input class="ml-0 btn btn-secondary col-9" name="evaluasi" type="file">
                         </div>
+                        <input type="hidden" name="nip" value='<?= $this->session->flashdata('nip');?>'>
+                        <input type="hidden" name="nama" value='<?= $this->session->flashdata('nama_sdm');?>'>
+                        <p> <?= $this->session->flashdata('nip');?>-<?= $this->session->flashdata('nama_sdm');?> </p>
                         <div class=" row d-flex justify-content-around text-center">
-                          <input  class="btn btn-primary my-4 col-2" value="Submit" data-toggle="modal" data-target="#input-portofolio" type="button"></input>
-                          <a  href="dashboard"> <button type="button" class="btn btn-success my-4">Lanjut</button></a>
+                          <input  class="btn btn-primary my-4 col-2" value="Submit" data-toggle="modal" data-target="#input-portofolio" type="submit"></input>
+                          <a  href="<?=base_url()?>"> <button type="button" class="btn btn-success my-4">Selesai</button></a>
                         </div>
+                        
                         <!-- Modal Portofolio -->
                         <div class="modal fade" id="input-portofolio" tabindex="-1" role="dialog" aria-labelledby="input-portofolioLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
