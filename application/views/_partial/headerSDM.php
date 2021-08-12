@@ -20,7 +20,7 @@
         <div class="col-4">
           <div class="card card-stats">
             <!-- Card body -->
-            <a href="" class="btn btn-sm btn-neutral">
+            <a href="<?= base_url("Caridata#formCari")?>" class="btn btn-sm btn-neutral">
               <div class="card-body">
                 <div class="row" >
                   <div class="col ">

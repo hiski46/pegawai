@@ -1,9 +1,20 @@
 <?php 
  
 class M_data extends CI_Model{
-	// function tampil_data(){
-    //     return $this->db->get('sdm')->result();
-	// }
+	function tampil_data(){
+		$this->db->select('*');
+		$this->db->from('sdm');
+
+		return $this->db->get();
+	}
+	public function getDataPagination($limit,$offset)
+	{
+		$this->db->select('*');
+		$this->db->from('sdm');
+		$this->db->limit($limit,$offset);
+
+		return $this->db->get();
+	}
 	// function only_makanan(){
 	// 	$this->db->like('jenis', 'makanan');
 	// 	$hasil=$this->db->get('table1')->result();
@@ -19,11 +30,14 @@ class M_data extends CI_Model{
 	// 	$hasil=$this->db->get('table1')->result();
 	// 	return $hasil;
 	// }
-	// function only_pakaian(){
-	// 	$this->db->like('jenis', 'pakaian');
-	// 	$hasil=$this->db->get('table1')->result();
-	// 	return $hasil;
-	// }
+	function CariSdm($nip){
+		$query = $this->db->query('SELECT * from sdm where nip= "'.$nip.'" OR nama like ("%'.$nip.'%");' );
+		$this->db->select('*');
+		$this->db->from('sdm');
+		$this->db->where('nip',$nip)->like('nama',$nip);
+		
+		return $query->result();
+	}
 	// function only_cash(){
 	// 	$this->db->like('bayar', 'cash');
 	// 	$hasil=$this->db->get('table1')->result();
@@ -39,6 +53,7 @@ class M_data extends CI_Model{
 	{
 		return $this->db->get_where($table,$where);
 	}
+	
 
 	// function hapus($id){
 	// 	$query = $this->db->query('DELETE FROM table1 WHERE UID =' . $id . ';');
@@ -67,5 +82,7 @@ class M_data extends CI_Model{
 			return false;
 		}
 	}
+
+	
 }
 
