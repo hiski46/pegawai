@@ -15,6 +15,13 @@ class M_data extends CI_Model{
 
 		return $this->db->get();
 	}
+	public function Porto($nip)
+	{
+		$this->db->select('nama_pelatihan');
+		$this->db->where('nip',$nip);
+		$this->db->from('portofolio');
+		return $this->db->get();
+	}
 	// function only_makanan(){
 	// 	$this->db->like('jenis', 'makanan');
 	// 	$hasil=$this->db->get('table1')->result();
@@ -32,9 +39,9 @@ class M_data extends CI_Model{
 	// }
 	function CariSdm($nip){
 		$query = $this->db->query('SELECT * from sdm where nip= "'.$nip.'" OR nama like ("%'.$nip.'%");' );
-		$this->db->select('*');
-		$this->db->from('sdm');
-		$this->db->where('nip',$nip)->like('nama',$nip);
+		// $this->db->select('*');
+		// $this->db->from('sdm');
+		// $this->db->where('nip',$nip)->like('nama',$nip);
 		
 		return $query->result();
 	}

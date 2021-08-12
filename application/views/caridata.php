@@ -54,6 +54,7 @@
                     <th scope="col">NIP</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Pendidikan Terakhir</th>
+                    <th scope="col">Pelatihan</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,6 +66,11 @@
                     <td><?= $s->nip;?></td>
                     <td><?= $s->nama;?></td>
                     <td><?= $s->pendidikan_terakhir;?></td>
+                    <td><?php 
+                        foreach($this->CI->portofolio($s->nip)->result() as $p){?>
+                        <ul><li class="mb--3 ml--4" ><?=$p->nama_pelatihan;?></li></ul>
+                        <?php }?>
+                    </td>
                 </tr>
                 <?php 
                     endforeach;
