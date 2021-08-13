@@ -45,6 +45,14 @@ class M_data extends CI_Model{
 		
 		return $query->result();
 	}
+	function TampilSdm($nip){
+		$query = $this->db->query('SELECT * from sdm where nip= "'.$nip.'";' );
+		// $this->db->select('*');
+		// $this->db->from('sdm');
+		// $this->db->where('nip',$nip)->like('nama',$nip);
+		
+		return $query->result();
+	}
 	// function only_cash(){
 	// 	$this->db->like('bayar', 'cash');
 	// 	$hasil=$this->db->get('table1')->result();
@@ -62,10 +70,31 @@ class M_data extends CI_Model{
 	}
 	
 
-	// function hapus($id){
-	// 	$query = $this->db->query('DELETE FROM table1 WHERE UID =' . $id . ';');
-	// 	return $query;
-	// }
+	function hapusSDM($id){
+		$query = $this->db->query('DELETE FROM sdm WHERE nip =' . $id . ';');
+		return $query;
+	}
+	function hapusPor($id){
+		$query = $this->db->query('DELETE FROM portofolio WHERE nip =' . $id . ';');
+		return $query;
+	}
+	function hapuslspro($id){
+		$query = $this->db->query('DELETE FROM lspro WHERE nip =' . $id . ';');
+		return $query;
+	}
+	function hapuslit($id){
+		$query = $this->db->query('DELETE FROM lit WHERE nip =' . $id . ';');
+		return $query;
+	}
+	function hapuspeng($id){
+		$query = $this->db->query('DELETE FROM lab_pengujian WHERE nip =' . $id . ';');
+		return $query;
+	}
+	function hapuskal($id){
+		$query = $this->db->query('DELETE FROM lab_kalibrasi WHERE nip =' . $id . ';');
+		return $query;
+	}
+
 	
 	// function edit($where, $data)
 	// {
@@ -89,7 +118,43 @@ class M_data extends CI_Model{
 			return false;
 		}
 	}
-
 	
+	public function ceklspro($nip)
+	{
+		$query=$this->db->get_where('lspro',array('nip'=>$nip));
+		if (empty($query->row_array())) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public function ceklit($nip)
+	{
+		$query=$this->db->get_where('lit',array('nip'=>$nip));
+		if (empty($query->row_array())) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function cekpeng($nip)
+	{
+		$query=$this->db->get_where('lab_pengujian',array('nip'=>$nip));
+		if (empty($query->row_array())) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function cekkal($nip)
+	{
+		$query=$this->db->get_where('lab_kalibrasi',array('nip'=>$nip));
+		if (empty($query->row_array())) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
 

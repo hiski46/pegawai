@@ -49,7 +49,8 @@ class Caridata extends CI_Controller {
 
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
+        $jlh=$this->m_data->tampil_data()->num_rows();
+		$data['jlh'] = $jlh;
         $data['semua']=$this->m_data->getDataPagination($config["per_page"], $data['page'])->result();
        
 		$this->load->view('caridata', $data);
@@ -59,12 +60,53 @@ class Caridata extends CI_Controller {
         $nip=$this->input->post('cari');
 
         $data['semua']=$this->m_data->CariSdm($nip);
-        
+        if ($nip==NULL) {
+            redirect('Caridata#formCari');
+        }
+        $jlh=$this->m_data->tampil_data()->num_rows();
+		$data['jlh'] = $jlh;
 		$this->load->view('hasilcaridata', $data);
+    }
+    public function cekLembaga($nip){
+        $a = array();
+        if ($this->m_data->ceklspro($nip)==FALSE) {
+            array_push($a,'Lembaga Sertifikasi Produk (LSPRO)');
+        }
+        if ($this->m_data->ceklit($nip)==FALSE) {
+            array_push($a,'Lembaga Inspeksi Teknis');
+        }
+        if ($this->m_data->cekpeng($nip)==FALSE) {
+            array_push($a,'Laboratorium Pengujian');
+        }
+        if ($this->m_data->cekkal($nip)==FALSE) {
+            array_push($a,'Laboratorium Kalibrasi');
+        }
+        return $a;
     }
     public function portofolio($nip)
     {
         $porto = $this->m_data->Porto($nip);
         return $porto;
+    }
+    public function HapusSdm(){
+        $nip=$this->uri->segment(3);
+        $nama=$this->uri->segment(4);
+        
+        $this->m_data->hapuslspro($nip);
+        $this->m_data->hapuslit($nip);
+        $this->m_data->hapuspeng($nip);
+        $this->m_data->hapuskal($nip);
+        $this->m_data->hapusPor($nip);
+        $this->m_data->hapusSdm($nip);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> '.$nama.' Sudah dihapus</div>');
+        redirect('Caridata#formCari');
+    }
+    public function DetailSdm()
+    {
+        $nip=$this->uri->segment(3);
+		$sdm=$this->m_data->TampilSdm($nip);
+		$data['sdm'] = $sdm;
+		$this->load->view('detailsdm',$data);
     }
 }

@@ -95,7 +95,8 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		// $toko = $this->m_data->tampil_data();
-		// $data['toko'] = $toko;
-		$this->load->view('dashboard');
+		$jlh=$this->m_data->tampil_data()->num_rows();
+		$data['jlh'] = $jlh;
+		$this->load->view('dashboard',$data);
 	}
 }

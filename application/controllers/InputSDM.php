@@ -14,7 +14,9 @@ class InputSDM extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->load->view('inputSDM');
+		$jlh=$this->m_data->tampil_data()->num_rows();
+		$data['jlh'] = $jlh;
+		$this->load->view('inputSDM',$data);
 	}
 
 	public function tambah_sdm(){

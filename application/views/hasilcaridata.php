@@ -47,7 +47,7 @@
         </form>
     </div>
     <div class="pt-3 pl-5 ">
-        <table class="table ">
+        <table class="table bg-white">
             <thead>
                 <tr>
                     <th scope="col">No.</th>
@@ -55,6 +55,8 @@
                     <th scope="col">Nama</th>
                     <th scope="col">Pendidikan Terakhir</th>
                     <th scope="col">Pelatihan</th>
+                    <th scope="col">Lembaga</th>
+                    <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,13 +74,44 @@
                         <ul><li class="mb--3 ml--4" ><?=$p->nama_pelatihan;?></li></ul>
                         <?php }?>
                     </td>
+                    <td class='pb-3 pt-2'>
+                        <?php foreach($this->CI->cekLembaga($s->nip) as $l){?>
+                            <ul><li class="mb--3 ml--4" ><?=$l?></li></ul>   
+                        <?php } ?>     
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-facebook">Edit</button> 
+                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_hapus<?= $s->nip?>" href="#">hapus</button>
+                    </td>
                 </tr>
                 <?php 
                     endforeach;
                 ?>
             </tbody>
         </table>
-        
+        <!-- Modal -->
+        <?php foreach ($semua as $s) { ?>
+              <div class="modal fade" id="modal_hapus<?= $s->nip?>" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Hapus</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Apakah anda yakin menghapus <strong><?=$s->nama?></strong>  ?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button  class=" btn btn-secondary" aria-label="Close" data-dismiss="modal">Batal</button>
+                      <a href="<?= base_url('Caridata/HapusSdm/'.$s->nip.'/'.$s->nama)?>"><button type="button" class="btn btn-danger">Hapus</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+        <!-- Akhir Modal -->
     </div>
     <!-- Footer -->
     <footer class="footer pt-0">    
