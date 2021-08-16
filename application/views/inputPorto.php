@@ -64,38 +64,18 @@
                           <input type="text" id="input-penyelenggara" name="penyelenggara" class="form-control col-9" placeholder="Masukkan Penyelenggara Pelatihan" >
                         </div>
                         <div class=" row p-2">
-                          <label class="col-3" for="sertifikat">Upload Sertifikat (Format Pdf): </label> <input class="ml-0  btn btn-secondary col-9" name="sertifikat" type="file">
+                          <label class=" form-control-label col-3" for="sertifikat">Upload Sertifikat (Format Pdf): </label> <input class="ml-0  btn btn-secondary col-9" name="sertifikat" type="file">
                         </div>
                         <div class=" row p-2">
-                          <label class="col-3" for="sertifikat">Upload Evaluasi (Format Pdf): </label> <input class="ml-0 btn btn-secondary col-9" name="evaluasi" type="file">
+                          <label class=" form-control-label col-3" for="sertifikat">Upload Evaluasi (Format Pdf): </label> <input class="ml-0 btn btn-secondary col-9" name="evaluasi" type="file">
                         </div>
                         <input type="hidden" name="nip" value='<?= $this->session->flashdata('nip');?>'>
                         <input type="hidden" name="nama" value='<?= $this->session->flashdata('nama_sdm');?>'>
                         <p> <?= $this->session->flashdata('nip');?>-<?= $this->session->flashdata('nama_sdm');?> </p>
                         <div class=" row d-flex justify-content-around text-center">
                           <input  class="btn btn-primary my-4 col-2" value="Submit" data-toggle="modal" data-target="#input-portofolio" type="submit"></input>
-                          <a  href="<?=base_url()?>"> <button type="button" class="btn btn-success my-4">Selesai</button></a>
+                          <a  href="<?=base_url('Caridata/DetailSdm/'.$this->session->flashdata('nip').'/'.$this->session->flashdata('nama_sdm'))?>"> <button type="button" class="btn btn-success my-4">Selesai</button></a>
                         </div>
-                        
-                        <!-- Modal Portofolio -->
-                        <div class="modal fade" id="input-portofolio" tabindex="-1" role="dialog" aria-labelledby="input-portofolioLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="input-portofolioLabel">Data SDM sudah disimpan, isi form dibawah jika SDM memiliki Portofolio</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body"><h1>Ini Modal (isi form)</h1></div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal"> close</button>
-                                <button type="button" class="btn btn-primary" > Save changes</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- end Modal Portofolio -->
                       </div>
                     </div>
                   </div>

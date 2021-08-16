@@ -17,7 +17,7 @@ class M_data extends CI_Model{
 	}
 	public function Porto($nip)
 	{
-		$this->db->select('nama_pelatihan');
+		$this->db->select('*');
 		$this->db->where('nip',$nip);
 		$this->db->from('portofolio');
 		return $this->db->get();
@@ -94,7 +94,28 @@ class M_data extends CI_Model{
 		$query = $this->db->query('DELETE FROM lab_kalibrasi WHERE nip =' . $id . ';');
 		return $query;
 	}
+	
+	function cari_sertif($id){
+		$query = $this->db->query('SELECT sertifikat FROM portofolio WHERE nip =' . $id . ';');
+		return $query->result();
+	}
+	function cari_eval($id){
+		$query = $this->db->query('SELECT form_evaluasi FROM portofolio WHERE nip =' . $id . ';');
+		return $query->result();
+	}
+	function cari_sertif_id($id){
+		$query = $this->db->query('SELECT sertifikat FROM portofolio WHERE id_portofolio =' . $id . ';');
+		return $query->result();
+	}
+	function cari_eval_id($id){
+		$query = $this->db->query('SELECT form_evaluasi FROM portofolio WHERE id_portofolio =' . $id . ';');
+		return $query->result();
+	}
 
+	function hapus_porto($id){
+		$query = $this->db->query('DELETE FROM portofolio WHERE id_portofolio ='. $id . ';');
+		return $query;
+	}
 	
 	// function edit($where, $data)
 	// {
@@ -155,6 +176,23 @@ class M_data extends CI_Model{
 		}else{
 			return false;
 		}
+	}
+
+	function UbahNama($where, $data)
+	{
+		$this->db->where($where);
+		$this->db->update('sdm',$data);
+	}
+
+	function UbahPen($nip,$pen)
+	{
+		$query = $this->db->query('UPDATE sdm SET pendidikan_terakhir = "'.$pen.'" WHERE nip = "'.$nip.'";');
+		return $query;
+	}
+	public function UbahPorto($id,$data)
+	{
+		$this->db->where($id);
+		$this->db->update('portofolio',$data);
 	}
 }
 

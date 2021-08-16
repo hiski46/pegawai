@@ -80,7 +80,7 @@
                         <?php } ?>     
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-facebook">Edit</button> 
+                    <a href="<?=base_url('Caridata/DetailSdm/'.$s->nip)?>"><button class="btn btn-sm btn-facebook">Edit</button> </a> 
                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_hapus<?= $s->nip?>" href="#">hapus</button>
                     </td>
                 </tr>

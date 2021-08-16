@@ -92,6 +92,34 @@ class Caridata extends CI_Controller {
         $nip=$this->uri->segment(3);
         $nama=$this->uri->segment(4);
         
+        // Hapus file di folder 
+        $this->load->helper("file");
+        $ser=$this->m_data->cari_sertif($nip);
+        $ev=$this->m_data->cari_eval($nip);
+
+        foreach ($ser as $s){
+            $path_ser='./assets/sertifikat/'.$s->sertifikat;
+            if (file_exists($path_ser)) {
+                // last resort setting
+                // chmod($oldPicture, 0777);
+                    // chmod($path_ser, 0644);
+                    unlink($path_ser);
+                    
+                } 
+        }
+        foreach ($ev as $e){
+            $path_eval='./assets/sertifikat/'.$e->form_evaluasi;
+            if (file_exists($path_eval)) {
+                    // last resort setting
+                    // chmod($oldPicture, 0777);
+                    // chmod($path_eval, 0644);
+                    unlink($path_eval);
+                    
+                } 
+        }
+
+        
+        
         $this->m_data->hapuslspro($nip);
         $this->m_data->hapuslit($nip);
         $this->m_data->hapuspeng($nip);
@@ -99,12 +127,17 @@ class Caridata extends CI_Controller {
         $this->m_data->hapusPor($nip);
         $this->m_data->hapusSdm($nip);
 
+        
+
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> '.$nama.' Sudah dihapus</div>');
         redirect('Caridata#formCari');
     }
     public function DetailSdm()
     {
         $nip=$this->uri->segment(3);
+        $nama=$this->uri->segment(4);
+        $this->session->set_flashdata('nip',$nip);
+		$this->session->set_flashdata('nama_sdm',$nama);
 		$sdm=$this->m_data->TampilSdm($nip);
 		$data['sdm'] = $sdm;
 		$this->load->view('detailsdm',$data);

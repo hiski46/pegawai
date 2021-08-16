@@ -29,7 +29,9 @@
     <!-- Header -->
    <?php $this->load->view("_partial/header.php") ?>
     <!-- menu -->
-    <?php $this->load->view("_partial/headerSDM.php") ?>
+    <div class="row pt-200">
+      <?php $this->load->view("_partial/headerSDM.php") ?>
+    </div>
     <!-- Footer -->
     <footer class="footer pt-0">    
     </footer>
