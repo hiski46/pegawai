@@ -27,10 +27,10 @@
                 <div class="collapse" id="lembaga">
                   <div class="card card-body mt--1 collapse-inner rounded py-2">
                     <ul class="list-group" id="list-tab" role="tablist">
-                    <a class="text-sm" href="<?=base_url()?>"><li class="list-group-item list-group-item-action">Lembaga Sertifikasi Produk</li></a>
-                    <a class="text-sm"href="<?=base_url()?>"><li class="list-group-item list-group-item-action">Lembaga Inspeksi Teknis</li></a>
-                    <a class="text-sm"href="<?=base_url()?>"><li class="list-group-item list-group-item-action">Laboratorium Pengujian</li></a>
-                    <a class="text-sm"href="<?=base_url()?>"><li class="list-group-item list-group-item-action">Laboratorium Kalibrasi</li></a>
+                    <a class="text-sm" href="<?=base_url("Lembaga/Lembaga/Salah_satu/1")?>"><li class="list-group-item list-group-item-action">Lembaga Sertifikasi Produk</li></a>
+                    <a class="text-sm"href="<?=base_url("Lembaga/Lembaga/Salah_satu/2")?>"><li class="list-group-item list-group-item-action">Lembaga Inspeksi Teknis</li></a>
+                    <a class="text-sm"href="<?=base_url("Lembaga/Lembaga/Salah_satu/3")?>"><li class="list-group-item list-group-item-action">Laboratorium Pengujian</li></a>
+                    <a class="text-sm"href="<?=base_url("Lembaga/Lembaga/Salah_satu/4")?>"><li class="list-group-item list-group-item-action">Laboratorium Kalibrasi</li></a>
                     </ul>
                   </div>
                 </div>

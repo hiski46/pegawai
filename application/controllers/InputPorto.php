@@ -92,11 +92,6 @@ class InputPorto extends CI_Controller {
 		}
 		
 		}
-
-		public function Evaluasi($ev)
-		{
-			# code...
-		}
 			
 			
 			
