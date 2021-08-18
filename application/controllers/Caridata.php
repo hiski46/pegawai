@@ -83,6 +83,22 @@ class Caridata extends CI_Controller {
         }
         return $a;
     }
+    public function cekLembagaId($nip){
+        $a = array();
+        if ($this->m_data->ceklspro($nip)==FALSE) {
+            array_push($a,'1');
+        }
+        if ($this->m_data->ceklit($nip)==FALSE) {
+            array_push($a,'2');
+        }
+        if ($this->m_data->cekpeng($nip)==FALSE) {
+            array_push($a,'3');
+        }
+        if ($this->m_data->cekkal($nip)==FALSE) {
+            array_push($a,'4');
+        }
+        return $a;
+    }
     public function portofolio($nip)
     {
         $porto = $this->m_data->Porto($nip);
@@ -142,4 +158,32 @@ class Caridata extends CI_Controller {
 		$data['sdm'] = $sdm;
 		$this->load->view('detailsdm',$data);
     }
+
+    public function tampil_jabatan_2($nip,$id)
+     {
+        
+        if ($id==1) {
+            $table='lspro';
+            $jabatan = $this->m_data->tampilJabatan($table, $nip);
+            return $jabatan->result();
+        }
+        if ($id==2) {
+            $this->session->set_flashdata('nama_lembaga','Lembaga Inspeksi Teknis (LIT)');
+            $table='lit';
+            $jabatan = $this->m_data->tampilJabatan($table, $nip);
+            return $jabatan->result();
+        }
+        if ($id==3) {
+            $this->session->set_flashdata('nama_lembaga','Laboratorium Pengujian');
+            $table='lab_pengujian';
+            $jabatan = $this->m_data->tampilJabatan($table, $nip);
+            return $jabatan->result();
+        }
+        if ($id==4) {
+            $this->session->set_flashdata('nama_lembaga','Laboratorium Kalibrasi');
+            $table='lab_kalibrasi';
+            $jabatan = $this->m_data->tampilJabatan($table, $nip);
+            return $jabatan->result();
+        }
+     }
 }

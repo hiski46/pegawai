@@ -37,6 +37,12 @@
               </div>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('Backup') ?>">
+                <i class="ni ni-circle-08 text-primary"></i>
+                <span class="nav-link-text">Back UP Database</span>
+              </a>
+          </li>
         </ul>
           
       </div>

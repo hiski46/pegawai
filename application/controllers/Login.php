@@ -29,6 +29,7 @@ class Login extends CI_Controller {
 				'nama' => $username,
 				'status' => "login"
 			);
+			
 			$this->session->set_userdata($data_session);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Login Berhasil</div>');
 

@@ -7,6 +7,50 @@ class M_data extends CI_Model{
 
 		return $this->db->get();
 	}
+	
+	function tampil_jabatan($tabel){
+		$this->db->select('*');
+		$this->db->from($tabel);
+
+
+		return $this->db->get();
+	}
+	function tampilJabatan($tabel,$nip){
+		$this->db->select('*');
+		$this->db->from($tabel);
+		$this->db->where('nip',$nip);
+
+
+		return $this->db->get();
+	}
+	function tampil_data_lembaga($tabel){
+		$query = $this->db->query('SELECT DISTINCT sdm.nip,nama FROM sdm JOIN '.$tabel.' where sdm.nip ='.$tabel.'.nip ' );
+
+		return $query;
+	}
+	public function hapus_lembaga_kosong($tabel)
+	{
+		$query = $this->db->query('DELETE FROM ' .$tabel.' WHERE jabatan =""');
+		return $query;
+	}
+	public function hapus_jabatan($tabel,$nip,$jabatan)
+	{
+		$ganti=str_replace("_", " ", $jabatan);
+		$query = $this->db->query('DELETE FROM ' .$tabel.' WHERE jabatan ="'.$ganti.' " AND nip="'.$nip.'"');
+		return $query;
+	}
+
+	public function cek_jabatan($tabel,$nip,$jabatan)
+	{
+		$query = $this->db->query('SELECT nip,jabatan FROM ' .$tabel.' WHERE jabatan ="'.$jabatan.' " AND nip="'.$nip.'"');
+
+		if ($query->result()!=NULL) {
+			return false;
+		}else{
+			return true;
+		}
+	}
+
 	public function getDataPagination($limit,$offset)
 	{
 		$this->db->select('*');
@@ -125,6 +169,9 @@ class M_data extends CI_Model{
 	function tambahLembaga($table,$id,$nip){
 		$query = $this->db->query('INSERT INTO '.$table.' (id_lembaga, nip) VALUES ('.$id.','.$nip.')' );
 		return $query;
+	}
+	function tambahJabatan($table, $jabatan){
+		$this->db->insert($table, $jabatan);
 	}
 	function tambah($data, $table){
 		$this->db->insert($table, $data);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2021 at 11:41 AM
+-- Generation Time: Aug 18, 2021 at 07:03 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.33
 
@@ -43,15 +43,158 @@ INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jabatan_kal`
+--
+
+CREATE TABLE `jabatan_kal` (
+  `id` int(11) NOT NULL,
+  `jabatan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jabatan_kal`
+--
+
+INSERT INTO `jabatan_kal` (`id`, `jabatan`) VALUES
+(1, 'Kepala'),
+(2, 'Manajer Mutu'),
+(3, 'Supervisor Mutu'),
+(4, 'Manajer Teknis'),
+(5, 'Supervisor Teknis'),
+(6, 'Manajer Administrasi'),
+(7, 'Supervisor Administrasi'),
+(8, 'Manajer Pengembangan SDM'),
+(9, 'Supervisor Pengembangan SDM'),
+(10, 'Petugas Kalibrasi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jabatan_lit`
+--
+
+CREATE TABLE `jabatan_lit` (
+  `id` int(11) NOT NULL,
+  `jabatan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jabatan_lit`
+--
+
+INSERT INTO `jabatan_lit` (`id`, `jabatan`) VALUES
+(2, 'Kepala'),
+(3, 'Manajer Mutu'),
+(4, 'Supervisior Mutu'),
+(5, 'Manajer Teknis'),
+(6, 'Supervisor Teknis Emisi & Ambien'),
+(7, 'Supervisor Teknis Mokrobiologi'),
+(8, 'Manajer Administrasi'),
+(9, 'Manajer Pengembangan SDM'),
+(10, 'Staf Pengembangan SDM'),
+(11, 'Inspektur '),
+(12, 'Pembantu Lapangan'),
+(13, 'Supervisor Administrasi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jabatan_lspro`
+--
+
+CREATE TABLE `jabatan_lspro` (
+  `id` int(11) NOT NULL,
+  `jabatan` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jabatan_lspro`
+--
+
+INSERT INTO `jabatan_lspro` (`id`, `jabatan`) VALUES
+(1, 'Kepala'),
+(2, 'Manajer Mutu'),
+(3, 'Penyelia Mutu'),
+(4, 'Manajer Administrasi'),
+(5, 'Penyelia Administrasi'),
+(6, 'Staf Administrasi'),
+(7, 'Manajer Operasional'),
+(8, 'Penyelia Operasional'),
+(9, 'Manajer SDM'),
+(10, 'Penyelia SDM'),
+(11, 'Lead Auditor/Auditor'),
+(12, 'Auditor'),
+(13, 'Petugas Pengambil Contoh'),
+(14, 'Evaluator'),
+(15, 'Kepala Balai Riset dan Standarisasi Industri '),
+(16, 'Manajer Mutu'),
+(17, 'Penyelia Mutu'),
+(18, 'Manajer Administrasi'),
+(19, 'Penyelia Administrasi'),
+(20, 'Staf Administrasi'),
+(21, 'Manajer Operasional'),
+(22, 'Penyelia Operasional'),
+(23, 'Manajer SDM'),
+(24, 'Penyelia SDM'),
+(25, 'Lead Auditor/Auditor'),
+(26, 'Auditor'),
+(27, 'Petugas Pengambil Contoh'),
+(28, 'Evaluator');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jabatan_peng`
+--
+
+CREATE TABLE `jabatan_peng` (
+  `id` int(11) NOT NULL,
+  `jabatan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jabatan_peng`
+--
+
+INSERT INTO `jabatan_peng` (`id`, `jabatan`) VALUES
+(1, 'Kepala'),
+(2, 'Manajer Mutu'),
+(3, 'Supervisor Mutu'),
+(4, 'Staf Mutu'),
+(5, 'Manajer Teknis'),
+(6, 'Supervisor Teknis Air dan Air Limbah'),
+(7, 'Supervisor Teknis Mikrobiologi'),
+(8, 'Supervisor Teknis Produk Aneka'),
+(9, 'Manajer Administrasi'),
+(10, 'Supervisor Administrasi'),
+(11, 'Manajer Pengembangan SDM'),
+(12, 'Supervisor Pengembangan SDM'),
+(13, 'Analis'),
+(14, 'Petugas Pengambil Contoh'),
+(15, 'Maintenance Alat Lab Uji');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lab_kalibrasi`
 --
 
 CREATE TABLE `lab_kalibrasi` (
+  `id` int(11) NOT NULL,
   `id_lembaga` int(11) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `Ruang Lingkup` varchar(50) NOT NULL,
-  `Jabatan` varchar(50) NOT NULL
+  `ruang_lingkup` varchar(50) NOT NULL,
+  `jabatan` varchar(50) NOT NULL,
+  `kel_produk` varchar(50) NOT NULL,
+  `sub_kel_produk` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lab_kalibrasi`
+--
+
+INSERT INTO `lab_kalibrasi` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES
+(25, 4, '123456789', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -60,11 +203,22 @@ CREATE TABLE `lab_kalibrasi` (
 --
 
 CREATE TABLE `lab_pengujian` (
+  `id` int(11) NOT NULL,
   `id_lembaga` int(11) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `Ruang Lingkup` varchar(50) NOT NULL,
-  `Jabatan` varchar(50) NOT NULL
+  `ruang_lingkup` varchar(50) NOT NULL,
+  `jabatan` varchar(50) NOT NULL,
+  `kel_produk` varchar(50) NOT NULL,
+  `sub_kel_produk` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lab_pengujian`
+--
+
+INSERT INTO `lab_pengujian` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES
+(1, 3, '987654321', '', '', '', ''),
+(5, 3, '123456789', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -94,18 +248,21 @@ INSERT INTO `lembaga` (`id_lembaga`, `nama_lembaga`) VALUES
 --
 
 CREATE TABLE `lit` (
+  `id` int(11) NOT NULL,
   `id_lembaga` int(11) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `Ruang Lingkup` varchar(50) NOT NULL,
-  `Jabatan` varchar(50) NOT NULL
+  `ruang_lingkup` varchar(50) NOT NULL,
+  `jabatan` varchar(50) NOT NULL,
+  `kel_produk` varchar(50) NOT NULL,
+  `sub_kel_produk` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `lit`
 --
 
-INSERT INTO `lit` (`id_lembaga`, `nip`, `Ruang Lingkup`, `Jabatan`) VALUES
-(2, '123456789', '', '');
+INSERT INTO `lit` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES
+(7, 2, '123456789', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -114,11 +271,22 @@ INSERT INTO `lit` (`id_lembaga`, `nip`, `Ruang Lingkup`, `Jabatan`) VALUES
 --
 
 CREATE TABLE `lspro` (
+  `id` int(11) NOT NULL,
   `id_lembaga` int(11) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `Ruang Lingkup` varchar(50) NOT NULL,
-  `Jabatan` varchar(20) NOT NULL
+  `ruang_lingkup` varchar(50) NOT NULL,
+  `jabatan` varchar(20) NOT NULL,
+  `kel_produk` varchar(50) NOT NULL,
+  `sub_kel_produk` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lspro`
+--
+
+INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES
+(14, 1, '222222222', '', '', '', ''),
+(16, 1, '222222222', '', 'Evaluator', '', '');
 
 -- --------------------------------------------------------
 
@@ -135,14 +303,6 @@ CREATE TABLE `portofolio` (
   `sertifikat` varchar(50) NOT NULL,
   `form_evaluasi` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `portofolio`
---
-
-INSERT INTO `portofolio` (`id_portofolio`, `nip`, `nama_pelatihan`, `tahun_pelatihan`, `penyelenggara`, `sertifikat`, `form_evaluasi`) VALUES
-(1, '123456789', 'bootstrap', 2020, 'quesera', 'sci20011.pdf', 'fsp0041.pdf'),
-(2, '123456789', 'css', 2019, 'itera', 'suzuki1985.pdf', '118090012_bab1.pdf');
 
 -- --------------------------------------------------------
 
@@ -161,7 +321,9 @@ CREATE TABLE `sdm` (
 --
 
 INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES
-('123456789', 'Hiskia', 'sma');
+('123456789', 'Hiskia Perdamen Pulungan', 'sma'),
+('222222222', 'ayu', 'sma'),
+('987654321', 'aswsda', 's1');
 
 --
 -- Indexes for dumped tables
@@ -174,9 +336,34 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `jabatan_kal`
+--
+ALTER TABLE `jabatan_kal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jabatan_lit`
+--
+ALTER TABLE `jabatan_lit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jabatan_lspro`
+--
+ALTER TABLE `jabatan_lspro`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jabatan_peng`
+--
+ALTER TABLE `jabatan_peng`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `lab_kalibrasi`
 --
 ALTER TABLE `lab_kalibrasi`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_lembaga` (`id_lembaga`),
   ADD KEY `nip` (`nip`);
 
@@ -184,6 +371,7 @@ ALTER TABLE `lab_kalibrasi`
 -- Indexes for table `lab_pengujian`
 --
 ALTER TABLE `lab_pengujian`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_lembaga` (`id_lembaga`),
   ADD KEY `nip` (`nip`);
 
@@ -197,6 +385,7 @@ ALTER TABLE `lembaga`
 -- Indexes for table `lit`
 --
 ALTER TABLE `lit`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_lembaga` (`id_lembaga`),
   ADD KEY `nip` (`nip`);
 
@@ -204,6 +393,7 @@ ALTER TABLE `lit`
 -- Indexes for table `lspro`
 --
 ALTER TABLE `lspro`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_lembaga` (`id_lembaga`),
   ADD KEY `nip` (`nip`);
 
@@ -231,16 +421,64 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `jabatan_kal`
+--
+ALTER TABLE `jabatan_kal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `jabatan_lit`
+--
+ALTER TABLE `jabatan_lit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `jabatan_lspro`
+--
+ALTER TABLE `jabatan_lspro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `jabatan_peng`
+--
+ALTER TABLE `jabatan_peng`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `lab_kalibrasi`
+--
+ALTER TABLE `lab_kalibrasi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `lab_pengujian`
+--
+ALTER TABLE `lab_pengujian`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `lembaga`
 --
 ALTER TABLE `lembaga`
   MODIFY `id_lembaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `lit`
+--
+ALTER TABLE `lit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `lspro`
+--
+ALTER TABLE `lspro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT for table `portofolio`
 --
 ALTER TABLE `portofolio`
-  MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

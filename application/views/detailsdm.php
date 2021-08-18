@@ -54,11 +54,29 @@
         <div class="row bg-white pl-8">
             <h4 class="col-3">Lembaga</h4>
             <div class="col-4">
-              <?php foreach($this->CI->cekLembaga($s->nip) as $l){?>
+              <?php
+              $id=0;
+              $id_lem=$this->CI->cekLembagaId($s->nip);
+               foreach($this->CI->cekLembaga($s->nip) as $l)
+               {?>
                     <ul display="" class="">
-                        <li display="" class=" mb--3 ml--4" ><?=$l?></li>
+                        <li display="" class=" mb--3 ml--4" ><?=$l?>
+                            <ul>
+                                <?php for ($i=0; $i <= $id ; $i++) { 
+                                  $y=$id_lem[$i];
+                                }?> 
+                                <?php foreach($this->CI->tampil_jabatan_2($s->nip,$y) as $jabatan){?>
+                                  <?php if($jabatan->jabatan!=""){?>
+                                    <li class="ml--4"><?=$jabatan->jabatan?> </li>
+                                  <?php }?>
+                                  <?php if($jabatan->jabatan==""){?>
+                                    <li class="list-unstyled ml--4">Jabatan:</li>
+                                  <?php }?>
+                                <?php } ?>
+                            </ul>
+                        </li>
                     </ul>   
-                <?php } ?>   
+                <?php $id++; } ?>   
               </div>
             <a data-toggle="modal" data-target="#modal_lembaga" href="#" class="col-1">ubah</a>           
         </div>
@@ -144,10 +162,10 @@
                     <div class="modal-body">
                       <form action="<?= base_url('DetailSdm/UbahLem')?>" method="POST">
                       <label for="input-lembaga" class="from-control-label row">Pilih Lembaga untuk <strong class="ml-1"><?=$s->nama?> :</label>
-                          <label class="form-control-label  pl-5 row"><input type="checkbox" id="lembaga1" name="lspro" value="1" class="m-1"   >Lembaga Sertivikasi Produk (LSPRO)</label>
-                          <label class="form-control-label  pl-5 row"><input type="checkbox" id="lembaga2" name="lit" value="2" class="m-1"   >Lembaga Inspeksi Teknis (LIT)</label>
-                          <label class="form-control-label  pl-5 row"><input type="checkbox" id="lembaga3" name="peng" value="3" class="m-1"   >Laboratorium Pengujian</label>
-                          <label class="form-control-label  pl-5 row"><input type="checkbox" id="lembaga4" name="kal" value="4" class="m-1"   >Laboratorium Kalibrasi</label>
+                          <label class="form-control-label  pl-5 row"><input type="checkbox" id="lembaga" name="lspro" value="1" class="m-1"   >Lembaga Sertivikasi Produk (LSPRO)</label>
+                          <label class="form-control-label  pl-5 row"><input type="checkbox" id="lembaga" name="lit" value="2" class="m-1"   >Lembaga Inspeksi Teknis (LIT)</label>
+                          <label class="form-control-label  pl-5 row"><input type="checkbox" id="lembaga" name="peng" value="3" class="m-1"   >Laboratorium Pengujian</label>
+                          <label class="form-control-label  pl-5 row"><input type="checkbox" id="lembaga" name="kal" value="4" class="m-1"   >Laboratorium Kalibrasi</label>
                           <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
