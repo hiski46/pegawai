@@ -29,6 +29,10 @@
     <!-- Header -->
    <?php $this->load->view("_partial/header.php") ?>
     <!-- menu -->
+    <?= $this->session->flashdata('message') ?>
+    <div><?php 
+    $message='';
+    echo $message; ?></div>
     <div class="row pt-200">
       <?php $this->load->view("_partial/headerSDM.php") ?>
     </div>
