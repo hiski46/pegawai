@@ -18,7 +18,6 @@ class Backup extends CI_Controller {
 
 	public function index()
 	{
-		
 		// export database
 		
 		$aturan = array (
@@ -31,7 +30,7 @@ class Backup extends CI_Controller {
 		// force_download($nama_zip, $backup);
 
 		// database baru
-		$db_name = 'balai_riset_'.date("Y-m");
+		$db_name = 'balai_riset_'.date("F-Y-h:i");
 		if ($this->dbforge->create_database($db_name,TRUE))
 		{
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Database Baru berhasil dibuat</div>');

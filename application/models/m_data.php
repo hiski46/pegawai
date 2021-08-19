@@ -1,6 +1,27 @@
 <?php 
  
 class M_data extends CI_Model{
+
+function __construct()
+    {
+        parent::__construct();
+        
+        $config=array();
+        if($this->session->userdata('database')!=NULL){
+        $config['hostname'] = 'localhost';
+        $config['username'] = 'root';
+        $config['password'] = '';
+        $config['database'] = $this->session->userdata('database');   
+        $config['dbdriver'] = 'mysqli';
+        $config['dbprefix'] = '';
+        $config['pconnect'] = FALSE;
+        $config['db_debug'] = TRUE;
+        $this->db=$this->load->database($config, true);
+         //load the 'default' database as defined in your config/database.php
+    	}else{
+			echo "Belum Ada Database";
+		}
+	}
 	function tampil_data(){
 		$this->db->select('*');
 		$this->db->from('sdm');

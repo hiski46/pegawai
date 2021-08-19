@@ -5,7 +5,9 @@ class Login extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();	
-		$this->load->model('m_data');
+		$this->load->model('m_login');
+		$this->CI = & get_instance();
+		$this->load->dbutil();
  
 	}
 	public function index()
@@ -14,20 +16,23 @@ class Login extends CI_Controller {
             redirect('dashboard');
         }
 		$this->load->view('login');
+		
 	}
 
 	function aksi_login(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
+		$db_name = $this->input->post('db');
 		$where = array(
 			'username' => $username,
 			'password' => $password
 		);
-		$cek = $this->m_data->cek_login("admin", $where)->num_rows();
+		$cek = $this->m_login->cek_login("admin", $where)->num_rows();
 		if($cek > 0){
 			$data_session = array(
 				'nama' => $username,
-				'status' => "login"
+				'status' => "login",
+				'database'=> $db_name
 			);
 			
 			$this->session->set_userdata($data_session);
@@ -45,5 +50,12 @@ class Login extends CI_Controller {
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">  Anda Berhasil Logout </div>');
 		redirect(base_url('login'));
+	}
+
+	public function cekDb()
+	{
+		$dbs = $this->dbutil->list_databases();
+		
+		return $dbs;
 	}
 }

@@ -76,7 +76,20 @@
                     <input class="form-control" placeholder="Password" type="password" name="password">
                   </div>
                 </div>
-                
+                <div class="form-group">
+                  <div class="input-group row">
+                      <label class="" for="cars">Pilih Database:</label>
+                      <select class="ml-4 col" name="db" id="db">
+                        <?php 
+                        foreach ($this->CI->cekDb() as $db)
+                        { ?>
+                            <?php if (strpos($db, 'balai_riset') !== false) { ?>
+                              <option value="<?=$db;?>"><?=$db;?></option>
+                            <?php } ?>
+                        <?php }?>
+                      </select>
+                  </div>
+                </div>
                 <div class="text-center">
                   <input type="submit" class="btn btn-primary my-4" value="Login"></input>
                 </div>
