@@ -3,10 +3,11 @@
     <!-- Brand -->
     <div class="sidenav-header  align-items-center">
       <a class="navbar-brand" href="<?= base_url() ?>dashboard">
+        <img  src="<?= base_url('assets/dashboard') ?>/img/brand/kem.png" >
         <h1>Dashboard</h1>
       </a>
     </div>
-    <div class="navbar-inner">
+    <div class="navbar-inner mt-3">
       <!-- Collapse -->
       <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <!-- Nav items -->
@@ -39,7 +40,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('Backup') ?>">
-                <i class="ni ni-circle-08 text-primary"></i>
+                <i class="ni ni-money-coins text-primary"></i>
                 <span class="nav-link-text">Back UP Database</span>
               </a>
           </li>

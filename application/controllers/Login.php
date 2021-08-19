@@ -41,7 +41,7 @@ class Login extends CI_Controller {
 			redirect(base_url("dashboard"));
 		}else{
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username atau Password Salah</div>');
-			redirect('login');
+			redirect('login/#login');
 		}
 	}
 	function logout(){

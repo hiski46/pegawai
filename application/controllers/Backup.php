@@ -22,9 +22,9 @@ class Backup extends CI_Controller {
 		
 		$aturan = array (
 			'format'=>'sql',
-			'filename'=>date("Y-m").'.sql'
+			'filename'=>date("F-Y-h-i").'.sql'
 		);
-		$nama_zip = date("Y-m").'.sql';
+		$nama_zip = date("F-Y-h-i").'.sql';
 		$backup = $this->dbutil->backup($aturan);
 		write_file('./database/'.$nama_zip, $backup);
 		// force_download($nama_zip, $backup);
