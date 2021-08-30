@@ -30,9 +30,9 @@
                     <span class="h1 text-primary"><i class="fas fa-search"></i></span>
                   </div>
                 </div>
-                <p class="mt--3 mb--2 text-sm"style="text-align:left;" >
-                  <span class="h5 text-justify-content-start text-success mr-0"><i class="fas fa-user m-1"></i class=""><?=$jlh?></span>
-                </p>
+                <!-- <p class="mt--3 mb--2 text-sm"style="text-align:left;" >
+                  <span class="h5 text-justify-content-start text-success mr-0"><i class="fas fa-user m-1"><?=$jlh?></i class=""></span>
+                </p> -->
               </div>
             </a>
           </div>

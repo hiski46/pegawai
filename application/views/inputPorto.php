@@ -69,9 +69,12 @@
                         <div class=" row p-2">
                           <label class=" form-control-label col-3" for="sertifikat">Upload Evaluasi (Format Pdf): </label> <input class="ml-0 btn btn-secondary col-9" name="evaluasi" type="file">
                         </div>
+                        <div class=" row p-2">
+                          <label class=" form-control-label col-3" for="sertifikat">Upload Surat Kerja (Format Pdf): </label> <input class="ml-0 btn btn-secondary col-9" name="kerja" type="file">
+                        </div>
                         <input type="hidden" name="nip" value='<?= $this->session->flashdata('nip');?>'>
                         <input type="hidden" name="nama" value='<?= $this->session->flashdata('nama_sdm');?>'>
-                        <p> <?= $this->session->flashdata('nip');?>-<?= $this->session->flashdata('nama_sdm');?> </p>
+                        <p> <?= $this->session->flashdata('nip');?>-<?=str_replace('%20',' ',$this->session->flashdata('nama_sdm')) ;?> </p>
                         <div class=" row d-flex justify-content-around text-center">
                           <input  class="btn btn-primary my-4 col-2" value="Submit" data-toggle="modal" data-target="#input-portofolio" type="submit"></input>
                           <a  href="<?=base_url('Caridata/DetailSdm/'.$this->session->flashdata('nip').'/'.$this->session->flashdata('nama_sdm'))?>"> <button type="button" class="btn btn-success my-4">Selesai</button></a>

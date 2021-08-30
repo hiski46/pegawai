@@ -29,19 +29,35 @@ function __construct()
 		return $this->db->get();
 	}
 	
-	function tampil_jabatan($tabel){
+	function jabatan_all($tabel){
 		$this->db->select('*');
 		$this->db->from($tabel);
 
 
 		return $this->db->get();
 	}
-	function tampilJabatan($tabel,$nip){
+	function tampil_Jabatan($idlem,$nip,$tabel){
 		$this->db->select('*');
 		$this->db->from($tabel);
-		$this->db->where('nip',$nip);
-
-
+		$this->db->where(array('nip'=>$nip, 'id_lembaga'=>$idlem));
+		// var_dump($this->db->get());
+		// die;
+		return $this->db->get();
+	}
+	function tampilJabatan($idlem,$nip,$tabel){
+		$this->db->select('*');
+		$this->db->from($tabel);
+		$this->db->where(array('nip'=>$nip, 'id_lembaga'=>$idlem));
+		// var_dump($this->db->get());
+		// die;
+		return $this->db->get();
+	}
+	function tampilkan($idlem,$nip,$tabel){
+		$this->db->select('*');
+		$this->db->from($tabel);
+		$this->db->where(array('nip'=>$nip, 'id_lembaga'=>$idlem));
+		// var_dump($this->db->get());
+		// die;
 		return $this->db->get();
 	}
 	function tampil_data_lembaga($tabel){
@@ -54,12 +70,12 @@ function __construct()
 		$query = $this->db->query('DELETE FROM ' .$tabel.' WHERE jabatan =""');
 		return $query;
 	}
-	public function hapus_jabatan($tabel,$nip,$jabatan)
-	{
-		$ganti=str_replace("_", " ", $jabatan);
-		$query = $this->db->query('DELETE FROM ' .$tabel.' WHERE jabatan ="'.$ganti.' " AND nip="'.$nip.'"');
-		return $query;
-	}
+	// public function hapus_jabatan($tabel,$nip,$jabatan)
+	// {
+	// 	$ganti=str_replace("_", " ", $jabatan);
+	// 	$query = $this->db->query('DELETE FROM ' .$tabel.' WHERE jabatan ="'.$ganti.' " AND nip="'.$nip.'"');
+	// 	return $query;
+	// }
 
 	public function cek_jabatan($tabel,$nip,$jabatan)
 	{
@@ -181,6 +197,11 @@ function __construct()
 		$query = $this->db->query('DELETE FROM portofolio WHERE id_portofolio ='. $id . ';');
 		return $query;
 	}
+
+	function hapus_jabatan($id,$tabel){
+		$query = $this->db->query('DELETE FROM '.$tabel.' WHERE id ='. $id . ';');
+		return $query;
+	}
 	
 	// function edit($where, $data)
 	// {
@@ -198,6 +219,15 @@ function __construct()
 		$this->db->insert($table, $data);
 	}
 
+	public function cekjabatan($data)
+	{
+		$query=$this->db->get_where('jabatan_sdm',$data);
+		if (empty($query->row_array())) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 	public function ceknip($nip)
 	{
 		$query=$this->db->get_where('sdm',array('nip'=>$nip));

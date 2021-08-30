@@ -164,25 +164,25 @@ class Caridata extends CI_Controller {
         
         if ($id==1) {
             $table='lspro';
-            $jabatan = $this->m_data->tampilJabatan($table, $nip);
+            $jabatan = $this->m_data->tampilJabatan($table, $nip, 'jabatan_sdm');
             return $jabatan->result();
         }
         if ($id==2) {
             $this->session->set_flashdata('nama_lembaga','Lembaga Inspeksi Teknis (LIT)');
             $table='lit';
-            $jabatan = $this->m_data->tampilJabatan($table, $nip);
+            $jabatan = $this->m_data->tampilJabatan($table, $nip, 'jabatan_sdm');
             return $jabatan->result();
         }
         if ($id==3) {
             $this->session->set_flashdata('nama_lembaga','Laboratorium Pengujian');
             $table='lab_pengujian';
-            $jabatan = $this->m_data->tampilJabatan($table, $nip);
+            $jabatan = $this->m_data->tampilJabatan($table, $nip, 'jabatan_sdm');
             return $jabatan->result();
         }
         if ($id==4) {
             $this->session->set_flashdata('nama_lembaga','Laboratorium Kalibrasi');
             $table='lab_kalibrasi';
-            $jabatan = $this->m_data->tampilJabatan($table, $nip);
+            $jabatan = $this->m_data->tampilJabatan($table, $nip, 'jabatan_sdm');
             return $jabatan->result();
         }
      }

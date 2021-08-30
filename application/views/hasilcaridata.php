@@ -55,6 +55,7 @@
                     <th scope="col">Nama</th>
                     <th scope="col">Pendidikan Terakhir</th>
                     <th scope="col">Pelatihan</th>
+                    <th scope="col">Tahun Pelatihan</th>
                     <th scope="col">Lembaga</th>
                     <th scope="col">Aksi</th>
                 </tr>
@@ -72,6 +73,11 @@
                     <td><?php 
                         foreach($this->CI->portofolio($s->nip)->result() as $p){?>
                         <ul><li class="mb--3 ml--4" ><?=$p->nama_pelatihan;?></li></ul>
+                        <?php }?>
+                    </td>
+                    <td><?php 
+                        foreach($this->CI->portofolio($s->nip)->result() as $p){?>
+                        <ul><li class="mb--3 ml--4" ><?=$p->tahun_pelatihan;?></li></ul>
                         <?php }?>
                     </td>
                     <td class='pb-3 pt-2'>

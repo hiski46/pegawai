@@ -224,6 +224,14 @@
                                   <div class=" row p-2">
                                     <label class="form-control-label col-3" for="sertifikat">Ubah Evaluasi (Format Pdf): </label> <input class="ml-0 btn btn-secondary col-9" name="evaluasi-baru" type="file">
                                   </div>
+                                  <div class="row p-2">
+                                    <label class="form-control-label col-3" for="eval-lama">Surat Kerja</label>
+                                    <input class="p-2" type="hidden" name="kerja-lama" value="<?=$p->surat_kerja?>">
+                                    <a href="<?=base_url('assets/sertifikat/'.$p->surat_kerja);?>" target="_blank"><label ><?=$p->surat_kerja?></label></a>
+                                  </div>
+                                  <div class=" row p-2">
+                                    <label class="form-control-label col-3" for="sertifikat">Ubah Surat Kerja (Format Pdf): </label> <input class="ml-0 btn btn-secondary col-9" name="kerja-baru" type="file">
+                                  </div>
                                   <input class="p-2" type="hidden" name="nip" value="<?=$p->nip?>">
                                   <div class=" row d-flex justify-content-around text-center">
                                     <button  class="btn btn-primary btn- my-4 col-2" value=""  type="submit">Simpan Perubahan</button>

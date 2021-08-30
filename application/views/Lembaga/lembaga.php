@@ -73,15 +73,12 @@
                     <td><?= $l->nama;?></td>
                     <td>
                       <ul>
-                        <?php foreach($this->CI->tampil_jabatan($l->nip) as $jb){ 
+                        <?php foreach($this->CI->tampil_jabatan($l->nip,$this->uri->segment(4)) as $jb){ 
                           
-                          // $ganti = str_replace(" ","_",$jb->jabatan);
+                          $ganti = str_replace(" ","_",$jb->jabatan);
                         ?>
                           <?php if($jb->jabatan!=""){?>
                             <li class="ml--4"><?=$jb->jabatan?> </li>
-                          <?php }?>
-                          <?php if($jb->jabatan==""){?>
-                            <li class="list-unstyled ml--4">daftar:</li>
                           <?php }?>
                         <?php }?>
                             
@@ -89,47 +86,50 @@
                     </td>
                     <td>
                       <ul>
-                      <?php foreach($this->CI->tampil_jabatan($l->nip) as $jb){?>
-                        <?php if($jb->ruang_lingkup!=""){?>
+                      <?php foreach($this->CI->tampil_ruang($l->nip, $this->uri->segment(4)) as $jb){?>
+                        
                           <li class="ml--4" ><?=$jb->ruang_lingkup?></li>
-                        <?php } ?>
-                        <?php if($jb->ruang_lingkup==""){?>
-                          <li class="list-unstyled ">-</li>
-                        <?php } ?>
-                        <?php } ?>
+                  
+                        <?php } ?> 
                         </ul>
                     </td>
                     <td>
                       <ul>
-                          <?php foreach($this->CI->tampil_jabatan($l->nip) as $jb){?>
-                              <?php if($jb->kel_produk!=""){?>
+                      <?php foreach($this->CI->tampil_kelompok($l->nip, $this->uri->segment(4)) as $jb){?>
+                        
+                          <li class="ml--4" ><?=$jb->kel_produk?></li>
+                  
+                        <?php } ?> 
+                        </ul>
+                    </td>
+                    <td>
+                      <ul>
+                      <?php foreach($this->CI->tampil_sub($l->nip, $this->uri->segment(4)) as $jb){?>
+                        
+                          <li class="ml--4" ><?=$jb->sub_kel_produk?></li>
+                  
+                        <?php } ?> 
+                        </ul>
+                    </td>
+                    <td>
+                      <ul>
+                          <!-- <?php //foreach(//$this->CI->tampil_jabatan($l->nip) as $jb){?>
+                              <?php //if($jb->kel_produk!=""){?>
                                 <li class="ml--4 "><?=$jb->kel_produk?></li>
-                              <?php } ?>
-                              <?php if($jb->kel_produk==""){?>
+                              <?php //} ?>
+                              <?php //if($jb->kel_produk==""){?>
                                 <li class="list-unstyled ">-</li>
-                              <?php } ?>
-                              <?php } ?>
+                              <?php //} ?>
+                              <?php// } ?> -->
                             </ul>
                     
                     </td>
                     <td>
                       
                       <ul>
-                            <?php foreach($this->CI->tampil_jabatan($l->nip) as $jb){
-                              $ganti = str_replace(" ","_",$jb->jabatan);?>
-                                <?php if($jb->sub_kel_produk!=""){?>
-                                  <?php if ($jb->jabatan!="") { ?>
-                                    
-                                    <li class="ml--4"><?=$jb->sub_kel_produk;?><a href="" data-toggle="modal" data-target="#hapus_jabatan<?= $jb->id?>" class="float-right mr-3 text-danger">-hapus</a></li>
-                                  <?php } ?>
-                                <?php } ?>
-                                <?php if($jb->sub_kel_produk==""){?>
-                                  <li class="list-unstyled">-
-                                  <?php if ($jb->jabatan!="") { ?>
-                                    <a href="" data-toggle="modal" data-target="#hapus_jabatan<?= $jb->id?>" class="float-right mr-3  text-danger">-hapus</a>
-                                  <?php } ?>
-                                <?php } ?>
-                                </li>
+                             <?php foreach($this->CI->tampil_jabatan($l->nip,$this->uri->segment(4)) as $jb){ ?>
+                              
+                                
                                 <!-- Modal -->
                                      
                                             <div class="modal fade bd-example-modal-lg " id="hapus_jabatan<?= $jb->id?>" tabindex="-1" role="dialog" >
@@ -159,7 +159,7 @@
                     <td>
                       <div class="row">
                         <!-- <a href="//base_url('Lembaga/Lembaga/hapus_jabatan/'.$this->uri->segment(4).'/'.$l->nip.'/'.$ganti)" class=" ml--9 float-right text-danger">-hapus</a> -->
-                        <a class="btn btn-primary btn-sm text-xs ml-2 mt-2 mr-3" href="" data-toggle="modal" data-target="#tambah_jabatan<?= $l->nip?>">+ tambah</a>
+                        <a class="btn btn-primary btn-sm text-xs ml-2 mt-2 mr-3" href="<?=base_url("Lembaga/TambahJabatan/menu/".$l->nip."/".$this->uri->segment(4)."/".$l->nama)?>" > Tambah</a>
                       </div>
                     </td>               
                 </tr>

@@ -30,7 +30,7 @@ class Lembaga extends CI_Controller {
             
             $data['lembaga']=$this->m_data->tampil_data_lembaga($table)->result();
             //$data['jabatan']=$this->m_data->tampil_jabatan($table)->result();
-            $data['list_jabatan']=$this->m_data->tampil_jabatan($table_jabatan)->result();
+            // $data['list_jabatan']=$this->m_data->tampil_jabatan($id,)->result();
             $this->load->view('Lembaga/lembaga', $data);
         }
         if ($id==2) {
@@ -40,7 +40,7 @@ class Lembaga extends CI_Controller {
             
             $data['lembaga']=$this->m_data->tampil_data_lembaga($table)->result();
             //$data['jabatan']=$this->m_data->tampil_jabatan($table)->result();
-            $data['list_jabatan']=$this->m_data->tampil_jabatan($table_jabatan)->result();
+            // $data['list_jabatan']=$this->m_data->tampil_jabatan($table_jabatan)->result();
             $this->load->view('Lembaga/lembaga', $data);
         }
         if ($id==3) {
@@ -50,7 +50,7 @@ class Lembaga extends CI_Controller {
             
             $data['lembaga']=$this->m_data->tampil_data_lembaga($table)->result();
             //$data['jabatan']=$this->m_data->tampil_jabatan($table)->result();
-            $data['list_jabatan']=$this->m_data->tampil_jabatan($table_jabatan)->result();
+            // $data['list_jabatan']=$this->m_data->tampil_jabatan($table_jabatan)->result();
             $this->load->view('Lembaga/lembaga', $data);
         }
         if ($id==4) {
@@ -60,7 +60,7 @@ class Lembaga extends CI_Controller {
             
             $data['lembaga']=$this->m_data->tampil_data_lembaga($table)->result();
             //$data['jabatan']=$this->m_data->tampil_jabatan($table)->result();
-            $data['list_jabatan']=$this->m_data->tampil_jabatan($table_jabatan)->result();
+            // $data['list_jabatan']=$this->m_data->tampil_jabatan($table_jabatan)->result();
             $this->load->view('Lembaga/lembaga', $data);
         }
     }
@@ -218,34 +218,27 @@ class Lembaga extends CI_Controller {
         }
      }
 
-     public function tampil_jabatan($nip)
+     public function tampil_jabatan($nip,$idlem)
      {
-       
-        $id=$this->uri->segment(4);
-        
-        if ($id==1) {
-            $table='lspro';
-            $jabatan = $this->m_data->tampilJabatan($table, $nip);
+            $jabatan = $this->m_data->tampilJabatan($idlem, $nip, 'jabatan_sdm');
             return $jabatan->result();
-        }
-        if ($id==2) {
-            $this->session->set_flashdata('nama_lembaga','Lembaga Inspeksi Teknis (LIT)');
-            $table='lit';
-            $jabatan = $this->m_data->tampilJabatan($table, $nip);
-            return $jabatan->result();
-        }
-        if ($id==3) {
-            $this->session->set_flashdata('nama_lembaga','Laboratorium Pengujian');
-            $table='lab_pengujian';
-            $jabatan = $this->m_data->tampilJabatan($table, $nip);
-            return $jabatan->result();
-        }
-        if ($id==4) {
-            $this->session->set_flashdata('nama_lembaga','Laboratorium Kalibrasi');
-            $table='lab_kalibrasi';
-            $jabatan = $this->m_data->tampilJabatan($table, $nip);
-            return $jabatan->result();
-        }
      }
+     public function tampil_ruang($nip,$idlem)
+     {
+            $jabatan = $this->m_data->tampilJabatan($idlem, $nip, 'ruang_linkup');
+            return $jabatan->result();
+     }
+     public function tampil_kelompok($nip,$idlem)
+     {
+            $jabatan = $this->m_data->tampilJabatan($idlem, $nip, 'kel_produk');
+            return $jabatan->result();
+     }
+     public function tampil_sub($nip,$idlem)
+     {
+            $jabatan = $this->m_data->tampilJabatan($idlem, $nip, 'sub_kel_produk');
+            return $jabatan->result();
+     }
+
+     
      
 }

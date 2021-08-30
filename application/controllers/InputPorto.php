@@ -27,6 +27,7 @@ class InputPorto extends CI_Controller {
 
 		$file = $_FILES['sertifikat']['name'];
 		$evaluasi = $_FILES['evaluasi']['name'];
+		$kerja = $_FILES['kerja']['name'];
 		$this->session->set_flashdata('nip',$nip);
 		$this->session->set_flashdata('nama_sdm',$nama);
 
@@ -35,6 +36,9 @@ class InputPorto extends CI_Controller {
 		$this->form_validation->set_rules('pelatihan','Pelatihan','required');
 		$this->form_validation->set_rules('tahun','Tahun','required');
 		$this->form_validation->set_rules('penyelenggara','Penyelenggara','required');
+		$config['upload_path'] = '././assets/sertifikat';
+		$config['allowed_types'] = 'pdf';
+		$config['max_size'] = 500000;
 		//EndValidation
 		if ($this->form_validation->run()==FALSE) {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">  Pastikan semua data terisi dan sudah benar</div>');
@@ -45,10 +49,6 @@ class InputPorto extends CI_Controller {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data gagal dimasukkan, anda Belum memasukkan sertifikat  </div>');
             redirect('InputPorto');
 		}else{
-			$config['upload_path'] = '././assets/sertifikat';
-			$config['allowed_types'] = 'pdf';
-			$config['max_size'] = 500000;
-
 			$this->load->library('upload', $config);
 			
 			if(!$this->upload->do_upload('sertifikat')){
@@ -60,12 +60,8 @@ class InputPorto extends CI_Controller {
 			}
 		}
 		if($evaluasi == '' ){
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data gagal dimasukkan, anda Belum memasukkan evaluasi </div>');
-           redirect('InputPorto');
+			$evaluasi = '';
 		}else{
-			$config['upload_path'] = '././assets/evaluasi';
-			$config['allowed_types'] = 'pdf';
-			$config['max_size'] = 500000;
 
 			$this->load->library('upload', $config);
 				
@@ -77,6 +73,20 @@ class InputPorto extends CI_Controller {
 				$evaluasi = $this->upload->data('file_name');
 			}									
 		}
+		if($kerja == '' ){
+			$kerja = '';
+		}else{
+
+			$this->load->library('upload', $config);
+				
+			if(!$this->upload->do_upload('kerja')){
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Upload sertifikat Gagal </div>');
+				redirect('InputPorto');
+				die;
+			}else{
+				$kerja = $this->upload->data('file_name');
+			}									
+		}
 
 			$data = array(
 				'nama_pelatihan'=>$pelatihan,
@@ -84,7 +94,8 @@ class InputPorto extends CI_Controller {
 				'tahun_pelatihan' => $tahun,
 				'penyelenggara'=>$penyelenggara,
 				'sertifikat'=>$file,
-				'form_evaluasi'=>$evaluasi
+				'form_evaluasi'=>$evaluasi,
+				'surat_kerja' =>$kerja
 			);
 				$this->m_data->tambah($data,'portofolio');
 				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">  Anda Berhasil Menambahkan Portofolio. Silahkan isi form dibawah apabila masih ada portofolio</div>');

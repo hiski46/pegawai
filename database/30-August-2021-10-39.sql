@@ -136,6 +136,56 @@ INSERT INTO `jabatan_peng` (`id`, `jabatan`) VALUES (15, 'Maintenance Alat Lab U
 
 
 #
+# TABLE STRUCTURE FOR: jabatan_sdm
+#
+
+DROP TABLE IF EXISTS `jabatan_sdm`;
+
+CREATE TABLE `jabatan_sdm` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_lembaga` int(11) NOT NULL,
+  `nip` varchar(9) NOT NULL,
+  `jabatan` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_lembaga` (`id_lembaga`),
+  KEY `nip` (`nip`),
+  CONSTRAINT `jabatan_sdm_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
+  CONSTRAINT `jabatan_sdm_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `jabatan_sdm` (`id`, `id_lembaga`, `nip`, `jabatan`) VALUES (19, 1, '123456789', 'Kepala');
+INSERT INTO `jabatan_sdm` (`id`, `id_lembaga`, `nip`, `jabatan`) VALUES (20, 1, '123456789', 'Staf Administrasi');
+INSERT INTO `jabatan_sdm` (`id`, `id_lembaga`, `nip`, `jabatan`) VALUES (22, 2, '123456789', 'Kepala');
+INSERT INTO `jabatan_sdm` (`id`, `id_lembaga`, `nip`, `jabatan`) VALUES (23, 2, '123456789', 'Manajer Administrasi');
+INSERT INTO `jabatan_sdm` (`id`, `id_lembaga`, `nip`, `jabatan`) VALUES (24, 1, '111111111', 'Kepala');
+
+
+#
+# TABLE STRUCTURE FOR: kel_produk
+#
+
+DROP TABLE IF EXISTS `kel_produk`;
+
+CREATE TABLE `kel_produk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_lembaga` int(11) NOT NULL,
+  `nip` varchar(9) NOT NULL,
+  `kel_produk` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_lembaga` (`id_lembaga`),
+  KEY `nip` (`nip`),
+  CONSTRAINT `kel_produk_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
+  CONSTRAINT `kel_produk_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `kel_produk` (`id`, `id_lembaga`, `nip`, `kel_produk`) VALUES (3, 2, '123456789', 'ini Kelompok Produk');
+INSERT INTO `kel_produk` (`id`, `id_lembaga`, `nip`, `kel_produk`) VALUES (4, 2, '123456789', 'itu Kelompok Produk');
+INSERT INTO `kel_produk` (`id`, `id_lembaga`, `nip`, `kel_produk`) VALUES (5, 1, '123456789', 'ini Kelompok Produk');
+INSERT INTO `kel_produk` (`id`, `id_lembaga`, `nip`, `kel_produk`) VALUES (6, 1, '111111111', 'itu Kelompok Produk');
+INSERT INTO `kel_produk` (`id`, `id_lembaga`, `nip`, `kel_produk`) VALUES (7, 1, '111111111', 'ini Kelompok Produk');
+
+
+#
 # TABLE STRUCTURE FOR: lab_kalibrasi
 #
 
@@ -145,19 +195,14 @@ CREATE TABLE `lab_kalibrasi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_lembaga` int(11) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `ruang_lingkup` varchar(50) NOT NULL,
-  `jabatan` varchar(50) NOT NULL,
-  `kel_produk` varchar(50) NOT NULL,
-  `sub_kel_produk` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_lembaga` (`id_lembaga`),
   KEY `nip` (`nip`),
   CONSTRAINT `lab_kalibrasi_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
   CONSTRAINT `lab_kalibrasi_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `lab_kalibrasi` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (25, 4, '123456789', '', '', '', '');
-INSERT INTO `lab_kalibrasi` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (26, 4, '123455432', '', '', '', '');
+INSERT INTO `lab_kalibrasi` (`id`, `id_lembaga`, `nip`) VALUES (1, 4, '111111111');
 
 
 #
@@ -170,20 +215,14 @@ CREATE TABLE `lab_pengujian` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_lembaga` int(11) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `ruang_lingkup` varchar(50) NOT NULL,
-  `jabatan` varchar(50) NOT NULL,
-  `kel_produk` varchar(50) NOT NULL,
-  `sub_kel_produk` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_lembaga` (`id_lembaga`),
   KEY `nip` (`nip`),
   CONSTRAINT `lab_pengujian_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
   CONSTRAINT `lab_pengujian_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `lab_pengujian` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (1, 3, '987654321', '', '', '', '');
-INSERT INTO `lab_pengujian` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (5, 3, '123456789', '', '', '', '');
-INSERT INTO `lab_pengujian` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (6, 3, '123455432', '', '', '', '');
+INSERT INTO `lab_pengujian` (`id`, `id_lembaga`, `nip`) VALUES (1, 3, '111111111');
 
 
 #
@@ -214,19 +253,15 @@ CREATE TABLE `lit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_lembaga` int(11) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `ruang_lingkup` varchar(50) NOT NULL,
-  `jabatan` varchar(50) NOT NULL,
-  `kel_produk` varchar(50) NOT NULL,
-  `sub_kel_produk` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_lembaga` (`id_lembaga`),
   KEY `nip` (`nip`),
   CONSTRAINT `lit_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
   CONSTRAINT `lit_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `lit` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (7, 2, '123456789', '', '', '', '');
-INSERT INTO `lit` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (10, 2, '123123123', '', '', '', '');
+INSERT INTO `lit` (`id`, `id_lembaga`, `nip`) VALUES (2, 2, '123456789');
+INSERT INTO `lit` (`id`, `id_lembaga`, `nip`) VALUES (3, 2, '111111111');
 
 
 #
@@ -239,22 +274,15 @@ CREATE TABLE `lspro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_lembaga` int(11) NOT NULL,
   `nip` varchar(9) NOT NULL,
-  `ruang_lingkup` varchar(50) NOT NULL,
-  `jabatan` varchar(20) NOT NULL,
-  `kel_produk` varchar(50) NOT NULL,
-  `sub_kel_produk` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_lembaga` (`id_lembaga`),
   KEY `nip` (`nip`),
   CONSTRAINT `lspro_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
   CONSTRAINT `lspro_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (14, 1, '222222222', '', '', '', '');
-INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (16, 1, '222222222', '', 'Evaluator', '', '');
-INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (17, 1, '123123123', '', '', '', '');
-INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (18, 1, '123123123', '', 'Evaluator', '', '');
-INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES (19, 1, '123123123', '', 'Staf Administrasi', '', '');
+INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`) VALUES (2, 1, '123456789');
+INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`) VALUES (3, 1, '111111111');
 
 
 #
@@ -271,10 +299,39 @@ CREATE TABLE `portofolio` (
   `penyelenggara` varchar(50) NOT NULL,
   `sertifikat` varchar(50) NOT NULL,
   `form_evaluasi` varchar(50) NOT NULL,
+  `surat_kerja` varchar(50) NOT NULL,
   PRIMARY KEY (`id_portofolio`),
   KEY `nip` (`nip`),
   CONSTRAINT `portofolio_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `portofolio` (`id_portofolio`, `nip`, `nama_pelatihan`, `tahun_pelatihan`, `penyelenggara`, `sertifikat`, `form_evaluasi`, `surat_kerja`) VALUES (8, '111111111', 'PHP', '2019', 'itera', 'lg.pdf', 'lg1.pdf', 'lg2.pdf');
+
+
+#
+# TABLE STRUCTURE FOR: ruang_linkup
+#
+
+DROP TABLE IF EXISTS `ruang_linkup`;
+
+CREATE TABLE `ruang_linkup` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_lembaga` int(11) NOT NULL,
+  `nip` varchar(9) NOT NULL,
+  `ruang_lingkup` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_lembaga` (`id_lembaga`),
+  KEY `nip` (`nip`),
+  CONSTRAINT `ruang_linkup_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
+  CONSTRAINT `ruang_linkup_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `ruang_linkup` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`) VALUES (6, 2, '123456789', 'itu Ruang Lingkup');
+INSERT INTO `ruang_linkup` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`) VALUES (8, 2, '123456789', 'Ini Ruang Lingkup');
+INSERT INTO `ruang_linkup` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`) VALUES (9, 2, '123456789', 'apa lagi');
+INSERT INTO `ruang_linkup` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`) VALUES (10, 1, '123456789', 'Ini Ruang Lingkup');
+INSERT INTO `ruang_linkup` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`) VALUES (11, 1, '111111111', 'Ini Ruang Lingkup');
+
 
 #
 # TABLE STRUCTURE FOR: sdm
@@ -289,10 +346,31 @@ CREATE TABLE `sdm` (
   PRIMARY KEY (`nip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES ('123123123', 'siapa aja', 's1');
-INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES ('123455432', 'asdklhada', 'sma');
-INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES ('123456789', 'Hiskia Perdamen Pulungan', 'sma');
-INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES ('222222222', 'ayu', 'sma');
-INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES ('987654321', 'aswsda', 's1');
+INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES ('111111111', 'Hiskia Perdamen Pulungan', 'SMA');
+INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES ('123456789', 'askjhas', 'sma');
+
+
+#
+# TABLE STRUCTURE FOR: sub_kel_produk
+#
+
+DROP TABLE IF EXISTS `sub_kel_produk`;
+
+CREATE TABLE `sub_kel_produk` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_lembaga` int(11) NOT NULL,
+  `nip` varchar(9) NOT NULL,
+  `sub_kel_produk` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_lembaga` (`id_lembaga`),
+  KEY `nip` (`nip`),
+  CONSTRAINT `sub_kel_produk_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
+  CONSTRAINT `sub_kel_produk_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `sub_kel_produk` (`id`, `id_lembaga`, `nip`, `sub_kel_produk`) VALUES (2, 2, '123456789', 'itu Sub Kel Produk');
+INSERT INTO `sub_kel_produk` (`id`, `id_lembaga`, `nip`, `sub_kel_produk`) VALUES (3, 2, '123456789', 'ini Sub Kel Produk');
+INSERT INTO `sub_kel_produk` (`id`, `id_lembaga`, `nip`, `sub_kel_produk`) VALUES (4, 1, '123456789', 'itu Sub Kel Produk');
+INSERT INTO `sub_kel_produk` (`id`, `id_lembaga`, `nip`, `sub_kel_produk`) VALUES (5, 1, '111111111', 'ini Sub Kel Produk');
 
 

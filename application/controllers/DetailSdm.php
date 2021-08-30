@@ -87,9 +87,11 @@ class DetailSdm extends CI_Controller {
 		$penye=$this->input->post('penyelenggara');
 		$serti_lama=$this->input->post('sertifikat-lama');
 		$eval_lama=$this->input->post('eval-lama');
+		$kerja_lama=$this->input->post('kerja-lama');
 
 		$file = $_FILES['sertifikat-baru']['name'];
 		$evaluasi = $_FILES['evaluasi-baru']['name'];
+		$kerja = $_FILES['kerja-baru']['name'];
 		
 
 		
@@ -98,6 +100,9 @@ class DetailSdm extends CI_Controller {
 		$this->form_validation->set_rules('tahun','Tahun','required');
 		$this->form_validation->set_rules('penyelenggara','Penyelenggara','required');
 		//EndValidation
+		$config['upload_path'] = '././assets/sertifikat';
+			$config['allowed_types'] = 'pdf';
+			$config['max_size'] = 500000;
 		if ($this->form_validation->run()==FALSE) {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">  Pastikan semua data terisi dan sudah benar</div>');
 			redirect('Caridata/DetailSdm/'.$nip);
@@ -106,9 +111,7 @@ class DetailSdm extends CI_Controller {
 			if($file == '' ){
 				$file=$serti_lama;
 		}else{
-			$config['upload_path'] = '././assets/sertifikat';
-			$config['allowed_types'] = 'pdf';
-			$config['max_size'] = 500000;
+			
 
 			$this->load->library('upload', $config);
 			
@@ -123,18 +126,31 @@ class DetailSdm extends CI_Controller {
 		if($evaluasi == '' ){
 			$evaluasi=$eval_lama;
 		}else{
-			$config['upload_path'] = '././assets/evaluasi';
-			$config['allowed_types'] = 'pdf';
-			$config['max_size'] = 500000;
+			
 
 			$this->load->library('upload', $config);
 				
 			if(!$this->upload->do_upload('evaluasi-baru')){
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Upload sertifikat Gagal </div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Upload Evaluasi Gagal </div>');
 				redirect('InputPorto');
 				die;
 			}else{
 				$evaluasi = $this->upload->data('file_name');
+			}									
+		}
+		if($kerja == '' ){
+			$kerja=$kerja_lama;
+		}else{
+			
+
+			$this->load->library('upload', $config);
+				
+			if(!$this->upload->do_upload('kerja-baru')){
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Upload Surat Kerja Gagal </div>');
+				redirect('InputPorto');
+				die;
+			}else{
+				$kerja = $this->upload->data('file_name');
 			}									
 		}
 
@@ -144,7 +160,8 @@ class DetailSdm extends CI_Controller {
 				'tahun_pelatihan' => $tahun,
 				'penyelenggara'=>$penye,
 				'sertifikat'=>$file,
-				'form_evaluasi'=>$evaluasi
+				'form_evaluasi'=>$evaluasi,
+				'surat_kerja'=>$kerja
 			);
 				$where  = array('id_portofolio' => $id );
 				$this->m_data->UbahPorto($where,$data);

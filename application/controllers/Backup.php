@@ -19,18 +19,18 @@ class Backup extends CI_Controller {
 	public function index()
 	{
 		// export database
-		
+		date_default_timezone_set('Asia/Jakarta');
 		$aturan = array (
 			'format'=>'sql',
-			'filename'=>date("F-Y-h-i").'.sql'
+			'filename'=>date("d-F-Y-h-i").'.sql'
 		);
-		$nama_zip = date("F-Y-h-i").'.sql';
+		$nama_zip = date("d-F-Y-h-i").'.sql';
 		$backup = $this->dbutil->backup($aturan);
 		write_file('./database/'.$nama_zip, $backup);
 		// force_download($nama_zip, $backup);
 
 		// database baru
-		$db_name = 'balai_riset_'.date("F-Y-h:i");
+		$db_name = 'balai_riset_'.date("d-F-Y/h:i");
 		if ($this->dbforge->create_database($db_name,TRUE))
 		{
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Database Baru berhasil dibuat</div>');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2021 at 07:03 PM
+-- Generation Time: Aug 30, 2021 at 05:34 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.33
 
@@ -22,25 +22,6 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `sdm`
---
-
-CREATE TABLE `sdm` (
-  `nip` varchar(9) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `pendidikan_terakhir` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `sdm`
---
-
-INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES
-('123456789', 'Hiskia Perdamen Pulungan', 'sma'),
-('222222222', 'ayu', 'sma'),
-('987654321', 'aswsda', 's1');
 
 --
 -- Table structure for table `admin`
@@ -195,25 +176,69 @@ INSERT INTO `jabatan_peng` (`id`, `jabatan`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jabatan_sdm`
+--
+
+CREATE TABLE `jabatan_sdm` (
+  `id` int(11) NOT NULL,
+  `id_lembaga` int(11) NOT NULL,
+  `nip` varchar(9) NOT NULL,
+  `jabatan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jabatan_sdm`
+--
+
+INSERT INTO `jabatan_sdm` (`id`, `id_lembaga`, `nip`, `jabatan`) VALUES
+(19, 1, '123456789', 'Kepala'),
+(20, 1, '123456789', 'Staf Administrasi'),
+(22, 2, '123456789', 'Kepala'),
+(23, 2, '123456789', 'Manajer Administrasi'),
+(24, 1, '111111111', 'Kepala');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kel_produk`
+--
+
+CREATE TABLE `kel_produk` (
+  `id` int(11) NOT NULL,
+  `id_lembaga` int(11) NOT NULL,
+  `nip` varchar(9) NOT NULL,
+  `kel_produk` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kel_produk`
+--
+
+INSERT INTO `kel_produk` (`id`, `id_lembaga`, `nip`, `kel_produk`) VALUES
+(3, 2, '123456789', 'ini Kelompok Produk'),
+(4, 2, '123456789', 'itu Kelompok Produk'),
+(5, 1, '123456789', 'ini Kelompok Produk'),
+(6, 1, '111111111', 'itu Kelompok Produk'),
+(7, 1, '111111111', 'ini Kelompok Produk');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lab_kalibrasi`
 --
 
 CREATE TABLE `lab_kalibrasi` (
   `id` int(11) NOT NULL,
   `id_lembaga` int(11) NOT NULL,
-  `nip` varchar(9) NOT NULL,
-  `ruang_lingkup` varchar(50) NOT NULL,
-  `jabatan` varchar(50) NOT NULL,
-  `kel_produk` varchar(50) NOT NULL,
-  `sub_kel_produk` varchar(50) NOT NULL
+  `nip` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `lab_kalibrasi`
 --
 
-INSERT INTO `lab_kalibrasi` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES
-(25, 4, '123456789', '', '', '', '');
+INSERT INTO `lab_kalibrasi` (`id`, `id_lembaga`, `nip`) VALUES
+(1, 4, '111111111');
 
 -- --------------------------------------------------------
 
@@ -224,20 +249,15 @@ INSERT INTO `lab_kalibrasi` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabata
 CREATE TABLE `lab_pengujian` (
   `id` int(11) NOT NULL,
   `id_lembaga` int(11) NOT NULL,
-  `nip` varchar(9) NOT NULL,
-  `ruang_lingkup` varchar(50) NOT NULL,
-  `jabatan` varchar(50) NOT NULL,
-  `kel_produk` varchar(50) NOT NULL,
-  `sub_kel_produk` varchar(50) NOT NULL
+  `nip` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `lab_pengujian`
 --
 
-INSERT INTO `lab_pengujian` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES
-(1, 3, '987654321', '', '', '', ''),
-(5, 3, '123456789', '', '', '', '');
+INSERT INTO `lab_pengujian` (`id`, `id_lembaga`, `nip`) VALUES
+(1, 3, '111111111');
 
 -- --------------------------------------------------------
 
@@ -269,19 +289,16 @@ INSERT INTO `lembaga` (`id_lembaga`, `nama_lembaga`) VALUES
 CREATE TABLE `lit` (
   `id` int(11) NOT NULL,
   `id_lembaga` int(11) NOT NULL,
-  `nip` varchar(9) NOT NULL,
-  `ruang_lingkup` varchar(50) NOT NULL,
-  `jabatan` varchar(50) NOT NULL,
-  `kel_produk` varchar(50) NOT NULL,
-  `sub_kel_produk` varchar(50) NOT NULL
+  `nip` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `lit`
 --
 
-INSERT INTO `lit` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES
-(7, 2, '123456789', '', '', '', '');
+INSERT INTO `lit` (`id`, `id_lembaga`, `nip`) VALUES
+(2, 2, '123456789'),
+(3, 2, '111111111');
 
 -- --------------------------------------------------------
 
@@ -292,20 +309,16 @@ INSERT INTO `lit` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_p
 CREATE TABLE `lspro` (
   `id` int(11) NOT NULL,
   `id_lembaga` int(11) NOT NULL,
-  `nip` varchar(9) NOT NULL,
-  `ruang_lingkup` varchar(50) NOT NULL,
-  `jabatan` varchar(20) NOT NULL,
-  `kel_produk` varchar(50) NOT NULL,
-  `sub_kel_produk` varchar(50) NOT NULL
+  `nip` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `lspro`
 --
 
-INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`, `jabatan`, `kel_produk`, `sub_kel_produk`) VALUES
-(14, 1, '222222222', '', '', '', ''),
-(16, 1, '222222222', '', 'Evaluator', '', '');
+INSERT INTO `lspro` (`id`, `id_lembaga`, `nip`) VALUES
+(2, 1, '123456789'),
+(3, 1, '111111111');
 
 -- --------------------------------------------------------
 
@@ -320,12 +333,83 @@ CREATE TABLE `portofolio` (
   `tahun_pelatihan` year(4) NOT NULL,
   `penyelenggara` varchar(50) NOT NULL,
   `sertifikat` varchar(50) NOT NULL,
-  `form_evaluasi` varchar(50) NOT NULL
+  `form_evaluasi` varchar(50) NOT NULL,
+  `surat_kerja` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `portofolio`
+--
+
+INSERT INTO `portofolio` (`id_portofolio`, `nip`, `nama_pelatihan`, `tahun_pelatihan`, `penyelenggara`, `sertifikat`, `form_evaluasi`, `surat_kerja`) VALUES
+(8, '111111111', 'PHP', 2019, 'itera', 'lg.pdf', 'lg1.pdf', 'lg2.pdf');
 
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `ruang_linkup`
+--
 
+CREATE TABLE `ruang_linkup` (
+  `id` int(11) NOT NULL,
+  `id_lembaga` int(11) NOT NULL,
+  `nip` varchar(9) NOT NULL,
+  `ruang_lingkup` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ruang_linkup`
+--
+
+INSERT INTO `ruang_linkup` (`id`, `id_lembaga`, `nip`, `ruang_lingkup`) VALUES
+(6, 2, '123456789', 'itu Ruang Lingkup'),
+(8, 2, '123456789', 'Ini Ruang Lingkup'),
+(9, 2, '123456789', 'apa lagi'),
+(10, 1, '123456789', 'Ini Ruang Lingkup'),
+(11, 1, '111111111', 'Ini Ruang Lingkup');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sdm`
+--
+
+CREATE TABLE `sdm` (
+  `nip` varchar(9) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `pendidikan_terakhir` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sdm`
+--
+
+INSERT INTO `sdm` (`nip`, `nama`, `pendidikan_terakhir`) VALUES
+('111111111', 'Hiskia Perdamen Pulungan', 'SMA'),
+('123456789', 'askjhas', 'sma');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sub_kel_produk`
+--
+
+CREATE TABLE `sub_kel_produk` (
+  `id` int(11) NOT NULL,
+  `id_lembaga` int(11) NOT NULL,
+  `nip` varchar(9) NOT NULL,
+  `sub_kel_produk` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sub_kel_produk`
+--
+
+INSERT INTO `sub_kel_produk` (`id`, `id_lembaga`, `nip`, `sub_kel_produk`) VALUES
+(2, 2, '123456789', 'itu Sub Kel Produk'),
+(3, 2, '123456789', 'ini Sub Kel Produk'),
+(4, 1, '123456789', 'itu Sub Kel Produk'),
+(5, 1, '111111111', 'ini Sub Kel Produk');
 
 --
 -- Indexes for dumped tables
@@ -360,6 +444,22 @@ ALTER TABLE `jabatan_lspro`
 --
 ALTER TABLE `jabatan_peng`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jabatan_sdm`
+--
+ALTER TABLE `jabatan_sdm`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_lembaga` (`id_lembaga`),
+  ADD KEY `nip` (`nip`);
+
+--
+-- Indexes for table `kel_produk`
+--
+ALTER TABLE `kel_produk`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_lembaga` (`id_lembaga`),
+  ADD KEY `nip` (`nip`);
 
 --
 -- Indexes for table `lab_kalibrasi`
@@ -407,10 +507,26 @@ ALTER TABLE `portofolio`
   ADD KEY `nip` (`nip`);
 
 --
+-- Indexes for table `ruang_linkup`
+--
+ALTER TABLE `ruang_linkup`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_lembaga` (`id_lembaga`),
+  ADD KEY `nip` (`nip`);
+
+--
 -- Indexes for table `sdm`
 --
 ALTER TABLE `sdm`
   ADD PRIMARY KEY (`nip`);
+
+--
+-- Indexes for table `sub_kel_produk`
+--
+ALTER TABLE `sub_kel_produk`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_lembaga` (`id_lembaga`),
+  ADD KEY `nip` (`nip`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -447,16 +563,28 @@ ALTER TABLE `jabatan_peng`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `jabatan_sdm`
+--
+ALTER TABLE `jabatan_sdm`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `kel_produk`
+--
+ALTER TABLE `kel_produk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `lab_kalibrasi`
 --
 ALTER TABLE `lab_kalibrasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lab_pengujian`
 --
 ALTER TABLE `lab_pengujian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lembaga`
@@ -468,23 +596,49 @@ ALTER TABLE `lembaga`
 -- AUTO_INCREMENT for table `lit`
 --
 ALTER TABLE `lit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `lspro`
 --
 ALTER TABLE `lspro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `portofolio`
 --
 ALTER TABLE `portofolio`
-  MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `ruang_linkup`
+--
+ALTER TABLE `ruang_linkup`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `sub_kel_produk`
+--
+ALTER TABLE `sub_kel_produk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `jabatan_sdm`
+--
+ALTER TABLE `jabatan_sdm`
+  ADD CONSTRAINT `jabatan_sdm_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
+  ADD CONSTRAINT `jabatan_sdm_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`);
+
+--
+-- Constraints for table `kel_produk`
+--
+ALTER TABLE `kel_produk`
+  ADD CONSTRAINT `kel_produk_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
+  ADD CONSTRAINT `kel_produk_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`);
 
 --
 -- Constraints for table `lab_kalibrasi`
@@ -519,6 +673,20 @@ ALTER TABLE `lspro`
 --
 ALTER TABLE `portofolio`
   ADD CONSTRAINT `portofolio_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`);
+
+--
+-- Constraints for table `ruang_linkup`
+--
+ALTER TABLE `ruang_linkup`
+  ADD CONSTRAINT `ruang_linkup_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
+  ADD CONSTRAINT `ruang_linkup_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`);
+
+--
+-- Constraints for table `sub_kel_produk`
+--
+ALTER TABLE `sub_kel_produk`
+  ADD CONSTRAINT `sub_kel_produk_ibfk_1` FOREIGN KEY (`id_lembaga`) REFERENCES `lembaga` (`id_lembaga`),
+  ADD CONSTRAINT `sub_kel_produk_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `sdm` (`nip`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

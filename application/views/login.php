@@ -84,7 +84,7 @@
                         foreach ($this->CI->cekDb() as $db)
                         { ?>
                             <?php if (strpos($db, 'balai_riset') !== false) { ?>
-                              <option value="<?=$db;?>"><?=$db;?></option>
+                              <option value="<?=$db;?>"><?=str_replace("balai_riset_","",$db);?></option>
                             <?php } ?>
                         <?php }?>
                       </select>
