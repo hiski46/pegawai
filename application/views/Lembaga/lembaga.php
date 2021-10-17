@@ -56,9 +56,9 @@
                     <th scope="col">NIP</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Jabatan</th>
-                    <th scope="col">Ruang Lingkup</th>
+                    <!-- <th scope="col">Ruang Lingkup</th>
                     <th scope="col">Kelompok Produk</th>
-                    <th scope="col">Sub. Kelompok Produk</th>
+                    <th scope="col">Sub. Kelompok Produk</th> -->
                     <th scope="col">aksi</th>
                 </tr>
             </thead>
@@ -86,29 +86,29 @@
                     </td>
                     <td>
                       <ul>
-                      <?php foreach($this->CI->tampil_ruang($l->nip, $this->uri->segment(4)) as $jb){?>
+                      <?php //foreach($this->CI->tampil_ruang($l->nip, $this->uri->segment(4)) as $jb){?>
                         
-                          <li class="ml--4" ><?=$jb->ruang_lingkup?></li>
+                          <!-- <li class="ml--4" ><?=$jb->ruang_lingkup?></li> -->
                   
-                        <?php } ?> 
+                        <?php //} ?> 
                         </ul>
                     </td>
                     <td>
                       <ul>
-                      <?php foreach($this->CI->tampil_kelompok($l->nip, $this->uri->segment(4)) as $jb){?>
+                      <?php //foreach($this->CI->tampil_kelompok($l->nip, $this->uri->segment(4)) as $jb){?>
                         
-                          <li class="ml--4" ><?=$jb->kel_produk?></li>
+                          <!-- <li class="ml--4" ><?=$jb->kel_produk?></li> -->
                   
-                        <?php } ?> 
+                        <?php //} ?> 
                         </ul>
                     </td>
                     <td>
                       <ul>
-                      <?php foreach($this->CI->tampil_sub($l->nip, $this->uri->segment(4)) as $jb){?>
+                      <?php //foreach($this->CI->tampil_sub($l->nip, $this->uri->segment(4)) as $jb){?>
                         
-                          <li class="ml--4" ><?=$jb->sub_kel_produk?></li>
+                          <!-- <li class="ml--4" ><?=$jb->sub_kel_produk?></li> -->
                   
-                        <?php } ?> 
+                        <?php //} ?> 
                         </ul>
                     </td>
                     <td>
