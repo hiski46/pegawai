@@ -63,7 +63,7 @@
             </div>
             <a  data-toggle="modal" data-target="#tambah_jabatan" href="#" class=" ml-4 col-1">Tambah</a>           
         </div>
-        <div class="row bg-white pl-8">
+        <!-- <div class="row bg-white pl-8">
             <h4 class="col-3">Ruang Lingkup</h4>
             <div class="col-4">
                 <ul>
@@ -77,8 +77,8 @@
                 </ul>
             </div>
             <a  data-toggle="modal" data-target="#tambah_ruang" href="#" class=" ml-4 col-1">Tambah</a>           
-        </div>
-        <div class="row  pl-8">
+        </div> -->
+        <!-- <div class="row  pl-8">
             <h4 class="col-3">Kelompok Produk</h4>
             <div class="col-4">
                 <ul>
@@ -92,8 +92,8 @@
                 </ul>
             </div>
             <a  data-toggle="modal" data-target="#tambah_kelompok" href="#" class=" ml-4 col-1">Tambah</a>           
-        </div>
-        <div class="row bg-white pl-8">
+        </div> -->
+        <!-- <div class="row bg-white pl-8">
             <h4 class="col-3">Sub kelompok Produk</h4>
             <div class="col-4">
                 <ul>
@@ -107,7 +107,7 @@
                 </ul>
             </div>
             <a  data-toggle="modal" data-target="#tambah_sub" href="#" class=" ml-4 col-1">Tambah</a>           
-        </div>
+        </div> -->
        
             
     </div>

@@ -150,6 +150,12 @@ function __construct()
 		return $this->db->get_where($table,$where);
 	}
 	
+	function hapusJabatan($table, $nip)
+	{
+		$query = $this->db->query('DELETE FROM '.$table.' WHERE nip =' . $nip . ';');
+		return $query;
+	}
+
 
 	function hapusSDM($id){
 		$query = $this->db->query('DELETE FROM sdm WHERE nip =' . $id . ';');

@@ -46,8 +46,7 @@ class InputPorto extends CI_Controller {
 		}else{
 
 			if($file == '' ){
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data gagal dimasukkan, anda Belum memasukkan sertifikat  </div>');
-            redirect('InputPorto');
+				$file = '';
 		}else{
 			$this->load->library('upload', $config);
 			

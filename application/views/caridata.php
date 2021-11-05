@@ -72,7 +72,7 @@
                     <td><?= $s->pendidikan_terakhir;?></td>
                     <td><?php 
                         foreach($this->CI->portofolio($s->nip)->result() as $p){?>
-                        <ul><li class="mb--3 ml--4" ><?=$p->nama_pelatihan;?></li></ul>
+                          <ul><li class="mb--3 ml--4" ><?=$p->nama_pelatihan;?></li></ul>
                         <?php }?>
                     </td>
                     <td><?php 
@@ -85,6 +85,8 @@
                             <ul><li class="mb--3 ml--4" ><?=$l?></li></ul>   
                         <?php } ?>     
                     </td>
+                    
+
                     <td>
                         <a href="<?=base_url('Caridata/DetailSdm/'.$s->nip.'/'.$s->nama)?>"><button class="btn btn-sm btn-facebook">Edit</button> </a>
                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_hapus<?= $s->nip?>" href="#">hapus</button>

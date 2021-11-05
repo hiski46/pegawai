@@ -52,7 +52,7 @@
                     <div class="col-lg-12">
                       <div class="form-group">
                         <div class="row p-2">
-                          <label class="form-control-label col-3" for="input-pelatihan">Pelatihan yang Pernah Diikuti</label>
+                          <label class="form-control-label col-3" for="input-pelatihan">Portofolio yang Pernah Diikuti</label>
                           <input type="text" id="input-pelatihan" name="pelatihan" class="form-control col-9" placeholder="Masukkan Pelatihan yang Pernah Diikuti" >
                         </div>  
                         <div class="row p-2">

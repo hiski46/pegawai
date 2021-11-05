@@ -42,7 +42,7 @@ class InputSDM extends CI_Controller {
 			}
 
 			$this->form_validation->set_rules('nama','Nama','required');
-			$this->form_validation->set_rules('nip','NIP','required|exact_length[9]|numeric|callback_ceknip');
+			$this->form_validation->set_rules('nip','NIP','required|exact_length[14]|numeric|callback_ceknip');
 			$this->form_validation->set_rules('pendidikan-terakhir','Pendidikan Terakhir','required');
 			//EndValidation
 			if ($this->form_validation->run()==FALSE) {
