@@ -87,8 +87,8 @@ class Rekap extends CI_Controller {
         $sheet->setCellValue('B1', 'NIP');
         $sheet->setCellValue('C1', 'Nama');
         $sheet->setCellValue('D1', 'Pendidikan Terakhir');
-        $sheet->setCellValue('E1', 'Pelatihan');
-        $sheet->setCellValue('F1', 'Tahun Pelatihan');
+        $sheet->setCellValue('E1', 'Portofolio');
+        $sheet->setCellValue('F1', 'Tahun');
         $sheet->setCellValue('G1', 'Lembaga');
         
         $sdm=$this->m_data->tampil_data()->result();

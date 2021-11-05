@@ -54,8 +54,8 @@
                     <th scope="col">NIP</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Pendidikan Terakhir</th>
-                    <th scope="col">Pelatihan</th>
-                    <th scope="col">Tahun Pelatihan</th>
+                    <th scope="col">Portofolio</th>
+                    <th scope="col">Tahun</th>
                     <th scope="col">Lembaga</th>
                     <th scope="col">Aksi</th>
                 </tr>
@@ -71,9 +71,38 @@
                     <td><?= $s->nama;?></td>
                     <td><?= $s->pendidikan_terakhir;?></td>
                     <td><?php 
-                        foreach($this->CI->portofolio($s->nip)->result() as $p){?>
-                        <ul><li class="mb--3 ml--4" ><?=$p->nama_pelatihan;?></li></ul>
-                        <?php }?>
+                        foreach($this->CI->portofolio($s->nip)->result() as $p){
+                          if($p->sertifikat==''){
+                              $sertifikat=base_url('Caridata');
+                              
+                            }else{
+                              $sertifikat=base_url('assets/sertifikat/'.$p->sertifikat);
+                            }
+                            if($p->form_evaluasi==''){
+                              $eval='';
+                              
+                            }else{
+                              $eval=base_url('assets/sertifikat/'.$p->form_evaluasi);
+                            }
+                            if($p->surat_kerja==''){
+                              $surat='';
+                              
+                            }else{
+                              $surat=base_url('assets/sertifikat/'.$p->surat_kerja);
+                            }
+                            ?>
+                          <ul><li class="mb--3 ml--4" >
+                            <div class="dropdown">
+                              <button type="button" class="dropdown-toggle btn btn-link btn-sm" type="button" id="drop" data-toggle="dropdown"> <?=$p->nama_pelatihan;?> </button> 
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item"  href="<?= $sertifikat?>">Sertifikat</a> 
+                                <a class="dropdown-item" href="<?= $eval?>">Evaluasi</a>
+                                <a class="dropdown-item" href="<?= $surat?>">Nota Dinas</a> 
+                      
+                              </div>
+                            </div>
+                          </li></ul>
+                          <?php }?>
                     </td>
                     <td><?php 
                         foreach($this->CI->portofolio($s->nip)->result() as $p){?>

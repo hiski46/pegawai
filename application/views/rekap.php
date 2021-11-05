@@ -47,8 +47,8 @@
                     <th scope="col">NIP</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Pendidikan Terakhir</th>
-                    <th scope="col">Pelatihan</th>
-                    <th scope="col">Tahun Pelatihan</th>
+                    <th scope="col">Portofolio</th>
+                    <th scope="col">Tahun</th>
                     <th scope="col">Lembaga</th>
                 </tr>
             </thead>
