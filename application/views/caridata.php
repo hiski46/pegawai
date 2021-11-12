@@ -69,7 +69,15 @@
                     <th scope="row"><?=++$page?></th>
                     <td><?= $s->nip;?></td>
                     <td><?= $s->nama;?></td>
-                    <td><?= $s->pendidikan_terakhir;?></td>
+                    <td>
+                      <?php foreach ($this->CI->tampilPendidikan($s->nip) as $pd){ ?> 
+                        <ul>
+                          <li class="mb--3 ml--4">
+                            <?=$pd->pendidikan?>
+                          </li>
+                        </ul>
+                      <?php }?>
+                    </td>
                     <td><?php 
                         foreach($this->CI->portofolio($s->nip)->result() as $p){
                           if($p->sertifikat==''){

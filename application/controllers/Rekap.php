@@ -63,6 +63,12 @@ class Rekap extends CI_Controller {
         $porto = $this->m_data->Porto($nip);
         return $porto;
     }
+    public function tampilPendidikan($nip)
+    {
+        $pd = $this->m_data->tampilPendidikan($nip);
+        return $pd;
+    }
+
     public function cekLembaga($nip){
         $a = array();
         if ($this->m_data->ceklspro($nip)==FALSE) {
@@ -98,7 +104,15 @@ class Rekap extends CI_Controller {
             $sheet->setCellValue('A'.$x, $no++);
             $sheet->setCellValue('B'.$x, $row->nip);
             $sheet->setCellValue('C'.$x, $row->nama);
-            $sheet->setCellValue('D'.$x, $row->pendidikan_terakhir);
+            $tampil_pd= $this->m_data->tampilPendidikan($row->nip);
+            $pendidikan=array();
+            foreach ($tampil_pd as $pd){
+                array_push($pendidikan, $pd->pendidikan);
+            }
+        
+            $stringPendidikan=implode('; ',$pendidikan);
+           
+            $sheet->setCellValue('D'.$x, $stringPendidikan);
             $porto = $this->m_data->Porto($row->nip)->result();
             $nama_pelatihan=array();
             $tahun_pelatihan=array();
@@ -117,7 +131,7 @@ class Rekap extends CI_Controller {
         }
         $writer = new Xlsx($spreadsheet);
         $filename = 'data_pegawai';
-
+        
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"'); 
         header('Cache-Control: max-age=0');

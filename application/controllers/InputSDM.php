@@ -32,7 +32,11 @@ class InputSDM extends CI_Controller {
 			$data = array(
 				'nama'=>$nama,
 				'nip' => $nip,
-				'pendidikan_terakhir' => $pendidikanTerakhir
+
+			);
+			$data_pend = array(
+				'nip' => $nip,
+				'pendidikan' => $pendidikanTerakhir
 
 			);
 			//Validation
@@ -50,6 +54,7 @@ class InputSDM extends CI_Controller {
 				$this->load->view('inputSDM');
 			}else{
 				$this->m_data->tambah($data,'sdm');
+				$this->m_data->tambahPendidikan($data_pend,'pd_terakhir');
 				if ($lspro != null) {
 					$this->m_data->tambahLembaga('lspro',1,$nip);
 				}

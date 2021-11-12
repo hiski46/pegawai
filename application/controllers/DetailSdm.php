@@ -11,6 +11,7 @@ class DetailSdm extends CI_Controller {
 		$this->load->model('m_data');
 		$this->load->helper('url');
 		$this->load->library('form_validation');
+		$this->CI = & get_instance();
 	}
 
 
@@ -35,8 +36,13 @@ class DetailSdm extends CI_Controller {
 	{
 		$nip=$this->input->post('nip');
 		$pen=$this->input->post('pen');
-		$this->m_data->UbahPen($nip,$pen);
-		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Pendidikan Terakhir Sudah Diubah</div>');
+		$data_pend = array(
+			'nip' => $nip,
+			'pendidikan' => $pen
+
+		);
+		$this->m_data->tambahPendidikan($data_pend,'pd_terakhir');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Pendidikan Terakhir Sudah Ditambah</div>');
 		redirect('Caridata/DetailSdm/'.$nip);
 	}
 	public function UbahLem()
@@ -76,6 +82,14 @@ class DetailSdm extends CI_Controller {
 		$this->m_data->hapuslit($nip);
 		$this->m_data->hapuspeng($nip);
 		$this->m_data->hapuskal($nip);
+	}
+
+	public function Hapus_Pend()
+	{
+		$nip=$this->uri->segment(3);
+		$id=$this->uri->segment(4);
+		$this->m_data->hapusPendidikan($id);
+		redirect('Caridata/DetailSdm/'.$nip);
 	}
 
 	public function Edit_porto()

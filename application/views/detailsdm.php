@@ -48,8 +48,49 @@
         </div>
         <div class="row pl-8">
             <h4 class="col-3">Pendidikan Terakhir</h4>
-            <p class="col-4 "><strong>: <?=$s->pendidikan_terakhir?> </strong></p>
-            <a data-toggle="modal" data-target="#modal_pen" href="#" class="col-1">ubah</a>
+            <div class="col-4">
+
+              <?php foreach ($pendidikan as $pd){ ?> 
+                <ul>
+                  <li class=>
+                    <?=$pd->pendidikan?>
+                    <a class="text-danger" href="<?=base_url('DetailSdm/Hapus_Pend/'.$s->nip.'/'.$pd->id)?>"> Hapus <a>
+                  </li>
+                </ul>
+                
+                
+              <?php }?>
+            </div>
+            <a data-toggle="modal" data-target="#modal_pen" href="#" class="col-1">Tambah</a>
+            <!-- Modal Pendidikan -->
+            
+              <div class="modal fade" id="modal_pen" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Tambah Pendidikan Terakhir</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahPen')?>" method="POST">
+                          <label class="mr-2" for="nip">Pendidikan Terakhir</label>
+                          <input class="p-2" type="text" name="pen" placeholder="Tambah Pendidikan">
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Tambah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            
+            
         </div>
         <div class="row bg-white pl-8">
             <h4 class="col-3">Lembaga</h4>
@@ -122,32 +163,7 @@
               </div>
             <?php } ?>
 
-            <?php foreach ($sdm as $s) { ?>
-              <div class="modal fade" id="modal_pen" tabindex="-1" role="dialog" >
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Ubah Pendidikan Terakhir</h5>
-                      <button class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form action="<?= base_url('DetailSdm/UbahPen')?>" method="POST">
-                          <label class="mr-2" for="nip">Pendidikan Terakhir</label>
-                          <input class="p-2" type="text" name="pen" value="<?=$s->pendidikan_terakhir?>">
-                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                            <input type="submit" class="btn btn-primary" value="Ubah">
-                          </div>
-                      </form>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
-            <?php } ?>
+            
 
             <?php foreach ($sdm as $s) { ?>
               <div class="modal fade" id="modal_lembaga" tabindex="-1" role="dialog" >

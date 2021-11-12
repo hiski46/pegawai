@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Writer\Word2007;
+
 class Lembaga extends CI_Controller {
 
 	function __construct(){
@@ -239,6 +242,53 @@ class Lembaga extends CI_Controller {
             return $jabatan->result();
      }
 
-     
+     public function Cetak()
+     {
+         $nip=$this->uri->segment(4);
+         $id=$this->uri->segment(5);
+
+         $sdm=$this->m_data->tampil_data($nip)->result();
+         $nama=array();
+         foreach ($sdm as $s){
+             array_push($nama,$s->nama);
+            }
+        $Nama=implode('; ', $nama);
+            
+        $jabatan=$this->m_data->tampil_jabatan($id,$nip,'jabatan_sdm')->result();
+        $jb=array();
+        foreach ($jabatan as $j){
+            array_push($jb,$j->jabatan);
+           }
+       $Jabatan=implode('; ', $jb);
+         
+        //  $phpWord = new PhpWord();
+        //  $section = $phpWord->addSection();
+        //  $section->addText($nip);
+         
+        //  $writer = new Word2007($phpWord);
+         
+        //  $filename = 'CV';
+         
+        //  header('Content-Type: application/msword');
+        //  header('Content-Disposition: attachment;filename="'. $filename .'.docx"'); 
+        //  header('Cache-Control: max-age=0');
+         
+        //  $writer->save('php://output');
+        $template=base_url("assets/template/lspro.rtf");
+        $document= file_get_contents($template);
+        $document = str_replace("#nip", $nip, $document);
+        $document = str_replace("#nama", $Nama, $document);
+        $document = str_replace("#jabatan", $Jabatan, $document);
+
+        
+
+        header("Content-type: application/msword");
+        header("Content-disposition: inline; filename=CV.doc");
+        header("Content-length: ".strlen($document));
+
+        echo $document;
+
+        redirect("Lembaga/Lembaga/Salah_satu/".$id);
+     }
      
 }

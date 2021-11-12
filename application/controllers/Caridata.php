@@ -104,6 +104,11 @@ class Caridata extends CI_Controller {
         $porto = $this->m_data->Porto($nip);
         return $porto;
     }
+    public function tampilPendidikan($nip)
+    {
+        $pd = $this->m_data->tampilPendidikan($nip);
+        return $pd;
+    }
     public function HapusSdm(){
         $nip=$this->uri->segment(3);
         $nama=$this->uri->segment(4);
@@ -145,6 +150,8 @@ class Caridata extends CI_Controller {
         $this->m_data->hapusJabatan('kel_produk',$nip);
         $this->m_data->hapusJabatan('ruang_linkup',$nip);
         $this->m_data->hapusJabatan('sub_kel_produk',$nip);
+        $this->m_data->hapusJabatan('pd_terakhir',$nip);
+
         $this->m_data->hapusSdm($nip);
 
         
@@ -159,7 +166,9 @@ class Caridata extends CI_Controller {
         $this->session->set_flashdata('nip',$nip);
 		$this->session->set_flashdata('nama_sdm',$nama);
 		$sdm=$this->m_data->TampilSdm($nip);
+		$pendidikan=$this->m_data->tampilPendidikan($nip);
 		$data['sdm'] = $sdm;
+		$data['pendidikan'] = $pendidikan;
 		$this->load->view('detailsdm',$data);
     }
 

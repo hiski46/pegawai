@@ -224,6 +224,21 @@ function __construct()
 	function tambah($data, $table){
 		$this->db->insert($table, $data);
 	}
+	function tambahPendidikan($data, $table){
+		$this->db->insert($table, $data);
+	}
+
+	function tampilPendidikan($nip)
+	{
+		$query = $this->db->query('SELECT * from pd_terakhir where nip= "'.$nip.'";' );		
+		return $query->result();
+	}
+
+	function hapusPendidikan($id)
+	{
+		$query = $this->db->query('DELETE FROM pd_terakhir WHERE id ='. $id . ';');
+		return $query;
+	}
 
 	public function cekjabatan($data)
 	{
