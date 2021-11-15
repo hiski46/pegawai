@@ -28,6 +28,13 @@ function __construct()
 
 		return $this->db->get();
 	}
+	function tampil_data_nip($nip){
+		$this->db->select('*');
+		$this->db->from('sdm');
+		$this->db->where(array('nip'=>$nip));
+
+		return $this->db->get();
+	}
 	
 	function jabatan_all($tabel){
 		$this->db->select('*');

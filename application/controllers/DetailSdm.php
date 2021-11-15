@@ -31,6 +31,17 @@ class DetailSdm extends CI_Controller {
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Nama Sudah Diubah</div>');
 		redirect('Caridata/DetailSdm/'.$nip);
 	}
+	public function UbahBanyak()
+	{
+		$tabel=$this->uri->segment(3);
+		$data=$this->input->post($tabel);
+		$nip=$this->input->post('nip');
+		$nm = array($tabel => $data );
+		$where  = array('nip' => $nip );
+		$this->m_data->UbahNama($where,$nm);
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Data Sudah Diubah</div>');
+		redirect('Caridata/DetailSdm/'.$nip);
+	}
 
 	public function UbahPen()
 	{

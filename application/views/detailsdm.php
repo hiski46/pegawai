@@ -39,16 +39,16 @@
         
         <div class="row  pl-8">
             <h4 class="col-3">NIP</h4>
-            <p class="col-4 "><strong>: <?=$s->nip?> </strong></p>
+            <p class="col-6 "><strong>: <?=$s->nip?> </strong></p>
         </div>
         <div class="row bg-white pl-8">
             <h4 class="col-3">Nama</h4>
-            <p class="col-4 "><strong>: <?=$s->nama?></strong> </p> 
+            <p class="col-6 "><strong>: <?=$s->nama?></strong> </p> 
             <a data-toggle="modal" data-target="#modal_nama" href="#" class="col-1  ">ubah</a>
         </div>
         <div class="row pl-8">
-            <h4 class="col-3">Pendidikan Terakhir</h4>
-            <div class="col-4">
+            <h4 class="col-3">Pendidikan</h4>
+            <div class="col-6">
 
               <?php foreach ($pendidikan as $pd){ ?> 
                 <ul>
@@ -93,8 +93,54 @@
             
         </div>
         <div class="row bg-white pl-8">
+            <h4 class="col-3">Pangkat Golongan</h4>
+            <p class="col-6 "><strong>: <?=$s->pangkat?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_pangkat" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">TMT Pangkat</h4>
+            <p class="col-6 "><strong>: <?=$s->tmt_pangkat?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_tmtpangkat" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Tempat Tanggal Lahir</h4>
+            <p class="col-6 "><strong>: <?=$s->ttl?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_ttl" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Jenis Kelamin</h4>
+            <p class="col-6 "><strong>: <?=$s->jenis_kelamin?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_jenis_kelamin" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Status</h4>
+            <p class="col-6 "><strong>: <?=$s->status?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_status" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Alamat</h4>
+            <p class="col-6 "><strong>: <?=$s->alamat?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_alamat" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Riwayat Jabatan</h4>
+            <p class="col-6 "><strong>: <?=$s->riwayat_jabatan?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_riwayat_jabatan" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Telepon Kantor</h4>
+            <p class="col-6 "><strong>: <?=$s->telepon_kantor?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_telepon_kantor" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Telepon</h4>
+            <p class="col-6 "><strong>: <?=$s->telepon_rumah?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_telepon_rumah" href="#" class="col-1  ">ubah</a>
+        </div>
+  
+        <div class="row bg-white pl-8">
             <h4 class="col-3">Lembaga</h4>
-            <div class="col-4">
+            <div class="col-6">
               <?php
               $id=0;
               $id_lem=$this->CI->cekLembagaId($s->nip);
@@ -162,8 +208,249 @@
                 </div>
               </div>
             <?php } ?>
-
+    <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_pangkat" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah Pangkat</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/pangkat')?>" method="POST">
+                          <label class="mr-2 row" for="nama">Pangkat</label>
+                          <input class="p-2" type="text" name="pangkat" value="<?=$s->pangkat?>">
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_tmtpangkat" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah TMT Pangkat</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/tmt_pangkat')?>" method="POST">
+                          <label class="mr-2 row" for="nama">TMT Pangkat</label>
+                          <input class="p-2" type="text" name="tmt_pangkat" value="<?=$s->tmt_pangkat?>">
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_ttl" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah Tempat Tanggal Lahir</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/ttl')?>" method="POST">
+                          <label class="mr-2 row" for="nama"></label>
+                          <input class="p-2" type="text" name="ttl" value="<?=$s->ttl?>">
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_jenis_kelamin" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Jenis Kelamin</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/jenis_kelamin')?>" method="POST">
+                          
+                          <div class="p-4">
+                            
+                            <label class="form-control-label  pl-5 "><input type="radio" id="jk1" name="jenis_kelamin" value="Laki-laki" class="m-1"   >Laki-laki</label>
+                            <label class="form-control-label  pl-5 "><input type="radio" id="jk2" name="jenis_kelamin" value="Perempuan" class="m-1"   >Perempuan</label>
+                        </div>
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_status" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah Status</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/status')?>" method="POST">
+                          
+                          <div class="p-4">
+                            
+                            <label class="form-control-label  pl-5 "><input type="radio" id="jk1" name="status" value="Menikah" class="m-1"   >Menikah</label>
+                            <label class="form-control-label  pl-5 "><input type="radio" id="jk2" name="status" value="Belum Menikah" class="m-1"   >Belum Menikah</label>
+                        </div>
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_alamat" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah Alamat</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/alamat')?>" method="POST">
+                          <label class="mr-2 row" for="nama"></label>
+                          <textarea class="p-2" type="text" name="alamat" > <?=$s->alamat?></textarea>
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_riwayat_jabatan" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah Riwayat Jabatan</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/riwayat_jabatan')?>" method="POST">
+                          <label class="mr-2 row" for="nama"></label>
+                          <textarea class="p-2" type="text" name="riwayat_jabatan" > <?=$s->riwayat_jabatan?></textarea>
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
             
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_telepon_kantor" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah Telepon Kantor</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/telepon_kantor')?>" method="POST">
+                          <label class="mr-2 row" for="nama">TMT Pangkat</label>
+                          <input class="p-2" type="text" name="telepon_kantor" value="<?=$s->telepon_kantor?>">
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_telepon_rumah" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah Telepon</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/telepon_rumah')?>" method="POST">
+                          <label class="mr-2 row" for="nama"></label>
+                          <input class="p-2" type="text" name="telepon_rumah" value="<?=$s->telepon_rumah?>">
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
 
             <?php foreach ($sdm as $s) { ?>
               <div class="modal fade" id="modal_lembaga" tabindex="-1" role="dialog" >

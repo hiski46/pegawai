@@ -23,6 +23,16 @@ class InputSDM extends CI_Controller {
 		$nama= $this->input->post('nama');
 		$nip= $this->input->post('nip');
 		$pendidikanTerakhir= $this->input->post('pendidikan-terakhir');
+		$pangkat= $this->input->post('pangkat');
+		$tmt_pangkat= $this->input->post('tmt_pangkat');
+		$ttl= $this->input->post('ttl');
+		$alamat= $this->input->post('alamat');
+		$riwayat= $this->input->post('riwayat');
+		$telepon_kantor= $this->input->post('telepon_kantor');
+		$telepon= $this->input->post('telepon');
+		$jk= $this->input->post('jk');
+		$status= $this->input->post('status');
+
 		$lspro=$this->input->post('lspro');
 		$lit=$this->input->post('lit');
 		$peng=$this->input->post('peng');
@@ -32,6 +42,16 @@ class InputSDM extends CI_Controller {
 			$data = array(
 				'nama'=>$nama,
 				'nip' => $nip,
+				'pangkat' => $pangkat,
+				'tmt_pangkat' => $tmt_pangkat,
+				'unit_kerja' => "Baristand Industri Bandar Lampung",
+				'ttl' => $ttl,
+				'jenis_kelamin' => $jk,
+				'status' => $status,
+				'alamat' => $alamat,
+				'riwayat_jabatan' => $riwayat,
+				'telepon_kantor' => $telepon_kantor,
+				'telepon_rumah' => $telepon,
 
 			);
 			$data_pend = array(

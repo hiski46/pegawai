@@ -59,8 +59,46 @@
                           <input type="text" id="input-nip" name="nip" class="form-control col-9" placeholder="Masukkan NIP" >
                         </div>
                         <div class="row p-2">
-                          <label class="form-control-label col-3" for="input-pendidikan-terakhir">Pendidikan Terakhir</label>
+                          <label class="form-control-label col-3" for="input-pendidikan-terakhir">Pendidikan</label>
                           <input type="text" id="input-pendidikan-teralhir" name="pendidikan-terakhir" class="form-control col-9" placeholder="Masukkan Pendidikan Terakhir" >
+                        </div>
+                        <div class="row p-2">
+                          <label class="form-control-label col-3" for="pangkat">Pangkat Golongan</label>
+                          <input type="text" id="pangkat" name="pangkat" class="form-control col-9" placeholder="Masukkan Pangkat Golongan" >
+                        </div>
+                        <div class="row p-2">
+                          <label class="form-control-label col-3" for="tmt_pangkat">TMT Pangkat</label>
+                          <input type="text" id="tmt_pangkat" name="tmt_pangkat" class="form-control col-9" placeholder="Masukkan TMT Pangkat" >
+                        </div>
+                        <div class="row p-2">
+                          <label class="form-control-label col-3" for="ttl">Tempat Tanggal Lahir</label>
+                          <input type="text" id="ttl" name="ttl" class="form-control col-9" placeholder="Masukkan Tempat Tanggal Lahir" >
+                        </div>
+                        <div class="row p-2">
+                          <label class="form-control-label col-3" for="alamat">Alamat Rumah</label>
+                          <textarea type="area" id="alamat" name="alamat" class="form-control col-9" placeholder="Masukkan Alamat" > </textarea>
+                        </div>
+                        <div class="row p-2">
+                          <label class="form-control-label col-3" for="riwayat">Riwayat Jabatan</label>
+                          <textarea  id="riwayat" name="riwayat" class="form-control col-9" placeholder="Masukkan Riwayat Jabatan" > </textarea>
+                        </div>
+                        <div class="row p-2">
+                          <label class="form-control-label col-3" for="telepon_kantor">Telepon Kantor</label>
+                          <input type="text"  id="telepon_kantor" name="telepon_kantor" class="form-control col-9" placeholder="Masukkan Telepon Kantor" > 
+                        </div>
+                        <div class="row p-2">
+                          <label class="form-control-label col-3" for="telepon">Telepon Kantor</label>
+                          <input  type="text" id="telepon" name="telepon" class="form-control col-9" placeholder="Masukkan Telepon" > 
+                        </div>
+                        <div class="p-4">
+                          <label for="jk" class="from-control-label row"> Jenis Kelamin :</label>
+                          <label class="form-control-label  pl-5 "><input type="radio" id="jk1" name="jk" value="Laki-laki" class="m-1"   >Laki-laki</label>
+                          <label class="form-control-label  pl-5 "><input type="radio" id="jk2" name="jk" value="Perempuan" class="m-1"   >Perempuan</label>
+                        </div>
+                        <div class="p-4">
+                          <label for="jk" class="from-control-label row"> Status :</label>
+                          <label class="form-control-label  pl-5 "><input type="radio" id="status1" name="status" value="Menikah" class="m-1"   >Menikah</label>
+                          <label class="form-control-label  pl-5 "><input type="radio" id="status2" name="status" value="Belum Menikah" class="m-1"   >Belum Menikah</label>
                         </div>
                         <div class="p-4">
                           <label for="input-lembaga" class="from-control-label row"> Lembaga :</label>

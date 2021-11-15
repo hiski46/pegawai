@@ -2,6 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Element\Table;
+use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\SimpleType\TblWidth;
 use PhpOffice\PhpWord\Writer\Word2007;
 
 class Lembaga extends CI_Controller {
@@ -247,7 +250,7 @@ class Lembaga extends CI_Controller {
          $nip=$this->uri->segment(4);
          $id=$this->uri->segment(5);
 
-         $sdm=$this->m_data->tampil_data($nip)->result();
+         $sdm=$this->m_data->tampil_data_nip($nip)->result();
          $nama=array();
          foreach ($sdm as $s){
              array_push($nama,$s->nama);
@@ -260,11 +263,19 @@ class Lembaga extends CI_Controller {
             array_push($jb,$j->jabatan);
            }
        $Jabatan=implode('; ', $jb);
+
+       $porto=$this->m_data->porto($nip)->result();
+       
          
         //  $phpWord = new PhpWord();
         //  $section = $phpWord->addSection();
         //  $section->addText($nip);
-         
+        //  $table = $section->addTable();
+        // for ($row = 1; $row <= 8; $row++) { $table->addRow();
+        //     for ($cell = 1; $cell <= 5; $cell++) { 
+        //         $table->addCell(1750)->addText("Row {$row}, Cell {$cell}");
+        //     }
+        // } 
         //  $writer = new Word2007($phpWord);
          
         //  $filename = 'CV';
@@ -274,19 +285,56 @@ class Lembaga extends CI_Controller {
         //  header('Cache-Control: max-age=0');
          
         //  $writer->save('php://output');
-        $template=base_url("assets/template/lspro.rtf");
-        $document= file_get_contents($template);
-        $document = str_replace("#nip", $nip, $document);
-        $document = str_replace("#nama", $Nama, $document);
-        $document = str_replace("#jabatan", $Jabatan, $document);
+
+        // $template=base_url("assets/template/lspro.rtf");
+        // $document= file_get_contents($template);
+        // $document = str_replace("#nip", $nip, $document);
+        // $document = str_replace("#nama", $Nama, $document);
+        // $document = str_replace("#jabatan", $Jabatan, $document);
 
         
 
-        header("Content-type: application/msword");
-        header("Content-disposition: inline; filename=CV.doc");
-        header("Content-length: ".strlen($document));
+        // header("Content-type: application/msword");
+        // header("Content-disposition: inline; filename=CV.doc");
+        // header("Content-length: ".strlen($document));
 
-        echo $document;
+        // echo $document;
+
+        $styleTable = array('borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80);
+        $styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+        $styleCell = array('valign' => 'center');
+        $styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+        $fontStyle = array('bold' => true, 'align' => 'center');
+        $table = new Table(array('unit' => TblWidth::TWIP,'borderSize' => 6, 'borderColor' => '0000', 'cellMargin' => 80, 'align'=>'center' ));
+        $n=0;
+        $table->addRow();
+        $table->addCell()->addText("NO.");
+        $table->addCell()->addText("Nama Pelatihan");
+        $table->addCell()->addText("Tahun");
+        $table->addCell()->addText("Penyelenggara");
+        $phpWord = new TemplateProcessor('assets/template/kalibrasi.docx');
+        foreach ($porto as $p){
+            $table->addRow();
+            $table->addCell()->addText(++$n);
+            $table->addCell()->addText($p->nama_pelatihan);
+            $table->addCell()->addText($p->tahun_pelatihan);
+            $table->addCell()->addText($p->penyelenggara);
+            $phpWord->setValue('pelatihan',$p->nama_pelatihan);
+        }
+        foreach ($sdm as $s){
+            $phpWord->setValue('nama',$s->nama);
+            $phpWord->setValue('nip',$s->nip);
+            $phpWord->setValue('pangkat',$s->pangkat);
+        }
+        
+        $phpWord->setComplexBlock('{table}', $table);
+        header("Content-type: application/msword");
+        header("Content-Disposition: attachment; filename='".$nip."-kalibrasi.docx'");
+        $phpWord->saveAs('php://output');
+        // $phpWord->saveAs('assets/template/template_with_table.docx');
+        // echo $phpWord;
+
+
 
         redirect("Lembaga/Lembaga/Salah_satu/".$id);
      }
