@@ -46,14 +46,61 @@
             <p class="col-6 "><strong>: <?=$s->nama?></strong> </p> 
             <a data-toggle="modal" data-target="#modal_nama" href="#" class="col-1  ">ubah</a>
         </div>
+        
+        <div class="row  pl-8">
+            <h4 class="col-3">Pangkat Golongan</h4>
+            <p class="col-6 "><strong>: <?=$s->pangkat?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_pangkat" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">TMT Pangkat</h4>
+            <p class="col-6 "><strong>: <?=$s->tmt_pangkat?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_tmtpangkat" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row  pl-8">
+            <h4 class="col-3">Pendidikan Terakhir</h4>
+            <p class="col-6 "><strong>: <?=$s->pendidikan_terakhir?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_pendidikan_terakhir" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Tempat Tanggal Lahir</h4>
+            <p class="col-6 "><strong>: <?=$s->ttl?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_ttl" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row  pl-8">
+            <h4 class="col-3">Jenis Kelamin</h4>
+            <p class="col-6 "><strong>: <?=$s->jenis_kelamin?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_jenis_kelamin" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Status</h4>
+            <p class="col-6 "><strong>: <?=$s->status?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_status" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row  pl-8">
+            <h4 class="col-3">Alamat</h4>
+            <p class="col-6 "><strong>: <?=$s->alamat?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_alamat" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Telepon Kantor</h4>
+            <p class="col-6 "><strong>: <?=$s->telepon_kantor?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_telepon_kantor" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row  pl-8">
+            <h4 class="col-3">Telepon</h4>
+            <p class="col-6 "><strong>: <?=$s->telepon_rumah?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_telepon_rumah" href="#" class="col-1  ">ubah</a>
+        </div>
+  
         <div class="row pl-8">
-            <h4 class="col-3">Pendidikan</h4>
+            <h4 class="col-3">Riwayat Pendidikan</h4>
             <div class="col-6">
 
               <?php foreach ($pendidikan as $pd){ ?> 
                 <ul>
                   <li class=>
-                    <?=$pd->pendidikan?>
+                    <?=$pd->tahun.' - '.$pd->pendidikan?>
                     <a class="text-danger" href="<?=base_url('DetailSdm/Hapus_Pend/'.$s->nip.'/'.$pd->id)?>"> Hapus <a>
                   </li>
                 </ul>
@@ -68,17 +115,24 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Tambah Pendidikan Terakhir</h5>
+                      <h5 class="modal-title">Tambah Riwayat</h5>
                       <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
                       <form action="<?= base_url('DetailSdm/UbahPen')?>" method="POST">
-                          <label class="mr-2" for="nip">Pendidikan Terakhir</label>
-                          <input class="p-2" type="text" name="pen" placeholder="Tambah Pendidikan">
-                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
-                          
+                        <div class=row>
+                            <label class="mr-2 col-3" for="nip">Riwayat Pendidikan </label>
+                            <input class="p-2 " type="text" name="pen" placeholder="Tambah Pendidikan">
+                            <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                            
+                          </div>
+                          <div class="row mt-2">
+                            <label class="mr-2 col-3" for="tahun">Tahun </label>
+                            <input class="p-2" type="text" name="tahun" placeholder="Tahun">
+
+                          </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                             <input type="submit" class="btn btn-primary" value="Tambah">
@@ -89,55 +143,8 @@
                   </div>
                 </div>
               </div>
-            
-            
         </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Pangkat Golongan</h4>
-            <p class="col-6 "><strong>: <?=$s->pangkat?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_pangkat" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">TMT Pangkat</h4>
-            <p class="col-6 "><strong>: <?=$s->tmt_pangkat?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_tmtpangkat" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Tempat Tanggal Lahir</h4>
-            <p class="col-6 "><strong>: <?=$s->ttl?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_ttl" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Jenis Kelamin</h4>
-            <p class="col-6 "><strong>: <?=$s->jenis_kelamin?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_jenis_kelamin" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Status</h4>
-            <p class="col-6 "><strong>: <?=$s->status?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_status" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Alamat</h4>
-            <p class="col-6 "><strong>: <?=$s->alamat?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_alamat" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Riwayat Jabatan</h4>
-            <p class="col-6 "><strong>: <?=$s->riwayat_jabatan?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_riwayat_jabatan" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Telepon Kantor</h4>
-            <p class="col-6 "><strong>: <?=$s->telepon_kantor?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_telepon_kantor" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Telepon</h4>
-            <p class="col-6 "><strong>: <?=$s->telepon_rumah?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_telepon_rumah" href="#" class="col-1  ">ubah</a>
-        </div>
-  
+
         <div class="row bg-white pl-8">
             <h4 class="col-3">Lembaga</h4>
             <div class="col-6">
@@ -248,6 +255,32 @@
                       <form action="<?= base_url('DetailSdm/UbahBanyak/tmt_pangkat')?>" method="POST">
                           <label class="mr-2 row" for="nama">TMT Pangkat</label>
                           <input class="p-2" type="text" name="tmt_pangkat" value="<?=$s->tmt_pangkat?>">
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_pendidikan_terakhir" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah Pendidikan Terakhir</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/pendidikan_terakhir')?>" method="POST">
+                          <label class="mr-2 row" for="nama"></label>
+                          <input class="p-2" type="text" name="pendidikan_terakhir" value="<?=$s->pendidikan_terakhir?>">
                           <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -372,32 +405,7 @@
                 </div>
               </div>
             <?php } ?>
-            <?php foreach ($sdm as $s) { ?>
-              <div class="modal fade" id="modal_riwayat_jabatan" tabindex="-1" role="dialog" >
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Ubah Riwayat Jabatan</h5>
-                      <button class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form action="<?= base_url('DetailSdm/UbahBanyak/riwayat_jabatan')?>" method="POST">
-                          <label class="mr-2 row" for="nama"></label>
-                          <textarea class="p-2" type="text" name="riwayat_jabatan" > <?=$s->riwayat_jabatan?></textarea>
-                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                            <input type="submit" class="btn btn-primary" value="Ubah">
-                          </div>
-                      </form>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
-            <?php } ?>
+            
             
             <?php foreach ($sdm as $s) { ?>
               <div class="modal fade" id="modal_telepon_kantor" tabindex="-1" role="dialog" >

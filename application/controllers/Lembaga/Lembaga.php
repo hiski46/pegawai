@@ -7,6 +7,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpWord\SimpleType\TblWidth;
 use PhpOffice\PhpWord\Writer\Word2007;
 
+
 class Lembaga extends CI_Controller {
 
 	function __construct(){
@@ -247,96 +248,224 @@ class Lembaga extends CI_Controller {
 
      public function Cetak()
      {
-         $nip=$this->uri->segment(4);
-         $id=$this->uri->segment(5);
+        $nip=$this->uri->segment(4);
+        $id=$this->uri->segment(5);
+        $nama=$this->uri->segment(6);
 
-         $sdm=$this->m_data->tampil_data_nip($nip)->result();
-         $nama=array();
-         foreach ($sdm as $s){
-             array_push($nama,$s->nama);
-            }
-        $Nama=implode('; ', $nama);
-            
+
+        $sdm=$this->m_data->tampil_data_nip($nip)->result(); 
         $jabatan=$this->m_data->tampil_jabatan($id,$nip,'jabatan_sdm')->result();
-        $jb=array();
-        foreach ($jabatan as $j){
-            array_push($jb,$j->jabatan);
-           }
-       $Jabatan=implode('; ', $jb);
+        $riwayat_jabatan=$this->m_data->tampil_jabatan($id,$nip,'riwayat_jabatan')->result();
+        $porto=$this->m_data->porto($nip)->result();
+        $pendidikan=$this->m_data->tampilPendidikan($nip);
+        $pengalaman = $this->m_data->tampil_Jabatan($id, $nip, 'pengalaman')->result();
+        if($id==1){
+            $phpWord = new TemplateProcessor('assets/template/lspro.docx');
+            foreach ($sdm as $s){
+                $phpWord->setValue('nama',$s->nama);
+                $phpWord->setValue('nip',$s->nip);
+                $phpWord->setValue('pangkat',$s->pangkat);
+                $phpWord->setValue('tmt_pangkat',$s->tmt_pangkat);
+                $phpWord->setValue('ttl',$s->ttl);
+                $phpWord->setValue('jenis_kelamin',$s->jenis_kelamin);
+                $phpWord->setValue('status',$s->status);
+                $phpWord->setValue('alamat',$s->alamat);
+                $phpWord->setValue('telepon_kantor',$s->telepon_kantor);
+                $phpWord->setValue('telepon_rumah',$s->telepon_rumah);
+            }
+            foreach ($jabatan as $j){
+                $phpWord->setValue('jabatan',$j->jabatan);
+                $phpWord->setValue('tmt_jabatan',$j->tmt);
+            }
+            $list_Rjabatan=array();
+            foreach ($riwayat_jabatan as $j){
+                $isi=$j->tahun.' - '.$j->jabatan;
+                array_push($list_Rjabatan, $isi);
+            }
+            $phpWord->setValue('riwayat_jabatan',implode("</w:t><w:br/><w:t>",$list_Rjabatan));
+            $list_pendidikan = array();
+            foreach ($pendidikan as $j){
+                $isi=$j->tahun.' - '.$j->pendidikan;
+                array_push($list_pendidikan, $isi); 
+            }
+            $phpWord->setValue('riwayat_pendidikan',implode("</w:t><w:br/><w:t>",$list_pendidikan));
+            $list_pelatihan=array();
+            foreach ($porto as $p){
+                $isi=$p->nama_pelatihan.' ('.$p->penyelenggara.' tahun '.$p->tahun_pelatihan.')';
+                array_push($list_pelatihan, $isi);
+            }
+            $phpWord->setValue('pelatihan',implode("</w:t><w:br/><w:t>",$list_pelatihan));
+            $list_pengalaman =array();
+            foreach($pengalaman as $pl){
+                $isi=$pl->tahun.' - '.$pl->pengalaman;
+                array_push($list_pengalaman, $isi);
+            }
+            $phpWord->setValue('pengalaman',implode("</w:t><w:br/><w:t>",$list_pengalaman));
+    
+            header("Content-type: application/msword");
+            header("Content-Disposition: attachment; filename='".$nama."-lspro.docx'");
+            $phpWord->saveAs('php://output');
 
-       $porto=$this->m_data->porto($nip)->result();
-       
-         
-        //  $phpWord = new PhpWord();
-        //  $section = $phpWord->addSection();
-        //  $section->addText($nip);
-        //  $table = $section->addTable();
-        // for ($row = 1; $row <= 8; $row++) { $table->addRow();
-        //     for ($cell = 1; $cell <= 5; $cell++) { 
-        //         $table->addCell(1750)->addText("Row {$row}, Cell {$cell}");
-        //     }
-        // } 
-        //  $writer = new Word2007($phpWord);
-         
-        //  $filename = 'CV';
-         
-        //  header('Content-Type: application/msword');
-        //  header('Content-Disposition: attachment;filename="'. $filename .'.docx"'); 
-        //  header('Cache-Control: max-age=0');
-         
-        //  $writer->save('php://output');
+            redirect("Lembaga/Lembaga/Salah_satu/".$id);
+        }if($id==2){
+            $phpWord = new TemplateProcessor('assets/template/inspeksi.docx');
+            foreach ($sdm as $s){
+                $phpWord->setValue('nama',$s->nama);
+                $phpWord->setValue('nip',$s->nip);
+                $phpWord->setValue('pangkat',$s->pangkat);
+                $phpWord->setValue('tmt_pangkat',$s->tmt_pangkat);
+                $phpWord->setValue('ttl',$s->ttl);
+                $phpWord->setValue('jenis_kelamin',$s->jenis_kelamin);
+                $phpWord->setValue('alamat',$s->alamat);
+                $phpWord->setValue('telepon_kantor',$s->telepon_kantor);
+                $phpWord->setValue('telepon_rumah',$s->telepon_rumah);
+            }
+            foreach ($jabatan as $j){
+                $phpWord->setValue('jabatan',$j->jabatan);
+                $phpWord->setValue('tmt_jabatan',$j->tmt);
+            }
+            $list_Rjabatan=array();
+            foreach ($riwayat_jabatan as $j){
+                $isi=$j->tahun.' - '.$j->jabatan;
+                array_push($list_Rjabatan, $isi);
+            }
+            $phpWord->setValue('riwayat_jabatan',implode("</w:t><w:br/><w:t>",$list_Rjabatan));
+            $list_pendidikan = array();
+            foreach ($pendidikan as $j){
+                $isi=$j->tahun.' - '.$j->pendidikan;
+                array_push($list_pendidikan, $isi); 
+            }
+            $phpWord->setValue('riwayat_pendidikan',implode("</w:t><w:br/><w:t>",$list_pendidikan));
+            $list_pelatihan=array();
+            foreach ($porto as $p){
+                $isi=$p->nama_pelatihan.' ('.$p->penyelenggara.' tahun '.$p->tahun_pelatihan.')';
+                array_push($list_pelatihan, $isi);
+            }
+            $phpWord->setValue('pelatihan',implode("</w:t><w:br/><w:t>",$list_pelatihan));
+            $list_pengalaman =array();
+            foreach($pengalaman as $pl){
+                $isi=$pl->tahun.' - '.$pl->pengalaman;
+                array_push($list_pengalaman, $isi);
+            }
+            $phpWord->setValue('pengalaman',implode("</w:t><w:br/><w:t>",$list_pengalaman));
+    
+            header("Content-type: application/msword");
+            header("Content-Disposition: attachment; filename='".$nama."-inspeksi.docx'");
+            $phpWord->saveAs('php://output');
 
-        // $template=base_url("assets/template/lspro.rtf");
-        // $document= file_get_contents($template);
-        // $document = str_replace("#nip", $nip, $document);
-        // $document = str_replace("#nama", $Nama, $document);
-        // $document = str_replace("#jabatan", $Jabatan, $document);
-
-        
-
-        // header("Content-type: application/msword");
-        // header("Content-disposition: inline; filename=CV.doc");
-        // header("Content-length: ".strlen($document));
-
-        // echo $document;
-
-        $styleTable = array('borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80);
-        $styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
-        $styleCell = array('valign' => 'center');
-        $styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
-        $fontStyle = array('bold' => true, 'align' => 'center');
-        $table = new Table(array('unit' => TblWidth::TWIP,'borderSize' => 6, 'borderColor' => '0000', 'cellMargin' => 80, 'align'=>'center' ));
-        $n=0;
-        $table->addRow();
-        $table->addCell()->addText("NO.");
-        $table->addCell()->addText("Nama Pelatihan");
-        $table->addCell()->addText("Tahun");
-        $table->addCell()->addText("Penyelenggara");
-        $phpWord = new TemplateProcessor('assets/template/kalibrasi.docx');
-        foreach ($porto as $p){
+            redirect("Lembaga/Lembaga/Salah_satu/".$id);
+        }if($id==3){
+            $phpWord = new TemplateProcessor('assets/template/labuji.docx');
+            foreach ($sdm as $s){
+                $phpWord->setValue('nama',$s->nama);
+                
+            }
+            foreach ($jabatan as $j){
+                $phpWord->setValue('jabatan',$j->jabatan);
+                $phpWord->setValue('tmt_jabatan',$j->tmt);
+            }
+            $list_pendidikan = array();
+            foreach ($pendidikan as $j){
+                $isi=$j->tahun.' - '.$j->pendidikan;
+                array_push($list_pendidikan, $isi); 
+            }
+            $phpWord->setValue('riwayat_pendidikan',implode("</w:t><w:br/><w:t>",$list_pendidikan));
+            $table = new Table(array('unit' => TblWidth::TWIP,'borderSize' => 6, 'borderColor' => '0000', 'cellMargin' => 80, 'align'=>'center' ));
+            $n=0;
             $table->addRow();
-            $table->addCell()->addText(++$n);
-            $table->addCell()->addText($p->nama_pelatihan);
-            $table->addCell()->addText($p->tahun_pelatihan);
-            $table->addCell()->addText($p->penyelenggara);
-            $phpWord->setValue('pelatihan',$p->nama_pelatihan);
-        }
-        foreach ($sdm as $s){
-            $phpWord->setValue('nama',$s->nama);
-            $phpWord->setValue('nip',$s->nip);
-            $phpWord->setValue('pangkat',$s->pangkat);
-        }
-        
-        $phpWord->setComplexBlock('{table}', $table);
-        header("Content-type: application/msword");
-        header("Content-Disposition: attachment; filename='".$nip."-kalibrasi.docx'");
-        $phpWord->saveAs('php://output');
-        // $phpWord->saveAs('assets/template/template_with_table.docx');
-        // echo $phpWord;
-
-
-
-        redirect("Lembaga/Lembaga/Salah_satu/".$id);
+            $table->addCell(150)->addText("NO.");
+            $table->addCell(4000)->addText("Nama Pelatihan");
+            $table->addCell(2000)->addText("Instansi");
+            $table->addCell(3000)->addText("Tahun");
+            
+            foreach ($porto as $p){
+                $table->addRow();
+                $table->addCell()->addText(++$n);
+                $table->addCell()->addText($p->nama_pelatihan);
+                $table->addCell()->addText($p->penyelenggara);
+                $table->addCell()->addText($p->tahun_pelatihan);
+            }
+            $list_pengalaman =array();
+            foreach($pengalaman as $pl){
+                $isi=$pl->tahun.' - '.$pl->pengalaman;
+                array_push($list_pengalaman, $isi);
+            }
+            $phpWord->setValue('pengalaman',implode("</w:t><w:br/><w:t>",$list_pengalaman));
+            $phpWord->setComplexBlock('{table}', $table);
+            header("Content-type: application/msword");
+            header("Content-Disposition: attachment; filename='".$nama."-lab_uji.docx'");
+            $phpWord->saveAs('php://output');
+            redirect("Lembaga/Lembaga/Salah_satu/".$id);
+        }if($id==4){
+            // kalibrasi
+            $styleTable = array('borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80);
+            $styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+            $styleCell = array('valign' => 'center');
+            $styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+            $fontStyle = array('bold' => false, 'align' => 'left');
+            $table = new Table(array('unit' => TblWidth::TWIP,'borderSize' => 6, 'borderColor' => '0000', 'cellMargin' => 80, 'align'=>'center' ));
+            $n=0;
+            $table->addRow();
+            $table->addCell(150)->addText("NO.");
+            $table->addCell(4000)->addText("Nama Pelatihan");
+            $table->addCell(2000)->addText("Tahun");
+            $table->addCell(3000)->addText("Penyelenggara");
+            $phpWord = new TemplateProcessor('assets/template/kalibrasi.docx');
+            $list_pelatihan = array();
+            foreach ($porto as $p){
+                $table->addRow();
+                $table->addCell()->addText(++$n);
+                $table->addCell()->addText($p->nama_pelatihan);
+                $table->addCell()->addText($p->tahun_pelatihan);
+                $table->addCell()->addText($p->penyelenggara);
+                $isi=$p->nama_pelatihan.' ('.$p->penyelenggara.' tahun '.$p->tahun_pelatihan.')';
+                array_push($list_pelatihan, $isi);
+            }
+            $phpWord->setValue('pelatihan',implode("</w:t><w:br/><w:t>",$list_pelatihan));
+            foreach ($sdm as $s){
+                $phpWord->setValue('nama',$s->nama);
+                $phpWord->setValue('nip',$s->nip);
+                $phpWord->setValue('pangkat',$s->pangkat);
+                $phpWord->setValue('tmt_pangkat',$s->tmt_pangkat);
+                $phpWord->setValue('ttl',$s->ttl);
+                $phpWord->setValue('jenis_kelamin',$s->jenis_kelamin);
+                $phpWord->setValue('status',$s->status);
+                $phpWord->setValue('alamat',$s->alamat);
+                $phpWord->setValue('telepon_kantor',$s->telepon_kantor);
+                $phpWord->setValue('telepon_rumah',$s->telepon_rumah);
+            }
+            foreach ($jabatan as $j){
+                $phpWord->setValue('jabatan',$j->jabatan);
+                $phpWord->setValue('tmt_jabatan',$j->tmt);
+            }
+            $list_Rjabatan=array();
+            foreach ($riwayat_jabatan as $j){
+                $isi=$j->tahun.' - '.$j->jabatan;
+                array_push($list_Rjabatan, $isi);
+            }
+            $phpWord->setValue('riwayat_jabatan',implode("</w:t><w:br/><w:t>",$list_Rjabatan));
+            
+            $list_pendidikan = array();
+            foreach ($pendidikan as $j){
+                $isi=$j->tahun.' - '.$j->pendidikan;
+                array_push($list_pendidikan, $isi); 
+            }
+            $phpWord->setValue('riwayat_pendidikan',implode("</w:t><w:br/><w:t>",$list_pendidikan));
+            // $phpWord->setComplexValue('riwayat_pendidikan', $list_pendidikan);
+            
+            $list_pengalaman =array();
+            foreach($pengalaman as $pl){
+                $isi=$pl->tahun.' - '.$pl->pengalaman;
+                array_push($list_pengalaman, $isi);
+            }
+            $phpWord->setValue('pengalaman',implode("</w:t><w:br/><w:t>",$list_pengalaman));
+            
+            $phpWord->setComplexBlock('{table}', $table);
+            header("Content-type: application/msword");
+            header("Content-Disposition: attachment; filename='".$nama."-kalibrasi.docx'");
+            $phpWord->saveAs('php://output');
+            redirect("Lembaga/Lembaga/Salah_satu/".$id);
+        } 
      }
      
 }

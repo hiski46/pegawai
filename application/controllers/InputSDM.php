@@ -49,16 +49,16 @@ class InputSDM extends CI_Controller {
 				'jenis_kelamin' => $jk,
 				'status' => $status,
 				'alamat' => $alamat,
-				'riwayat_jabatan' => $riwayat,
+				'pendidikan_terakhir' => $pendidikanTerakhir,
 				'telepon_kantor' => $telepon_kantor,
 				'telepon_rumah' => $telepon,
 
 			);
-			$data_pend = array(
-				'nip' => $nip,
-				'pendidikan' => $pendidikanTerakhir
+			// $data_pend = array(
+			// 	'nip' => $nip,
+			// 	'pendidikan' => $pendidikanTerakhir
 
-			);
+			// );
 			//Validation
 			if ($lspro==null&&$lit==null&&$peng==null&&$kal==null){
 				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">  Anda belum menambahkan lembaga. <br>silahkan pilih minimal 1 lembaga</div>');
@@ -74,7 +74,7 @@ class InputSDM extends CI_Controller {
 				$this->load->view('inputSDM');
 			}else{
 				$this->m_data->tambah($data,'sdm');
-				$this->m_data->tambahPendidikan($data_pend,'pd_terakhir');
+				// $this->m_data->tambahPendidikan($data_pend,'pd_terakhir');
 				if ($lspro != null) {
 					$this->m_data->tambahLembaga('lspro',1,$nip);
 				}

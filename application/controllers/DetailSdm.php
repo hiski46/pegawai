@@ -47,9 +47,11 @@ class DetailSdm extends CI_Controller {
 	{
 		$nip=$this->input->post('nip');
 		$pen=$this->input->post('pen');
+		$tahun=$this->input->post('tahun');
 		$data_pend = array(
 			'nip' => $nip,
-			'pendidikan' => $pen
+			'pendidikan' => $pen,
+			'tahun' => $tahun
 
 		);
 		$this->m_data->tambahPendidikan($data_pend,'pd_terakhir');

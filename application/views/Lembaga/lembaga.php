@@ -159,7 +159,7 @@
                     <td>
                       <div class="row">
                         <!-- <a href="//base_url('Lembaga/Lembaga/hapus_jabatan/'.$this->uri->segment(4).'/'.$l->nip.'/'.$ganti)" class=" ml--9 float-right text-danger">-hapus</a> -->
-                        <a class="btn btn-success btn-sm text-xs ml-2 mt-2 mr-3" href="<?=base_url("Lembaga/Lembaga/Cetak/".$l->nip."/".$this->uri->segment(4))?>" > Cetak</a>
+                        <a class="btn btn-success btn-sm text-xs ml-2 mt-2 mr-3" href="<?=base_url("Lembaga/Lembaga/Cetak/".$l->nip."/".$this->uri->segment(4)."/".$l->nama)?>" > Cetak</a>
                         <a class="btn btn-primary btn-sm text-xs ml-2 mt-2 mr-3" href="<?=base_url("Lembaga/TambahJabatan/menu/".$l->nip."/".$this->uri->segment(4)."/".$l->nama)?>" > Tambah</a>
                       </div>
                     </td>               

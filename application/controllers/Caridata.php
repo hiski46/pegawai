@@ -151,6 +151,8 @@ class Caridata extends CI_Controller {
         $this->m_data->hapusJabatan('ruang_linkup',$nip);
         $this->m_data->hapusJabatan('sub_kel_produk',$nip);
         $this->m_data->hapusJabatan('pd_terakhir',$nip);
+        $this->m_data->hapusJabatan('riwayat_jabatan',$nip);
+        $this->m_data->hapusJabatan('pengalaman',$nip);
 
         $this->m_data->hapusSdm($nip);
 

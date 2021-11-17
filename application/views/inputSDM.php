@@ -59,7 +59,7 @@
                           <input type="text" id="input-nip" name="nip" class="form-control col-9" placeholder="Masukkan NIP" >
                         </div>
                         <div class="row p-2">
-                          <label class="form-control-label col-3" for="input-pendidikan-terakhir">Pendidikan</label>
+                          <label class="form-control-label col-3" for="input-pendidikan-terakhir">Pendidikan Terakhir</label>
                           <input type="text" id="input-pendidikan-teralhir" name="pendidikan-terakhir" class="form-control col-9" placeholder="Masukkan Pendidikan Terakhir" >
                         </div>
                         <div class="row p-2">
@@ -77,10 +77,6 @@
                         <div class="row p-2">
                           <label class="form-control-label col-3" for="alamat">Alamat Rumah</label>
                           <textarea type="area" id="alamat" name="alamat" class="form-control col-9" placeholder="Masukkan Alamat" > </textarea>
-                        </div>
-                        <div class="row p-2">
-                          <label class="form-control-label col-3" for="riwayat">Riwayat Jabatan</label>
-                          <textarea  id="riwayat" name="riwayat" class="form-control col-9" placeholder="Masukkan Riwayat Jabatan" > </textarea>
                         </div>
                         <div class="row p-2">
                           <label class="form-control-label col-3" for="telepon_kantor">Telepon Kantor</label>

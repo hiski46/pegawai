@@ -50,18 +50,44 @@
         </div>
         <div class="row pl-8">
             <h4 class="col-3">Jabatan</h4>
-            <div class="col-4">
+            <div class="col-6">
                 <ul>
                 <?php foreach($this->CI->tampil_jabatan($nip,$idlem) as $jabatan){?>
                     <div class="row">
-                     <li class="ml--2 col-9"><?=$jabatan->jabatan?>  </li><a href="<?=base_url('Lembaga/TambahJabatan/hapusJabatan/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$jabatan->id)?>" class=" col-1 ml-4 text-danger">Hapus</a>
+                     <li class="ml--2 col-9"><?=$jabatan->jabatan?> (<?=$jabatan->tmt?>)  </li><a href="<?=base_url('Lembaga/TambahJabatan/hapusJabatan/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$jabatan->id)?>" class=" col-1 ml-4 text-danger">Hapus</a>
                     </div>
-                    
                                   
                 <?php } ?>
                 </ul>
             </div>
             <a  data-toggle="modal" data-target="#tambah_jabatan" href="#" class=" ml-4 col-1">Tambah</a>           
+        </div>
+        
+        <div class="row pl-8">
+            <h4 class="col-3">Riwayat Jabatan </h4>
+            <div class="col-4">
+                <ul>
+                <?php foreach($this->CI->tampil_riwayat_jabatan($nip,$idlem) as $rj){?>
+                    <div class="row">
+                     <li class="ml--2 col-9"><?=$rj->tahun.' - '.$rj->jabatan?>  </li><a href="<?=base_url('Lembaga/TambahJabatan/hapusRiwayatJabatan/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$rj->id)?>" class=" col-1 ml-4 text-danger">Hapus</a>
+                    </div>                 
+                <?php } ?>
+                </ul>
+            </div>
+            <a  data-toggle="modal" data-target="#tambah_riwayat_jabatan" href="#" class=" ml-4 col-1">Tambah</a>           
+        </div>
+        <div class="row pl-8">
+            <h4 class="col-3">Pengalaman </h4>
+            <div class="col-4">
+                <ul>
+                <?php foreach($this->CI->tampil_pengalaman($nip,$idlem) as $p){?>
+                    <div class="row">
+                     <li class="ml--2 col-9"><?=$p->tahun.' - '.$p->pengalaman?>  </li><a href="<?=base_url('Lembaga/TambahJabatan/hapusPengalaman/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$p->id)?>" class=" col-1 ml-4 text-danger">Hapus</a>
+                    </div>                 
+                <?php } ?>
+                </ul>
+            </div>
+            <a  data-toggle="modal" data-target="#tambah_pengalaman" href="#" class=" ml-4 col-1">Tambah</a>           
         </div>
         <!-- <div class="row bg-white pl-8">
             <h4 class="col-3">Ruang Lingkup</h4>
@@ -113,26 +139,83 @@
     </div>
     <!-- Modal -->
     <div class="modal fade bd-example-modal-lg" id="tambah_jabatan" tabindex="-1" role="dialog" >
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Tambah Jabatan</h5>
-                      <button class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p class="mb--3">Pilih Jabatan <strong class="ml-1"><?=$nama?> </p>
-                      <form action="<?= base_url('Lembaga/TambahJabatan/tambah/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6))?>" method="POST">
-                          <?php foreach ($this->CI->jabatan_all() as $j) {?>
-                            <div class="form-control-label text-xs  pl-5 row"><input type="radio" id="jabatan" name="jabatan" value="<?= $j->jabatan?>" class="m-1"   ><?= $j->jabatan?> </div>
-                          <?php }?>
-                          <button type="submit" class="btn btn-primary"> Tambah </button>
-                      </form>
-                    </div>
-                  </div>
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Tambah Jabatan</h5>
+            <button class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="mb--3">Pilih Jabatan <strong class="ml-1"><?=$nama?> </p>
+            <form action="<?= base_url('Lembaga/TambahJabatan/tambah/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6))?>" method="POST">
+                <?php foreach ($this->CI->jabatan_all() as $j) {?>
+                  <div class="form-control-label text-xs  pl-5 row"><input type="radio" id="jabatan" name="jabatan" value="<?= $j->jabatan?>" class="m-1"   ><?= $j->jabatan?> </div>
+                <?php }?>
+                <div class="row mt-3 mb-3">
+                  <label class=" ml-3 col-1" for="tmt">TMT</label>
+                  <input class="form-control col-4" type="text" name="tmt_jabatan" placeholder="TMT Jabatan">
                 </div>
-              </div>
+                <button type="submit" class="btn btn-primary"> Tambah </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Riwayat Jabatan -->
+    <div class="modal fade bd-example-modal-lg" id="tambah_riwayat_jabatan" tabindex="-1" role="dialog" >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Tambah Riwayat Jabatan</h5>
+            <button class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body ">
+            <p class="">Masukkan Riwayat Jabatan <strong class="ml-1"> </p>
+            <form action="<?= base_url('Lembaga/TambahJabatan/tambah_riwayat_jabatan/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6))?>" method="POST">
+                <div class = "row mb-4">
+                  <label class="col-3" for="riwayat_jabatan">Riwayat Jabatan</label>
+                  <input class ="col-8" type="text" name="riwayat_jabatan" placeholder="Masukkan Riwayat Jabatan"> 
+                </div>
+                <div class = "row mb-4">
+                  <label class="col-3" for="tahun_jabatan">Tahun</label>
+                  <input class ="" type="text" name="tahun_jabatan" placeholder="Masukkan Tahun Jabatan"> 
+                </div>
+                <button type="submit" class="btn btn-primary"> Tambah </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="tambah_pengalaman" tabindex="-1" role="dialog" >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Tambah Pengalanman</h5>
+            <button class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body ">
+            <p class="">Masukkan Pengalaman <strong class="ml-1"> </p>
+            <form action="<?= base_url('Lembaga/TambahJabatan/tambah_pengalaman/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6))?>" method="POST">
+                <div class = "row mb-4">
+                  <label class="col-3" for="pengalaman">Pengalaman</label>
+                  <input class ="col-8" type="text" name="pengalaman" placeholder="Masukkan pengalaman"> 
+                </div>
+                <div class = "row mb-4">
+                  <label class="col-3" for="tahun">Tahun</label>
+                  <input class ="" type="text" name="tahun" placeholder="Masukkan Tahun"> 
+                </div>
+                <button type="submit" class="btn btn-primary"> Tambah </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="modal fade bd-example-modal-lg" id="tambah_ruang" tabindex="-1" role="dialog" >
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
