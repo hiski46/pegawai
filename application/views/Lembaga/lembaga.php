@@ -21,6 +21,7 @@
 
 <body >
   <!-- Sidenav -->
+  
   <?php $this->load->view("_partial/sidenav.php") ?>
    
     <!-- Header -->
@@ -29,12 +30,12 @@
     <!-- Header -->
    <?php $this->load->view("_partial/header.php") ?>
     <!-- menu -->
-    <div class="row ">
-    
-      <div class="col-12 pl-5">
-          <h1><?=$this->session->flashdata('nama_lembaga')?></h1>
+    <div style="height:200px; background-image:url('<?=base_url('assets/img/'.$this->session->flashdata('foto'))?>'); ">
+      <div class="pl-3 pt-8" id="formCari">
+        <h1 class="text-white"><?=$this->session->flashdata('nama_lembaga')?></h1>
       </div>
     </div>
+    
     <!-- <div class='row m-4'>
         <form action="<?= base_url('Caridata/TampilCari');?>" method="POST" class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
             <div class="form-group mb-0">

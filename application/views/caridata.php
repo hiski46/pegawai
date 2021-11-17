@@ -25,13 +25,18 @@
    
     <!-- Header -->
   <!-- Main content -->
-  <div class="main-content" id="panel">
+  <div class="main-content" id="panel" >
     <!-- Header -->
    <?php $this->load->view("_partial/header.php") ?>
     <!-- menu -->
-    <?php $this->load->view("_partial/headerSDM.php") ?>
+    <div style="height:250px; background-image:url('<?=base_url('assets/img/fotobersama1.jpeg')?>'); ">
+      <?php $this->load->view("_partial/headerSDM.php") ?>
+      <div class="pl-3" id="formCari">
+          <h1 class="text-white ">Cari Data SDM</h1>
+          
+      </div>
+    </div>
     <div class="pl-3" id="formCari">
-        <h2>Cari Data SDM</h2>
         <p class="m-4">Masukkan Nama atau NIP</p>
     </div>
     <div class='row m-4'>

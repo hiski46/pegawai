@@ -27,9 +27,15 @@
     <!-- Header -->
     <?php $this->load->view("_partial/header.php") ?>
     <!-- Header -->
-    <?php $this->load->view("_partial/headerSDM.php") ?>
+    <div style="height:250px; background-image:url('<?=base_url('assets/img/fotobersama1.jpeg')?>'); ">
+      <?php $this->load->view("_partial/headerSDM.php") ?>
+      <div class="pl-3" id="formCari">
+          <h1 class="text-white ">Input Data SDM</h1>
+          
+      </div>
+    </div>
     <!-- Page content -->
-    <div class="container-fluid mt-0">
+    <div class="container-fluid mt-4">
       <div class="row">
         <div class="col-xl-8 order-xl-1">
           <?= $this->session->flashdata('message') ?>
@@ -37,7 +43,7 @@
             <div class="">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Input SDM</h3>
+                  <p>Masuukan Data Dengan Benar</p>
                 </div>
               </div>
             </div>

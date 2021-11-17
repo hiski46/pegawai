@@ -1,4 +1,4 @@
-<div class="container-fluid p-3">
+<div class="container-fluid p-3" >
       <div class="row d-flex justify-content-around ">
         <div class="col-3">
           <div class="card card-stats">

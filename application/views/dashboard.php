@@ -19,26 +19,21 @@
   <link rel="stylesheet" href="<?= base_url('assets/dashboard') ?>/css/argon.css?v=1.2.0" type="text/css">
 </head>
 
-<body >
+<body style="height:100%;">
   <!-- Sidenav -->
   <?php $this->load->view("_partial/sidenav.php") ?>
    
     <!-- Header -->
   <!-- Main content -->
-  <div class="main-content" id="panel">
+  <div class="main-content" id="panel" style="height:600px; " >
     <!-- Header -->
    <?php $this->load->view("_partial/header.php") ?>
     <!-- menu -->
     <?= $this->session->flashdata('message') ?>
-    <div><?php 
-    $message='';
-    echo $message; ?></div>
-    <div class="row pt-200">
+    <div class="row pt-200"  style="height:100%; background-image:url('<?=base_url('assets/img/gedung2.jpg')?>'); ">
       <?php $this->load->view("_partial/headerSDM.php") ?>
     </div>
     <!-- Footer -->
-    <footer class="footer pt-0">    
-    </footer>
   </div>  
   <!-- Argon Scripts -->
   <!-- Core -->

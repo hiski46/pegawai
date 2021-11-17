@@ -32,6 +32,7 @@ class Lembaga extends CI_Controller {
         $id=$this->uri->segment(4);
         if ($id==1) {
             $this->session->set_flashdata('nama_lembaga','Lembaga Sertifikasi Produk (LSPRO)');
+            $this->session->set_flashdata('foto','lspro.jpeg');
             $table='lspro';
             $table_jabatan='jabatan_lspro';
             
@@ -42,6 +43,7 @@ class Lembaga extends CI_Controller {
         }
         if ($id==2) {
             $this->session->set_flashdata('nama_lembaga','Lembaga Inspeksi Teknis (LIT)');
+            $this->session->set_flashdata('foto','inspeksi.jpeg');
             $table='lit';
             $table_jabatan='jabatan_lit';
             
@@ -52,6 +54,7 @@ class Lembaga extends CI_Controller {
         }
         if ($id==3) {
             $this->session->set_flashdata('nama_lembaga','Laboratorium Pengujian');
+            $this->session->set_flashdata('foto','labuji.jpeg');
             $table='lab_pengujian';
             $table_jabatan='jabatan_peng';
             
@@ -62,6 +65,7 @@ class Lembaga extends CI_Controller {
         }
         if ($id==4) {
             $this->session->set_flashdata('nama_lembaga','Laboratorium Kalibrasi');
+            $this->session->set_flashdata('foto','kalibrasi.jpeg');
             $table='lab_kalibrasi';
             $table_jabatan='jabatan_kal';
             

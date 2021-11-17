@@ -33,9 +33,9 @@
   <!-- Navbar -->
   
   <!-- Main content -->
-  <div class="main-content">
+  <div class="main-content ">
     <!-- Header -->
-    <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-6">
+    <div class="header bg-gradient-primary py-5 py-lg-5 pt-lg-5 p-3">
       <div class="container">
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
@@ -43,6 +43,7 @@
               <h1 id="selamatdatang" class="text-white">Selamat Datang!</h1>
               <p class="text-lead text-white">Silahkan masukkan password dan username </p>
             </div>
+            
           </div>
         </div>
       </div>
@@ -52,9 +53,11 @@
         </svg>
       </div>
     </div>
+    
     <!-- Page content -->
     <div class="container mt--8 pb-5">
       <div class="row justify-content-center">
+      
         <div class="col-lg-5 col-md-7">
           <div class="card bg-secondary border-0 mb-0">
             <?= $this->session->flashdata('message') ?>
@@ -96,10 +99,11 @@
               </form>
             </div>
           </div>
-
+          
         </div>
       </div>
     </div>
+    
   </div>
   <!-- Footer -->
   <footer class="py-5" id="footer-main">
@@ -108,6 +112,7 @@
         <div class="col-xl-6">
           <div class="copyright text-center text-xl-left text-muted">
             <!-- &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a> -->
+            <img class="" src="<?= base_url("assets/img/BRSBL2.png")?>" alt="" style="max-width:30%; height:auto; display: block;">
           </div>
         </div>
         <div class="col-xl-6">

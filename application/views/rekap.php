@@ -31,9 +31,14 @@
     <!-- Header -->
    <?php $this->load->view("_partial/header.php") ?>
     <!-- menu -->
-    <?php $this->load->view("_partial/headerSDM.php") ?>
-    <div class="pl-3 row" id="formCari">
-        <h2 class="col-9">Rekapitulasi SDM</h2>
+    <div style="height:250px; background-image:url('<?=base_url('assets/img/fotobersama1.jpeg')?>'); ">
+      <?php $this->load->view("_partial/headerSDM.php") ?>
+      <div class="pl-3" id="formCari">
+          <h1 class="text-white ">Rekapitulasi Data SDM</h1>
+      </div>
+    </div>
+    <div class="pl-3 pt-6 row" id="formCari">
+        <h2 class="col-9"></h2>
         <a href="<?=base_url('Rekap/Excel');?>" class="col-2 mr-5"><button class="btn btn-outline-success shadow"><i class="fa fa-file-excel"></i><br>Excel</button></a>
     </div>
     <div class='row m-4'>
