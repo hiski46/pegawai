@@ -65,11 +65,45 @@
         
         <div class="row pl-8">
             <h4 class="col-3">Riwayat Jabatan </h4>
-            <div class="col-4">
+            <div class="col-6">
                 <ul>
                 <?php foreach($this->CI->tampil_riwayat_jabatan($nip,$idlem) as $rj){?>
                     <div class="row">
-                     <li class="ml--2 col-9"><?=$rj->tahun.' - '.$rj->jabatan?>  </li><a href="<?=base_url('Lembaga/TambahJabatan/hapusRiwayatJabatan/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$rj->id)?>" class=" col-1 ml-4 text-danger">Hapus</a>
+                     <li class="ml--2 col-9"><?=$rj->tahun.' - '.$rj->jabatan?> <a href="" data-toggle="modal" data-target="#modal_edit_r_jabatan<?=$rj->id?>" class="text-success">Edit</a>|<a href="<?=base_url('Lembaga/TambahJabatan/hapusRiwayatJabatan/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$rj->id)?>" class="text-danger">Hapus</a>  </li>
+                    </div>
+                    <div class="modal fade" id="modal_edit_r_jabatan<?=$rj->id?>" tabindex="-1" role="dialog" >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Edit Riwayat Jabatan</h5>
+                            <button class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="<?= base_url('Lembaga/TambahJabatan/EditJabatan/'.$idlem)?>" method="POST">
+                              <div class=row>
+                                  <label class="mr-2 col-3" for="nip">Riwayat Jabatan </label>
+                                  <input class="p-2" type="text" name="r_jabatan" value="<?=$rj->jabatan?>">
+                                  <input class="p-2" type="hidden" name="nip" value="<?=$rj->nip?>">
+                                  <input class="p-2" type="hidden" name="nama" value="<?=$nama?>">
+                                  
+                                </div>
+                                <div class="row mt-2">
+                                  <label class="mr-2 col-3" for="tahun">Tahun </label>
+                                  <input class="p-2 " type="text" name="r_tahun" value="<?=$rj->tahun?>">
+                                  <input class="p-2 " type="hidden" name="id" value="<?=$rj->id?>">
+
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                  <input type="submit" class="btn btn-primary" value="Ubah">
+                                </div>
+                            </form>
+                          </div>
+                          
+                        </div>
+                      </div>
                     </div>                 
                 <?php } ?>
                 </ul>
@@ -78,12 +112,46 @@
         </div>
         <div class="row pl-8">
             <h4 class="col-3">Pengalaman </h4>
-            <div class="col-4">
+            <div class="col-6">
                 <ul>
                 <?php foreach($this->CI->tampil_pengalaman($nip,$idlem) as $p){?>
                     <div class="row">
-                     <li class="ml--2 col-9"><?=$p->tahun.' - '.$p->pengalaman?>  </li><a href="<?=base_url('Lembaga/TambahJabatan/hapusPengalaman/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$p->id)?>" class=" col-1 ml-4 text-danger">Hapus</a>
-                    </div>                 
+                     <li class="ml--2 col-9"><?=$p->tahun.' - '.$p->pengalaman?> <a href="" data-toggle="modal" data-target="#modal_edit_pengalaman<?=$p->id?>" class="text-success">Edit</a>|<a href="<?=base_url('Lembaga/TambahJabatan/hapusPengalaman/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$p->id)?>" class="text-danger">Hapus</a> </li>
+                    </div>
+                    <div class="modal fade" id="modal_edit_pengalaman<?=$p->id?>" tabindex="-1" role="dialog" >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Edit Pengalaman</h5>
+                            <button class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="<?= base_url('Lembaga/TambahJabatan/EditPengalaman/'.$idlem)?>" method="POST">
+                              <div class=row>
+                                  <label class="mr-2 col-3" for="nip">Pengalaman </label>
+                                  <input class="p-2" type="text" name="pengalaman" value="<?=$p->pengalaman?>">
+                                  <input class="p-2" type="hidden" name="nip" value="<?=$p->nip?>">
+                                  <input class="p-2" type="hidden" name="nama" value="<?=$nama?>">
+                                  
+                                </div>
+                                <div class="row mt-2">
+                                  <label class="mr-2 col-3" for="tahun">Tahun </label>
+                                  <input class="p-2 " type="text" name="r_tahun" value="<?=$p->tahun?>">
+                                  <input class="p-2 " type="hidden" name="id" value="<?=$p->id?>">
+
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                  <input type="submit" class="btn btn-primary" value="Ubah">
+                                </div>
+                            </form>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>                  
                 <?php } ?>
                 </ul>
             </div>

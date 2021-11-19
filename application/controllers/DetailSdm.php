@@ -58,6 +58,24 @@ class DetailSdm extends CI_Controller {
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Pendidikan Terakhir Sudah Ditambah</div>');
 		redirect('Caridata/DetailSdm/'.$nip);
 	}
+	public function EditData()
+	{
+		$nip=$this->input->post('nip');
+		$id=$this->input->post('id');
+		$pen=$this->input->post('r_pen');
+		$tahun=$this->input->post('r_tahun');
+		$where=array(
+			'nip'=>$nip,
+			'id'=>$id
+		);
+		$data=array(
+			'pendidikan'=>$pen,
+			'tahun'=>$tahun
+		);
+		$this->m_data->UbahData($where, $data, 'pd_terakhir');
+		redirect('Caridata/DetailSdm/'.$nip);
+		
+	}
 	public function UbahLem()
 	{
 		$nip=$this->input->post('nip');

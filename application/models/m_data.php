@@ -309,6 +309,11 @@ function __construct()
 		$this->db->where($where);
 		$this->db->update('sdm',$data);
 	}
+	function UbahData($where, $data, $table)
+	{
+		$this->db->where($where);
+		$this->db->update($table,$data);
+	}
 
 	function UbahPen($nip,$pen)
 	{

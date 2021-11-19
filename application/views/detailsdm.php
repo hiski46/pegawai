@@ -101,10 +101,42 @@
                 <ul>
                   <li class=>
                     <?=$pd->tahun.' - '.$pd->pendidikan?>
-                    <a class="text-danger" href="<?=base_url('DetailSdm/Hapus_Pend/'.$s->nip.'/'.$pd->id)?>"> Hapus <a>
+                    <a href="#" data-toggle="modal" data-target="#modal_edit_pen<?=$pd->id?>" class="text-success">edit</a>|<a class="text-danger" href="<?=base_url('DetailSdm/Hapus_Pend/'.$s->nip.'/'.$pd->id)?>"> Hapus <a>
                   </li>
                 </ul>
-                
+                <div class="modal fade" id="modal_edit_pen<?=$pd->id?>" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Edit Riwayat Pendidikan</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/EditData')?>" method="POST">
+                        <div class=row>
+                            <label class="mr-2 col-3" for="nip">Riwayat Pendidikan </label>
+                            <input class="p-2" type="text" name="r_pen" value="<?=$pd->pendidikan?>">
+                            <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                            
+                          </div>
+                          <div class="row mt-2">
+                            <label class="mr-2 col-3" for="tahun">Tahun </label>
+                            <input class="p-2 " type="text" name="r_tahun" value="<?=$pd->tahun?>">
+                            <input class="p-2 " type="hidden" name="id" value="<?=$pd->id?>">
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
                 
               <?php }?>
             </div>
@@ -143,6 +175,7 @@
                   </div>
                 </div>
               </div>
+              
         </div>
 
         <div class="row bg-white pl-8">

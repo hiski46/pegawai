@@ -90,6 +90,44 @@ class TambahJabatan extends CI_Controller {
            $jabatan = $this->m_data->tampil_Jabatan($idlem, $nip, 'pengalaman');
            return $jabatan->result();
     }
+    public function EditJabatan()
+    {
+        $nip=$this->input->post('nip');
+		$id=$this->input->post('id');
+        $idlem=$this->uri->segment(4);
+        $nama=$this->input->post('nama');
+		$jabatan=$this->input->post('r_jabatan');
+		$tahun=$this->input->post('r_tahun');
+		$where=array(
+			'nip'=>$nip,
+			'id'=>$id
+		);
+		$data=array(
+			'jabatan'=>$jabatan,
+			'tahun'=>$tahun
+		);
+		$this->m_data->UbahData($where, $data, 'riwayat_jabatan');
+		redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
+    }
+    public function EditPengalaman()
+    {
+        $nip=$this->input->post('nip');
+		$id=$this->input->post('id');
+        $idlem=$this->uri->segment(4);
+        $nama=$this->input->post('nama');
+		$pengalaman=$this->input->post('pengalaman');
+		$tahun=$this->input->post('r_tahun');
+		$where=array(
+			'nip'=>$nip,
+			'id'=>$id
+		);
+		$data=array(
+			'pengalaman'=>$pengalaman,
+			'tahun'=>$tahun
+		);
+		$this->m_data->UbahData($where, $data, 'pengalaman');
+		redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
+    }
     public function jabatan_all()
     {
         $id=$this->uri->segment(5);
