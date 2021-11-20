@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require('./application/third_party/vendor/autoload.php');
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use \PhpOffice\PhpSpreadsheet\Cell\DataType;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class Rekap extends CI_Controller {
 
@@ -89,20 +92,34 @@ class Rekap extends CI_Controller {
     {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'No');
-        $sheet->setCellValue('B1', 'NIP');
-        $sheet->setCellValue('C1', 'Nama');
-        $sheet->setCellValue('D1', 'Pendidikan Terakhir');
-        $sheet->setCellValue('E1', 'Portofolio');
-        $sheet->setCellValue('F1', 'Tahun');
-        $sheet->setCellValue('G1', 'Lembaga');
+        $styleArray = array(
+            'borders' => array(
+                'allBorders' => array(
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                ),
+            ),
+        );
+        $sheet->getStyle('A3:G3')->applyFromArray($styleArray);
+        $sheet->mergeCells('A1:G1');
+        $sheet->getStyle('A')->getAlignment()->setHorizontal('center');
+        $sheet->setCellValue('A1', 'Data personil Lembaga Penilai Kesesuaian (LPK) Baristand Industri Bandar Lampung');
+        $sheet->setCellValue('A3', 'No');
+        $sheet->setCellValue('B3', 'NIP');
+        $sheet->setCellValue('C3', 'Nama');
+        $sheet->setCellValue('D3', 'Pendidikan Terakhir');
+        $sheet->setCellValue('E3', 'Portofolio');
+        $sheet->setCellValue('F3', 'Tahun');
+        $sheet->setCellValue('G3', 'Lembaga');
+        $sheet->getStyle("A3:G3")->getFont()->setBold( true );
+        $sheet->getStyle("A1")->getFont()->setBold( true );
         
         $sdm=$this->m_data->tampil_data()->result();
         $no = 1;
-        $x=2;
+        $x=4;
         foreach($sdm as $row){
             $sheet->setCellValue('A'.$x, $no++);
             $sheet->setCellValue('B'.$x, $row->nip);
+            $sheet->getStyle('B'.$x)->getNumberFormat()->setFormatCode('##############');
             $sheet->setCellValue('C'.$x, $row->nama);
             $tampil_pd= $this->m_data->tampilPendidikan($row->nip);
             $pendidikan=array();
@@ -110,7 +127,7 @@ class Rekap extends CI_Controller {
                 array_push($pendidikan, $pd->pendidikan);
             }
         
-            $stringPendidikan=implode('; ',$pendidikan);
+            $stringPendidikan=implode(PHP_EOL,$pendidikan);
            
             $sheet->setCellValue('D'.$x, $stringPendidikan);
             $porto = $this->m_data->Porto($row->nip)->result();
@@ -120,15 +137,22 @@ class Rekap extends CI_Controller {
                 array_push($nama_pelatihan, $p->nama_pelatihan);
                 array_push($tahun_pelatihan, $p->tahun_pelatihan);
             }
-            $string_nama_pelatihan = implode('; ', $nama_pelatihan);
-            $string_tahun_pelatihan = implode('; ', $tahun_pelatihan);
+            $string_nama_pelatihan = implode(PHP_EOL, $nama_pelatihan);
+            $string_tahun_pelatihan = implode(PHP_EOL, $tahun_pelatihan);
             $sheet->setCellValue('E'.$x, $string_nama_pelatihan);
             $sheet->setCellValue('F'.$x, $string_tahun_pelatihan);
             $lembaga=$this->cekLembaga($row->nip);
-            $string_lembaga=implode('; ', $lembaga);
+            $string_lembaga=implode(PHP_EOL, $lembaga);
             $sheet->setCellValue('G'.$x, $string_lembaga);
+            $sheet->getStyle('A'.$x.':G'.$x)->getAlignment()->setWrapText(true);
+            $sheet->getStyle('A'.$x.':G'.$x)->getAlignment()->setVertical('center');
+            $sheet->getStyle('A'.$x.':G'.$x)->applyFromArray($styleArray);
             $x++;    
         }
+        foreach (range('A','G') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+            
+         }
         $writer = new Xlsx($spreadsheet);
         $filename = 'data_pegawai';
         
