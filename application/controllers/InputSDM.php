@@ -32,6 +32,7 @@ class InputSDM extends CI_Controller {
 		$telepon= $this->input->post('telepon');
 		$jk= $this->input->post('jk');
 		$status= $this->input->post('status');
+		$tahun= $this->input->post('tahun');
 
 		$lspro=$this->input->post('lspro');
 		$lit=$this->input->post('lit');
@@ -54,6 +55,12 @@ class InputSDM extends CI_Controller {
 				'telepon_rumah' => $telepon,
 
 			);
+
+			$pd=array(
+				'nip'=>$nip,
+				'pendidikan'=>$pendidikanTerakhir,
+				'tahun'=>$tahun
+			);
 			// $data_pend = array(
 			// 	'nip' => $nip,
 			// 	'pendidikan' => $pendidikanTerakhir
@@ -68,12 +75,15 @@ class InputSDM extends CI_Controller {
 			$this->form_validation->set_rules('nama','Nama','required');
 			$this->form_validation->set_rules('nip','NIP','required|exact_length[18]|numeric|callback_ceknip');
 			$this->form_validation->set_rules('pendidikan-terakhir','Pendidikan Terakhir','required');
+			$this->form_validation->set_rules('jk','Jenis Kelamin','required');
+			$this->form_validation->set_rules('status','Status','required');
 			//EndValidation
 			if ($this->form_validation->run()==FALSE) {
 				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">  Pastikan semua data terisi dan sudah benar</div>');
 				$this->load->view('inputSDM');
 			}else{
 				$this->m_data->tambah($data,'sdm');
+				$this->m_data->tambah($pd,'pd_terakhir');
 				// $this->m_data->tambahPendidikan($data_pend,'pd_terakhir');
 				if ($lspro != null) {
 					$this->m_data->tambahLembaga('lspro',1,$nip);

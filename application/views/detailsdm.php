@@ -57,42 +57,11 @@
             <p class="col-6 "><strong>: <?=$s->tmt_pangkat?></strong> </p> 
             <a data-toggle="modal" data-target="#modal_tmtpangkat" href="#" class="col-1  ">ubah</a>
         </div>
-        <div class="row  pl-8">
+        <!-- <div class="row  pl-8">
             <h4 class="col-3">Pendidikan Terakhir</h4>
             <p class="col-6 "><strong>: <?=$s->pendidikan_terakhir?></strong> </p> 
             <a data-toggle="modal" data-target="#modal_pendidikan_terakhir" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Tempat Tanggal Lahir</h4>
-            <p class="col-6 "><strong>: <?=$s->ttl?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_ttl" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row  pl-8">
-            <h4 class="col-3">Jenis Kelamin</h4>
-            <p class="col-6 "><strong>: <?=$s->jenis_kelamin?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_jenis_kelamin" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Status</h4>
-            <p class="col-6 "><strong>: <?=$s->status?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_status" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row  pl-8">
-            <h4 class="col-3">Alamat</h4>
-            <p class="col-6 "><strong>: <?=$s->alamat?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_alamat" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row bg-white pl-8">
-            <h4 class="col-3">Telepon Kantor</h4>
-            <p class="col-6 "><strong>: <?=$s->telepon_kantor?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_telepon_kantor" href="#" class="col-1  ">ubah</a>
-        </div>
-        <div class="row  pl-8">
-            <h4 class="col-3">Telepon Rumah</h4>
-            <p class="col-6 "><strong>: <?=$s->telepon_rumah?></strong> </p> 
-            <a data-toggle="modal" data-target="#modal_telepon_rumah" href="#" class="col-1  ">ubah</a>
-        </div>
-  
+        </div> -->
         <div class="row pl-8">
             <h4 class="col-3">Riwayat Pendidikan</h4>
             <div class="col-6">
@@ -177,6 +146,38 @@
               </div>
               
         </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Tempat Tanggal Lahir</h4>
+            <p class="col-6 "><strong>: <?=$s->ttl?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_ttl" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row  pl-8">
+            <h4 class="col-3">Jenis Kelamin</h4>
+            <p class="col-6 "><strong>: <?=$s->jenis_kelamin?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_jenis_kelamin" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Status</h4>
+            <p class="col-6 "><strong>: <?=$s->status?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_status" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row  pl-8">
+            <h4 class="col-3">Alamat</h4>
+            <p class="col-6 "><strong>: <?=$s->alamat?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_alamat" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">Telepon Kantor</h4>
+            <p class="col-6 "><strong>: <?=$s->telepon_kantor?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_telepon_kantor" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row  pl-8">
+            <h4 class="col-3">Telepon Rumah</h4>
+            <p class="col-6 "><strong>: <?=$s->telepon_rumah?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_telepon_rumah" href="#" class="col-1  ">ubah</a>
+        </div>
+  
+        
 
         <div class="row bg-white pl-8">
             <h4 class="col-3">Lembaga</h4>

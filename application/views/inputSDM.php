@@ -66,7 +66,8 @@
                         </div>
                         <div class="row p-2">
                           <label class="form-control-label col-3" for="input-pendidikan-terakhir">Pendidikan Terakhir</label>
-                          <input type="text" id="input-pendidikan-teralhir" name="pendidikan-terakhir" class="form-control col-9" placeholder="Masukkan Pendidikan Terakhir" >
+                          <input type="text" id="input-pendidikan-teralhir" name="pendidikan-terakhir" class="form-control col-5" placeholder="Masukkan Pendidikan Terakhir" > 
+                          <input type="text" name="tahun" class="form-control col-3 ml-2" placeholder="Tahun" >
                         </div>
                         <div class="row p-2">
                           <label class="form-control-label col-3" for="pangkat">Pangkat Golongan</label>
