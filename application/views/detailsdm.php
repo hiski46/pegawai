@@ -88,7 +88,7 @@
             <a data-toggle="modal" data-target="#modal_telepon_kantor" href="#" class="col-1  ">ubah</a>
         </div>
         <div class="row  pl-8">
-            <h4 class="col-3">Telepon</h4>
+            <h4 class="col-3">Telepon Rumah</h4>
             <p class="col-6 "><strong>: <?=$s->telepon_rumah?></strong> </p> 
             <a data-toggle="modal" data-target="#modal_telepon_rumah" href="#" class="col-1  ">ubah</a>
         </div>

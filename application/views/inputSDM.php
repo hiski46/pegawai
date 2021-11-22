@@ -89,7 +89,7 @@
                           <input type="text"  id="telepon_kantor" name="telepon_kantor" class="form-control col-9" placeholder="Masukkan Telepon Kantor" > 
                         </div>
                         <div class="row p-2">
-                          <label class="form-control-label col-3" for="telepon">Telepon Kantor</label>
+                          <label class="form-control-label col-3" for="telepon">Telepon Rumah</label>
                           <input  type="text" id="telepon" name="telepon" class="form-control col-9" placeholder="Masukkan Telepon" > 
                         </div>
                         <div class="p-4">
