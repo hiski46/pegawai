@@ -28,7 +28,7 @@ class InputPorto extends CI_Controller {
 		$file = $_FILES['sertifikat']['name'];
 		$evaluasi = $_FILES['evaluasi']['name'];
 		$kerja = $_FILES['kerja']['name'];
-		$bukti = $_FILES['bukti']['name'];
+		$bukti  = $_FILES['bukti']['name'];
 		$this->session->set_flashdata('nip',$nip);
 		$this->session->set_flashdata('nama_sdm',$nama);
 

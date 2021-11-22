@@ -263,6 +263,7 @@ class Lembaga extends CI_Controller {
         $porto=$this->m_data->porto($nip)->result();
         $pendidikan=$this->m_data->tampilPendidikan($nip);
         $pengalaman = $this->m_data->tampil_Jabatan($id, $nip, 'pengalaman')->result();
+        $tugas = $this->m_data->tampil_Jabatan($id, $nip, 'tugas')->result();
         if($id==1){
             $phpWord = new TemplateProcessor('assets/template/lspro.docx');
             foreach ($sdm as $s){
@@ -394,6 +395,13 @@ class Lembaga extends CI_Controller {
                 $isi=$pl->tahun.' - '.$pl->pengalaman;
                 array_push($list_pengalaman, $isi);
             }
+            $list_tugas =array();
+            $no=0;
+            foreach($tugas as $t){
+                $isi=++$no.". ".$t->tugas;
+                array_push($list_tugas, $isi);
+            }
+            $phpWord->setValue('tugas',implode("</w:t><w:br/><w:t>",$list_tugas));
             $phpWord->setValue('pengalaman',implode("</w:t><w:br/><w:t>",$list_pengalaman));
             $phpWord->setComplexBlock('{table}', $table);
             header("Content-type: application/msword");
@@ -411,9 +419,10 @@ class Lembaga extends CI_Controller {
             $n=0;
             $table->addRow();
             $table->addCell(150)->addText("NO.");
-            $table->addCell(4000)->addText("Nama Pelatihan");
-            $table->addCell(2000)->addText("Tahun");
-            $table->addCell(3000)->addText("Penyelenggara");
+            $table->addCell(3000)->addText("Materi");
+            $table->addCell(1500)->addText("Waktu Pelaksanaan");
+            $table->addCell(2000)->addText("No.Sertifikat");
+            $table->addCell(2000)->addText("Penyelenggara");
             $phpWord = new TemplateProcessor('assets/template/kalibrasi.docx');
             $list_pelatihan = array();
             foreach ($porto as $p){
@@ -421,9 +430,15 @@ class Lembaga extends CI_Controller {
                 $table->addCell()->addText(++$n);
                 $table->addCell()->addText($p->nama_pelatihan);
                 $table->addCell()->addText($p->tahun_pelatihan);
+                $table->addCell()->addText("");
                 $table->addCell()->addText($p->penyelenggara);
                 $isi=$p->nama_pelatihan.' ('.$p->penyelenggara.' tahun '.$p->tahun_pelatihan.')';
                 array_push($list_pelatihan, $isi);
+            }
+            if($isi==NULL){
+                $phpWord->setValue('pelatihan',"");
+            }else{
+                $phpWord->setValue('pelatihan_lampiran',"Terlampir FLPK6.1-3/0 Rekaman Pelatihan");
             }
             $phpWord->setValue('pelatihan',implode("</w:t><w:br/><w:t>",$list_pelatihan));
             foreach ($sdm as $s){
@@ -463,6 +478,13 @@ class Lembaga extends CI_Controller {
                 array_push($list_pengalaman, $isi);
             }
             $phpWord->setValue('pengalaman',implode("</w:t><w:br/><w:t>",$list_pengalaman));
+            $list_tugas =array();
+            $no=0;
+            foreach($tugas as $t){
+                $isi=++$no.". ".$t->tugas;
+                array_push($list_tugas, $isi);
+            }
+            $phpWord->setValue('tugas',implode("</w:t><w:br/><w:t>",$list_tugas));
             
             $phpWord->setComplexBlock('{table}', $table);
             header("Content-type: application/msword");

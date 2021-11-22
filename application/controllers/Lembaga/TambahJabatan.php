@@ -90,6 +90,11 @@ class TambahJabatan extends CI_Controller {
            $jabatan = $this->m_data->tampil_Jabatan($idlem, $nip, 'pengalaman');
            return $jabatan->result();
     }
+    public function tampil_tugas($nip,$idlem)
+    {
+           $jabatan = $this->m_data->tampil_Jabatan($idlem, $nip, 'tugas');
+           return $jabatan->result();
+    }
     public function EditJabatan()
     {
         $nip=$this->input->post('nip');
@@ -126,6 +131,23 @@ class TambahJabatan extends CI_Controller {
 			'tahun'=>$tahun
 		);
 		$this->m_data->UbahData($where, $data, 'pengalaman');
+		redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
+    }
+    public function EditTugas()
+    {
+        $nip=$this->input->post('nip');
+		$id=$this->input->post('id');
+        $idlem=$this->uri->segment(4);
+        $nama=$this->input->post('nama');
+		$tugas=$this->input->post('tugas');
+		$where=array(
+			'nip'=>$nip,
+			'id'=>$id
+		);
+		$data=array(
+			'tugas'=>$tugas
+		);
+		$this->m_data->UbahData($where, $data, 'tugas');
 		redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
     }
     public function jabatan_all()
@@ -204,6 +226,20 @@ class TambahJabatan extends CI_Controller {
         $this->m_data->tambahJabatan('pengalaman',$data);
         redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$id.'/'.$nama);
     }
+    public function tambah_tugas()
+    {
+        $nip=$this->uri->segment(4);
+        $id=$this->uri->segment(5);
+        $nama=$this->uri->segment(6);
+        $pengalaman=$this->input->post('tugas');
+        $data=array(
+            'id_lembaga'=>$id,
+            'nip'=>$nip,
+            'tugas'=>$pengalaman
+        );
+        $this->m_data->tambahJabatan('tugas',$data);
+        redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$id.'/'.$nama);
+    }
     public function hapusJabatan()
     {
         $nip=$this->uri->segment(4);
@@ -229,6 +265,15 @@ class TambahJabatan extends CI_Controller {
         $idlem=$this->uri->segment(5);
         $nama=$this->uri->segment(6);
         $this->m_data->hapus_jabatan($id, 'pengalaman');
+        redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
+    }
+    public function hapusTugas()
+    {
+        $nip=$this->uri->segment(4);
+        $id=$this->uri->segment(7);
+        $idlem=$this->uri->segment(5);
+        $nama=$this->uri->segment(6);
+        $this->m_data->hapus_jabatan($id, 'tugas');
         redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
     }
 
