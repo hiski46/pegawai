@@ -103,6 +103,12 @@
                             }else{
                               $surat=base_url('assets/sertifikat/'.$p->surat_kerja);
                             }
+                            if($p->bukti==''){
+                              $bukti='';
+                              
+                            }else{
+                              $bukti=base_url('assets/sertifikat/'.$p->bukti);
+                            }
                             ?>
                           <ul><li class="mb--3 ml--4" >
                             <div class="dropdown">
@@ -111,6 +117,7 @@
                                 <a class="dropdown-item"  href="<?= $sertifikat?>">Sertifikat</a> 
                                 <a class="dropdown-item" href="<?= $eval?>">Evaluasi</a>
                                 <a class="dropdown-item" href="<?= $surat?>">Nota Dinas</a> 
+                                <a class="dropdown-item" href="<?= $bukti?>">Bukti</a> 
                       
                               </div>
                             </div>

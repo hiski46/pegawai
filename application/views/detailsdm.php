@@ -577,6 +577,14 @@
                                   <div class=" row p-2">
                                     <label class="form-control-label col-3" for="sertifikat">Ubah Nota Dinas (Format Pdf): </label> <input class="ml-0 btn btn-secondary col-9" name="kerja-baru" type="file">
                                   </div>
+                                  <div class="row p-2">
+                                    <label class="form-control-label col-3" for="bukti-lama">Bukti</label>
+                                    <input class="p-2" type="hidden" name="bukti-lama" value="<?=$p->bukti?>">
+                                    <a href="<?=base_url('assets/sertifikat/'.$p->bukti);?>" target="_blank"><label ><?=$p->bukti?></label></a>
+                                  </div>
+                                  <div class=" row p-2">
+                                    <label class="form-control-label col-3" for="bukti-baru">Ubah Bukti (Format Pdf): </label> <input class="ml-0 btn btn-secondary col-9" name="bukti-baru" type="file">
+                                  </div>
                                   <input class="p-2" type="hidden" name="nip" value="<?=$p->nip?>">
                                   <div class=" row d-flex justify-content-around text-center">
                                     <button  class="btn btn-primary btn- my-4 col-2" value=""  type="submit">Simpan Perubahan</button>

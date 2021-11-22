@@ -133,10 +133,12 @@ class DetailSdm extends CI_Controller {
 		$serti_lama=$this->input->post('sertifikat-lama');
 		$eval_lama=$this->input->post('eval-lama');
 		$kerja_lama=$this->input->post('kerja-lama');
+		$bukti_lama=$this->input->post('bukti-lama');
 
 		$file = $_FILES['sertifikat-baru']['name'];
 		$evaluasi = $_FILES['evaluasi-baru']['name'];
 		$kerja = $_FILES['kerja-baru']['name'];
+		$bukti = $_FILES['bukti-baru']['name'];
 		
 
 		
@@ -198,6 +200,21 @@ class DetailSdm extends CI_Controller {
 				$kerja = $this->upload->data('file_name');
 			}									
 		}
+		if($bukti == '' ){
+			$bukti=$bukti_lama;
+		}else{
+			
+
+			$this->load->library('upload', $config);
+				
+			if(!$this->upload->do_upload('bukti-baru')){
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Upload Surat bukti Gagal </div>');
+				redirect('InputPorto');
+				die;
+			}else{
+				$bukti = $this->upload->data('file_name');
+			}									
+		}
 
 			$data = array(
 				'nama_pelatihan'=>$pelatihan,
@@ -206,7 +223,8 @@ class DetailSdm extends CI_Controller {
 				'penyelenggara'=>$penye,
 				'sertifikat'=>$file,
 				'form_evaluasi'=>$evaluasi,
-				'surat_kerja'=>$kerja
+				'surat_kerja'=>$kerja,
+				'bukti'=>$bukti
 			);
 				$where  = array('id_portofolio' => $id );
 				$this->m_data->UbahPorto($where,$data);

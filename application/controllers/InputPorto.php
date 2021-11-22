@@ -28,6 +28,7 @@ class InputPorto extends CI_Controller {
 		$file = $_FILES['sertifikat']['name'];
 		$evaluasi = $_FILES['evaluasi']['name'];
 		$kerja = $_FILES['kerja']['name'];
+		$bukti = $_FILES['bukti']['name'];
 		$this->session->set_flashdata('nip',$nip);
 		$this->session->set_flashdata('nama_sdm',$nama);
 
@@ -86,6 +87,20 @@ class InputPorto extends CI_Controller {
 				$kerja = $this->upload->data('file_name');
 			}									
 		}
+		if($bukti == '' ){
+			$bukti = '';
+		}else{
+
+			$this->load->library('upload', $config);
+				
+			if(!$this->upload->do_upload('bukti')){
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Upload sertifikat Gagal </div>');
+				redirect('InputPorto');
+				die;
+			}else{
+				$bukti = $this->upload->data('file_name');
+			}									
+		}
 
 			$data = array(
 				'nama_pelatihan'=>$pelatihan,
@@ -94,7 +109,8 @@ class InputPorto extends CI_Controller {
 				'penyelenggara'=>$penyelenggara,
 				'sertifikat'=>$file,
 				'form_evaluasi'=>$evaluasi,
-				'surat_kerja' =>$kerja
+				'surat_kerja' =>$kerja,
+				'bukti' =>$bukti
 			);
 				$this->m_data->tambah($data,'portofolio');
 				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">  Anda Berhasil Menambahkan Portofolio. Silahkan isi form dibawah apabila masih ada portofolio</div>');
