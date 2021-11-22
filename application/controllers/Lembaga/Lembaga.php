@@ -453,10 +453,18 @@ class Lembaga extends CI_Controller {
                 $phpWord->setValue('telepon_kantor',$s->telepon_kantor);
                 $phpWord->setValue('telepon_rumah',$s->telepon_rumah);
             }
+            $list_jabatan=array();
+            $list_tmt=array();
             foreach ($jabatan as $j){
-                $phpWord->setValue('jabatan',$j->jabatan);
-                $phpWord->setValue('tmt_jabatan',$j->tmt);
+                $isi=$j->jabatan;
+                $isi_t=$j->tmt;
+                array_push($list_jabatan, $isi);
+                array_push($list_tmt, $isi_t);
+                // $phpWord->setValue('jabatan',$j->jabatan);
+                // $phpWord->setValue('tmt_jabatan',$j->tmt);
             }
+            $phpWord->setValue('jabatan',implode("</w:t><w:br/><w:t>",$list_jabatan));
+            $phpWord->setValue('tmt_jabatan',implode("</w:t><w:br/><w:t>",$list_tmt));
             $list_Rjabatan=array();
             foreach ($riwayat_jabatan as $j){
                 $isi=$j->tahun.' - '.$j->jabatan;
@@ -481,7 +489,7 @@ class Lembaga extends CI_Controller {
             $list_tugas =array();
             $no=0;
             foreach($tugas as $t){
-                $isi=++$no.". ".$t->tugas;
+                $isi=++$no.". ".$t->tugas." (".$t->jabatan.")";
                 array_push($list_tugas, $isi);
             }
             $phpWord->setValue('tugas',implode("</w:t><w:br/><w:t>",$list_tugas));

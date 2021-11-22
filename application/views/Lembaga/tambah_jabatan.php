@@ -163,7 +163,7 @@
                 <ul>
                 <?php foreach($this->CI->tampil_tugas($nip,$idlem) as $t){?>
                     <div class="row">
-                     <li class="ml--2 col-9"><?=$t->tugas?> <a href="" data-toggle="modal" data-target="#modal_edit_tugas<?=$t->id?>" class="text-success">Edit</a>|<a href="<?=base_url('Lembaga/TambahJabatan/hapusTugas/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$t->id)?>" class="text-danger">Hapus</a> </li>
+                     <li class="ml--2 col-9"><?=$t->tugas." (".$t->jabatan.")"?> <a href="" data-toggle="modal" data-target="#modal_edit_tugas<?=$t->id?>" class="text-success">Edit</a>|<a href="<?=base_url('Lembaga/TambahJabatan/hapusTugas/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$t->id)?>" class="text-danger">Hapus</a> </li>
                     </div>
                     <div class="modal fade" id="modal_edit_tugas<?=$t->id?>" tabindex="-1" role="dialog" >
                       <div class="modal-dialog">
@@ -185,7 +185,8 @@
                                 </div>
                                 <div class="row mt-2">
                                   <input class="p-2 " type="hidden" name="id" value="<?=$t->id?>">
-
+                                  <label class="mr-2 col-3" for="jabatan">Jabatan </label>
+                                  <input class="p-2" type="text" name="jabatan" value="<?=$t->jabatan?>">
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -344,6 +345,10 @@
                 <div class = "row mb-4">
                   <label class="col-3" for="tugas">Tugas</label>
                   <input class ="col-8" type="text" name="tugas" placeholder="Masukkan Tugas"> 
+                </div>
+                <div class = "row mb-4">
+                  <label class="col-3" for="tugas">Jabatan</label>
+                  <input class ="col-5" type="text" name="jabatan" placeholder="Masukkan Jabatan"> 
                 </div>
                 <button type="submit" class="btn btn-primary"> Tambah </button>
             </form>

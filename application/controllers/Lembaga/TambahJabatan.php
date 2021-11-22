@@ -140,12 +140,14 @@ class TambahJabatan extends CI_Controller {
         $idlem=$this->uri->segment(4);
         $nama=$this->input->post('nama');
 		$tugas=$this->input->post('tugas');
+		$jabatan=$this->input->post('jabatan');
 		$where=array(
 			'nip'=>$nip,
 			'id'=>$id
 		);
 		$data=array(
-			'tugas'=>$tugas
+			'tugas'=>$tugas,
+			'jabatan'=>$jabatan
 		);
 		$this->m_data->UbahData($where, $data, 'tugas');
 		redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
@@ -232,10 +234,12 @@ class TambahJabatan extends CI_Controller {
         $id=$this->uri->segment(5);
         $nama=$this->uri->segment(6);
         $pengalaman=$this->input->post('tugas');
+        $jabatan=$this->input->post('jabatan');
         $data=array(
             'id_lembaga'=>$id,
             'nip'=>$nip,
-            'tugas'=>$pengalaman
+            'tugas'=>$pengalaman,
+            'jabatan'=>$jabatan
         );
         $this->m_data->tambahJabatan('tugas',$data);
         redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$id.'/'.$nama);
