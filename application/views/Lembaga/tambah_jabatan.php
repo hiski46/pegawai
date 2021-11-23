@@ -178,7 +178,8 @@
                             <form action="<?= base_url('Lembaga/TambahJabatan/EditTugas/'.$idlem)?>" method="POST">
                               <div class=row>
                                   <label class="mr-2 col-3" for="nip">Tugas </label>
-                                  <input class="p-2" type="text" name="tugas" value="<?=$t->tugas?>">
+                                  <!-- <input class="p-2" type="text" name="tugas" value=""> -->
+                                  <textarea name="tugas" id="" cols="30" rows="10" style="white-space: pre-wrap;"><?=$t->tugas?></textarea>
                                   <input class="p-2" type="hidden" name="nip" value="<?=$t->nip?>">
                                   <input class="p-2" type="hidden" name="nama" value="<?=$nama?>">
                                   
@@ -344,7 +345,7 @@
             <form action="<?= base_url('Lembaga/TambahJabatan/tambah_tugas/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6))?>" method="POST">
                 <div class = "row mb-4">
                   <label class="col-3" for="tugas">Tugas</label>
-                  <input class ="col-8" type="text" name="tugas" placeholder="Masukkan Tugas"> 
+                  <textarea name="tugas" id="tugas" cols="30" rows="10" style="white-space: pre-wrap;" placeholder="masukkan tugas"></textarea> 
                 </div>
                 <div class = "row mb-4">
                   <label class="col-3" for="tugas">Jabatan</label>

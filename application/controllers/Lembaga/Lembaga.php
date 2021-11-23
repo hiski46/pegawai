@@ -489,7 +489,7 @@ class Lembaga extends CI_Controller {
             $list_tugas =array();
             $no=0;
             foreach($tugas as $t){
-                $isi=++$no.". ".$t->tugas." (".$t->jabatan.")";
+                $isi="(".$t->jabatan.")".$t->tugas;
                 array_push($list_tugas, $isi);
             }
             $phpWord->setValue('tugas',implode("</w:t><w:br/><w:t>",$list_tugas));
