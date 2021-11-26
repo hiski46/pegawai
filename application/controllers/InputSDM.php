@@ -33,6 +33,8 @@ class InputSDM extends CI_Controller {
 		$jk= $this->input->post('jk');
 		$status= $this->input->post('status');
 		$tahun= $this->input->post('tahun');
+		$jabatan= $this->input->post('jabatan');
+		$tmt_jabatan= $this->input->post('tmt_jabatan');
 
 		$lspro=$this->input->post('lspro');
 		$lit=$this->input->post('lit');
@@ -53,6 +55,8 @@ class InputSDM extends CI_Controller {
 				'pendidikan_terakhir' => $pendidikanTerakhir,
 				'telepon_kantor' => $telepon_kantor,
 				'telepon_rumah' => $telepon,
+				'jabatan_terakhir' => $jabatan,
+				'tmt_jabatan' => $tmt_jabatan,
 
 			);
 

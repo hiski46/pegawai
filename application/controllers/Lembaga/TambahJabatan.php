@@ -95,6 +95,11 @@ class TambahJabatan extends CI_Controller {
            $jabatan = $this->m_data->tampil_Jabatan($idlem, $nip, 'tugas');
            return $jabatan->result();
     }
+    public function tampil_penjenjangan($nip,$idlem)
+    {
+           $jabatan = $this->m_data->tampil_Jabatan($idlem, $nip, 'penjenjangan');
+           return $jabatan->result();
+    }
     public function EditJabatan()
     {
         $nip=$this->input->post('nip');
@@ -150,6 +155,25 @@ class TambahJabatan extends CI_Controller {
 			'jabatan'=>$jabatan
 		);
 		$this->m_data->UbahData($where, $data, 'tugas');
+		redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
+    }
+    public function EditPenjenjangan()
+    {
+        $nip=$this->input->post('nip');
+		$id=$this->input->post('id');
+        $idlem=$this->uri->segment(4);
+        $nama=$this->input->post('nama');
+		$penjenjangan=$this->input->post('penjenjangan');
+		$tahun=$this->input->post('tahun');
+		$where=array(
+			'nip'=>$nip,
+			'id'=>$id
+		);
+		$data=array(
+			'penjenjangan'=>$penjenjangan,
+			'tahun'=>$tahun
+		);
+		$this->m_data->UbahData($where, $data, 'penjenjangan');
 		redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
     }
     public function jabatan_all()
@@ -210,6 +234,22 @@ class TambahJabatan extends CI_Controller {
             'tahun'=>$tahun
         );
         $this->m_data->tambahJabatan('riwayat_jabatan',$data);
+        redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$id.'/'.$nama);
+    }
+    public function tambah_penjenjangan()
+    {
+        $nip=$this->uri->segment(4);
+        $id=$this->uri->segment(5);
+        $nama=$this->uri->segment(6);
+        $penjenjangan=$this->input->post('penjenjangan');
+        $tahun=$this->input->post('tahun');
+        $data=array(
+            'id_lembaga'=>$id,
+            'nip'=>$nip,
+            'penjenjangan'=>$penjenjangan,
+            'tahun'=>$tahun
+        );
+        $this->m_data->tambahJabatan('penjenjangan',$data);
         redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$id.'/'.$nama);
     }
     public function tambah_pengalaman()
@@ -280,6 +320,16 @@ class TambahJabatan extends CI_Controller {
         $this->m_data->hapus_jabatan($id, 'tugas');
         redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
     }
+    public function hapusPenjenjangan()
+    {
+        $nip=$this->uri->segment(4);
+        $id=$this->uri->segment(7);
+        $idlem=$this->uri->segment(5);
+        $nama=$this->uri->segment(6);
+        $this->m_data->hapus_jabatan($id, 'penjenjangan');
+        redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$idlem.'/'.$nama);
+    }
+    
 
     public function tambahRuangLingkup()
     {

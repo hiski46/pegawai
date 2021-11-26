@@ -66,58 +66,65 @@
                     <td><?= $s->nip;?></td>
                     <td><?= $s->nama;?></td>
                     <td>
+                      <ul>
                       <?php foreach ($this->CI->tampilPendidikan($s->nip) as $pd){ ?> 
-                        <ul>
-                          <li class="mb--3 ml--4">
+                          <li class="">
                             <?=$pd->pendidikan?>
                           </li>
+                          <?php }?>
                         </ul>
-                      <?php }?>
                     </td>
-                    <td><?php 
+                    <td>
+                    <ol>
+                      <?php 
                         foreach($this->CI->portofolio($s->nip)->result() as $p){
-                        if($p->sertifikat==''){
-                            $sertifikat=base_url('Caridata');
-                            
-                          }else{
-                            $sertifikat=base_url('assets/sertifikat/'.$p->sertifikat);
-                          }
-                          if($p->form_evaluasi==''){
-                            $eval='';
-                            
-                          }else{
-                            $eval=base_url('assets/sertifikat/'.$p->form_evaluasi);
-                          }
-                          if($p->surat_kerja==''){
-                            $surat='';
-                            
-                          }else{
-                            $surat=base_url('assets/sertifikat/'.$p->surat_kerja);
-                          }
-                          if($p->bukti==''){
-                            $bukti='';
-                            
-                          }else{
-                            $bukti=base_url('assets/sertifikat/'.$p->bukti);
-                          }
-                          ?>
-                        <ul><li class="mb--3 ml--4" >
-                          <div class="dropdown">
-                            <button type="button" class="dropdown-toggle btn btn-link btn-sm" type="button" id="drop" data-toggle="dropdown"> <?=$p->nama_pelatihan;?> </button> 
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item"  href="<?= $sertifikat?>">Sertifikat</a> 
-                              <a class="dropdown-item" href="<?= $eval?>">Evaluasi</a>
-                              <a class="dropdown-item" href="<?= $surat?>">Nota Dinas</a> 
-                              <a class="dropdown-item" href="<?= $bukti?>">Bukti</a>
+                          if($p->sertifikat==''){
+                              $sertifikat=base_url('Caridata');
+                              
+                            }else{
+                              $sertifikat=base_url('assets/sertifikat/'.$p->sertifikat);
+                            }
+                            if($p->form_evaluasi==''){
+                              $eval='';
+                              
+                            }else{
+                              $eval=base_url('assets/sertifikat/'.$p->form_evaluasi);
+                            }
+                            if($p->surat_kerja==''){
+                              $surat='';
+                              
+                            }else{
+                              $surat=base_url('assets/sertifikat/'.$p->surat_kerja);
+                            }
+                            if($p->bukti==''){
+                              $bukti='';
+                              
+                            }else{
+                              $bukti=base_url('assets/sertifikat/'.$p->bukti);
+                            }
+                            ?>
+                          <li class="mb--2  ml--4" >
+                            <div class="dropdown">
+                              <button type="button" class="dropdown-toggle btn btn-link btn-sm" type="button" id="drop" data-toggle="dropdown"> <?=$p->nama_pelatihan;?> </button> 
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item"  href="<?= $sertifikat?>">Sertifikat</a> 
+                                <a class="dropdown-item" href="<?= $eval?>">Evaluasi</a>
+                                <a class="dropdown-item" href="<?= $surat?>">Nota Dinas</a> 
+                                <a class="dropdown-item" href="<?= $bukti?>">Bukti</a> 
+                      
+                              </div>
                             </div>
-                          </div>
-                        </li></ul>
-                        <?php }?>
+                          </li>
+                          <?php }?>
+                        </ol>
                     </td>
-                    <td><?php 
+                    <td>
+                    <ol>
+                      <?php 
                         foreach($this->CI->portofolio($s->nip)->result() as $p){?>
-                        <ul><li class="mb--3 ml--4" ><?=$p->tahun_pelatihan;?></li></ul>
+                        <li class="" ><?=$p->tahun_pelatihan;?></li>
                         <?php }?>
+                        </ol>   
                     </td>
                     <td class='pb-3 pt-2'>
                         <?php foreach($this->CI->cekLembaga($s->nip) as $l){?>

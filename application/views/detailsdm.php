@@ -57,13 +57,23 @@
             <p class="col-6 "><strong>: <?=$s->tmt_pangkat?></strong> </p> 
             <a data-toggle="modal" data-target="#modal_tmtpangkat" href="#" class="col-1  ">ubah</a>
         </div>
+        <div class="row  pl-8">
+            <h4 class="col-3">Jabatan Terakhir</h4>
+            <p class="col-6 "><strong>: <?=$s->jabatan_terakhir?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_jabatan_terakhir" href="#" class="col-1  ">ubah</a>
+        </div>
+        <div class="row bg-white pl-8">
+            <h4 class="col-3">TMT Jabatan Terakhir</h4>
+            <p class="col-6 "><strong>: <?=$s->tmt_jabatan?></strong> </p> 
+            <a data-toggle="modal" data-target="#modal_tmtjabatan" href="#" class="col-1  ">ubah</a>
+        </div>
         <!-- <div class="row  pl-8">
             <h4 class="col-3">Pendidikan Terakhir</h4>
             <p class="col-6 "><strong>: <?=$s->pendidikan_terakhir?></strong> </p> 
             <a data-toggle="modal" data-target="#modal_pendidikan_terakhir" href="#" class="col-1  ">ubah</a>
         </div> -->
         <div class="row pl-8">
-            <h4 class="col-3">Riwayat Pendidikan</h4>
+            <h4 class="col-3">Pendidikan</h4>
             <div class="col-6">
 
               <?php foreach ($pendidikan as $pd){ ?> 
@@ -481,6 +491,32 @@
                       <form action="<?= base_url('DetailSdm/UbahBanyak/telepon_rumah')?>" method="POST">
                           <label class="mr-2 row" for="nama"></label>
                           <input class="p-2" type="text" name="telepon_rumah" value="<?=$s->telepon_rumah?>">
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_jabatan_terakhir" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah jabatan Terakhir</h5>
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/jabatan_terakhir')?>" method="POST">
+                          <label class="mr-2 row" for="jabatan_terakhir"></label>
+                          <input class="p-2" type="text" name="jabatan_terakhir" value="<?=$s->jabatan_terakhir?>">
                           <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

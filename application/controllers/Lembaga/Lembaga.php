@@ -264,6 +264,7 @@ class Lembaga extends CI_Controller {
         $pendidikan=$this->m_data->tampilPendidikan($nip);
         $pengalaman = $this->m_data->tampil_Jabatan($id, $nip, 'pengalaman')->result();
         $tugas = $this->m_data->tampil_Jabatan($id, $nip, 'tugas')->result();
+        $penjenjangan = $this->m_data->tampil_Jabatan($id, $nip, 'penjenjangan')->result();
         if($id==1){
             $phpWord = new TemplateProcessor('assets/template/lspro.docx');
             foreach ($sdm as $s){
@@ -277,17 +278,24 @@ class Lembaga extends CI_Controller {
                 $phpWord->setValue('alamat',$s->alamat);
                 $phpWord->setValue('telepon_kantor',$s->telepon_kantor);
                 $phpWord->setValue('telepon_rumah',$s->telepon_rumah);
+                $phpWord->setValue('jabatan_terakhir',$s->jabatan_terakhir);
+                $phpWord->setValue('tmt_jabatan',$s->tmt_jabatan);
             }
-            foreach ($jabatan as $j){
-                $phpWord->setValue('jabatan',$j->jabatan);
-                $phpWord->setValue('tmt_jabatan',$j->tmt);
-            }
+            // foreach ($jabatan as $j){
+                
+            // }
             $list_Rjabatan=array();
             foreach ($riwayat_jabatan as $j){
                 $isi=$j->tahun.' - '.$j->jabatan;
                 array_push($list_Rjabatan, $isi);
             }
             $phpWord->setValue('riwayat_jabatan',implode("</w:t><w:br/><w:t>",$list_Rjabatan));
+            $list_penjenjangan=array();
+            foreach ($penjenjangan as $j){
+                $isi=$j->tahun.' - '.$j->penjenjangan;
+                array_push($list_penjenjangan, $isi);
+            }
+            $phpWord->setValue('penjenjangan',implode("</w:t><w:br/><w:t>",$list_penjenjangan));
             $list_pendidikan = array();
             foreach ($pendidikan as $j){
                 $isi=$j->tahun.' - '.$j->pendidikan;
@@ -324,17 +332,23 @@ class Lembaga extends CI_Controller {
                 $phpWord->setValue('alamat',$s->alamat);
                 $phpWord->setValue('telepon_kantor',$s->telepon_kantor);
                 $phpWord->setValue('telepon_rumah',$s->telepon_rumah);
+                $phpWord->setValue('jabatan_terakhir',$s->jabatan_terakhir);
+                $phpWord->setValue('tmt_jabatan',$s->tmt_jabatan);
             }
-            foreach ($jabatan as $j){
-                $phpWord->setValue('jabatan',$j->jabatan);
-                $phpWord->setValue('tmt_jabatan',$j->tmt);
-            }
+            // foreach ($jabatan as $j){
+            // }
             $list_Rjabatan=array();
             foreach ($riwayat_jabatan as $j){
                 $isi=$j->tahun.' - '.$j->jabatan;
                 array_push($list_Rjabatan, $isi);
             }
             $phpWord->setValue('riwayat_jabatan',implode("</w:t><w:br/><w:t>",$list_Rjabatan));
+            $list_penjenjangan=array();
+            foreach ($penjenjangan as $j){
+                $isi=$j->tahun.' - '.$j->penjenjangan;
+                array_push($list_penjenjangan, $isi);
+            }
+            $phpWord->setValue('penjenjangan',implode("</w:t><w:br/><w:t>",$list_penjenjangan));
             $list_pendidikan = array();
             foreach ($pendidikan as $j){
                 $isi=$j->tahun.' - '.$j->pendidikan;
@@ -365,10 +379,13 @@ class Lembaga extends CI_Controller {
                 $phpWord->setValue('nama',$s->nama);
                 
             }
+            $list_jabatan=array();
             foreach ($jabatan as $j){
-                $phpWord->setValue('jabatan',$j->jabatan);
-                $phpWord->setValue('tmt_jabatan',$j->tmt);
+                $isi=$j->jabatan;
+                $isi_t=$j->tmt;
+                array_push($list_jabatan, $isi);
             }
+            $phpWord->setValue('jabatan',implode("</w:t><w:br/><w:t>",$list_jabatan));
             $list_pendidikan = array();
             foreach ($pendidikan as $j){
                 $isi=$j->tahun.' - '.$j->pendidikan;
@@ -398,7 +415,7 @@ class Lembaga extends CI_Controller {
             $list_tugas =array();
             $no=0;
             foreach($tugas as $t){
-                $isi=++$no.". ".$t->tugas;
+                $isi="(".$t->jabatan.")".$t->tugas;
                 array_push($list_tugas, $isi);
             }
             $phpWord->setValue('tugas',implode("</w:t><w:br/><w:t>",$list_tugas));
@@ -435,11 +452,11 @@ class Lembaga extends CI_Controller {
                 $isi=$p->nama_pelatihan.' ('.$p->penyelenggara.' tahun '.$p->tahun_pelatihan.')';
                 array_push($list_pelatihan, $isi);
             }
-            if($isi==NULL){
-                $phpWord->setValue('pelatihan',"");
-            }else{
-                $phpWord->setValue('pelatihan_lampiran',"Terlampir FLPK6.1-3/0 Rekaman Pelatihan");
-            }
+            // if($isi==NULL){
+            //     $phpWord->setValue('pelatihan',"");
+            // }else{
+            //     $phpWord->setValue('pelatihan_lampiran',"Terlampir FLPK6.1-3/0 Rekaman Pelatihan");
+            // }
             $phpWord->setValue('pelatihan',implode("</w:t><w:br/><w:t>",$list_pelatihan));
             foreach ($sdm as $s){
                 $phpWord->setValue('nama',$s->nama);
@@ -452,19 +469,17 @@ class Lembaga extends CI_Controller {
                 $phpWord->setValue('alamat',$s->alamat);
                 $phpWord->setValue('telepon_kantor',$s->telepon_kantor);
                 $phpWord->setValue('telepon_rumah',$s->telepon_rumah);
+                $phpWord->setValue('jabatan_terakhir',$s->jabatan_terakhir);
+                $phpWord->setValue('tmt_jabatan',$s->tmt_jabatan);
             }
             $list_jabatan=array();
-            $list_tmt=array();
             foreach ($jabatan as $j){
-                $isi=$j->jabatan;
-                $isi_t=$j->tmt;
-                array_push($list_jabatan, $isi);
-                array_push($list_tmt, $isi_t);
+                $isij=$j->jabatan;
+                array_push($list_jabatan, $isij);
                 // $phpWord->setValue('jabatan',$j->jabatan);
                 // $phpWord->setValue('tmt_jabatan',$j->tmt);
             }
             $phpWord->setValue('jabatan',implode("</w:t><w:br/><w:t>",$list_jabatan));
-            $phpWord->setValue('tmt_jabatan',implode("</w:t><w:br/><w:t>",$list_tmt));
             $list_Rjabatan=array();
             foreach ($riwayat_jabatan as $j){
                 $isi=$j->tahun.' - '.$j->jabatan;

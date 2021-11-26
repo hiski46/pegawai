@@ -75,15 +75,17 @@
                     <td><?= $s->nip;?></td>
                     <td><?= $s->nama;?></td>
                     <td>
+                      <ul>
                       <?php foreach ($this->CI->tampilPendidikan($s->nip) as $pd){ ?> 
-                        <ul>
-                          <li class="mb--3 ml--4">
+                          <li class="">
                             <?=$pd->pendidikan?>
                           </li>
+                          <?php }?>
                         </ul>
-                      <?php }?>
                     </td>
-                    <td><?php 
+                    <td>
+                    <ol>
+                      <?php 
                         foreach($this->CI->portofolio($s->nip)->result() as $p){
                           if($p->sertifikat==''){
                               $sertifikat=base_url('Caridata');
@@ -110,7 +112,7 @@
                               $bukti=base_url('assets/sertifikat/'.$p->bukti);
                             }
                             ?>
-                          <ul><li class="mb--3 ml--4" >
+                          <li class="mb--2 ml--4" >
                             <div class="dropdown">
                               <button type="button" class="dropdown-toggle btn btn-link btn-sm" type="button" id="drop" data-toggle="dropdown"> <?=$p->nama_pelatihan;?> </button> 
                               <div class="dropdown-menu">
@@ -121,14 +123,15 @@
                       
                               </div>
                             </div>
-                          </li></ul>
+                          </li>
                           <?php }?>
+                        </ol>
                     </td>
-                    <td><?php 
+                    <td><ol><?php 
                         foreach($this->CI->portofolio($s->nip)->result() as $p){?>
-                        <ul><li class="mb--3 ml--4" ><?=$p->tahun_pelatihan;?></li></ul>
+                        <li class="" ><?=$p->tahun_pelatihan;?></li>
                         <?php }?>
-                    </td>
+                        </ol></td>
                     <td class='pb-3 pt-2'>
                         <?php foreach($this->CI->cekLembaga($s->nip) as $l){?>
                             <ul><li class="mb--3 ml--4" ><?=$l?></li></ul>   

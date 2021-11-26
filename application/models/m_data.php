@@ -99,6 +99,7 @@ function __construct()
 	{
 		$this->db->select('*');
 		$this->db->from('sdm');
+		$this->db->order_by('nama', 'ASC');
 		$this->db->limit($limit,$offset);
 
 		return $this->db->get();

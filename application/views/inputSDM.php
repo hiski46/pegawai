@@ -78,6 +78,14 @@
                           <input type="text" id="tmt_pangkat" name="tmt_pangkat" class="form-control col-9" placeholder="Masukkan TMT Pangkat" >
                         </div>
                         <div class="row p-2">
+                          <label class="form-control-label col-3" for="jabatan">Jabatan Terakhir</label>
+                          <input type="text" id="jabatan" name="jabatan" class="form-control col-9" placeholder="Masukkan Jabatan Terakhir" >
+                        </div>
+                        <div class="row p-2">
+                          <label class="form-control-label col-3" for="tmt_jabatan">TMT Jabatan</label>
+                          <input type="text" id="tmt_jabatan" name="tmt_jabatan" class="form-control col-9" placeholder="Masukkan TMT Jabatan" >
+                        </div>
+                        <div class="row p-2">
                           <label class="form-control-label col-3" for="ttl">Tempat Tanggal Lahir</label>
                           <input type="text" id="ttl" name="ttl" class="form-control col-9" placeholder="Masukkan Tempat Tanggal Lahir" >
                         </div>
