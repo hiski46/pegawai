@@ -53,14 +53,14 @@
         <table class="table bg-white">
             <thead>
                 <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">NIP</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Jabatan</th>
-                    <!-- <th scope="col">Ruang Lingkup</th>
-                    <th scope="col">Kelompok Produk</th>
-                    <th scope="col">Sub. Kelompok Produk</th> -->
-                    <th scope="col">aksi</th>
+                    <th class="text-center" scope="col">No.</th>
+                    <th class="text-center" scope="col">NIP</th>
+                    <th class="text-center" scope="col">Nama</th>
+                    <th class="text-center" scope="col">Jabatan</th>
+                    <!-- <th class="text-center" scope="col">Ruang Lingkup</th>
+                    <th class="text-center" scope="col">Kelompok Produk</th>
+                    <th class="text-center" scope="col">Sub. Kelompok Produk</th> -->
+                    <th class="text-center" scope="col">aksi</th>
                 </tr>
             </thead>
             <tbody>

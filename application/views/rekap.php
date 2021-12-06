@@ -48,13 +48,13 @@
         <table class="table bg-white">
             <thead>
                 <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">NIP</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Pendidikan Terakhir</th>
-                    <th scope="col">Portofolio</th>
-                    <th scope="col">Tahun</th>
-                    <th scope="col">Lembaga</th>
+                    <th class="text-center" scope="col">No.</th>
+                    <th class="text-center" scope="col">NIP</th>
+                    <th class="text-center" scope="col">Nama</th>
+                    <th class="text-center" scope="col">Pendidikan Terakhir</th>
+                    <th class="text-center" scope="col">Portofolio</th>
+                    <th class="text-center" scope="col">Tahun</th>
+                    <th class="text-center" scope="col">Lembaga</th>
                 </tr>
             </thead>
             <tbody>
