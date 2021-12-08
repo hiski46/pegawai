@@ -312,6 +312,32 @@
               </div>
             <?php } ?>
             <?php foreach ($sdm as $s) { ?>
+              <div class="modal fade" id="modal_tmtjabatan" tabindex="-1" role="dialog" >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ubah TMT Jabatan</h5>git 
+                      <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="<?= base_url('DetailSdm/UbahBanyak/tmt_jabatan')?>" method="POST">
+                          <label class="mr-2 row" for="nama">TMT Jabatan</label>
+                          <input class="p-2" type="text" name="tmt_jabatan" value="<?=$s->tmt_jabatan?>">
+                          <input class="p-2" type="hidden" name="nip" value="<?=$s->nip?>">
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <input type="submit" class="btn btn-primary" value="Ubah">
+                          </div>
+                      </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+            <?php foreach ($sdm as $s) { ?>
               <div class="modal fade" id="modal_pendidikan_terakhir" tabindex="-1" role="dialog" >
                 <div class="modal-dialog">
                   <div class="modal-content">
