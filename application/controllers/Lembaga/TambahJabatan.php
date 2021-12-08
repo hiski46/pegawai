@@ -90,9 +90,9 @@ class TambahJabatan extends CI_Controller {
            $jabatan = $this->m_data->tampil_Jabatan($idlem, $nip, 'pengalaman');
            return $jabatan->result();
     }
-    public function tampil_tugas($nip,$idlem)
+    public function tampil_tugas($nip,$idlem,$idjab)
     {
-           $jabatan = $this->m_data->tampil_Jabatan($idlem, $nip, 'tugas');
+           $jabatan = $this->m_data->tampil_Tugas($idlem, $nip,$idjab, 'tugas');
            return $jabatan->result();
     }
     public function tampil_penjenjangan($nip,$idlem)
@@ -275,11 +275,13 @@ class TambahJabatan extends CI_Controller {
         $nama=$this->uri->segment(6);
         $pengalaman=$this->input->post('tugas');
         $jabatan=$this->input->post('jabatan');
+        $id_jabatan=$this->input->post('id_jabatan');
         $data=array(
             'id_lembaga'=>$id,
             'nip'=>$nip,
             'tugas'=>$pengalaman,
-            'jabatan'=>$jabatan
+            'jabatan'=>$jabatan,
+            'id_jabatan'=>$id_jabatan
         );
         $this->m_data->tambahJabatan('tugas',$data);
         redirect('Lembaga/TambahJabatan/menu/'.$nip.'/'.$id.'/'.$nama);

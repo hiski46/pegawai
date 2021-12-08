@@ -159,51 +159,95 @@
         </div>
         <div class="row pl-8">
             <h4 class="col-3">Rincian Tugas </h4>
-            <div class="col-6">
-                <ul>
-                <?php foreach($this->CI->tampil_tugas($nip,$idlem) as $t){?>
+            <div class="col-9">
+                <ol>
+                <?php foreach($this->CI->tampil_jabatan($nip,$idlem) as $jabatan){?>
                     <div class="row">
-                     <li class="ml--2 col-9"><?=$t->tugas." (".$t->jabatan.")"?> <a href="" data-toggle="modal" data-target="#modal_edit_tugas<?=$t->id?>" class="text-success">Edit</a>|<a href="<?=base_url('Lembaga/TambahJabatan/hapusTugas/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$t->id)?>" class="text-danger">Hapus</a> </li>
+                     <li class="ml--2 col-9"><?=$jabatan->jabatan?> <a  data-toggle="modal" data-target="#tambah_tugas<?=$jabatan->id?>" href="#" class=" ml-4 col-1">Tambah Rincian Tugas</a>
+                        <ul>
+                      <?php foreach($this->CI->tampil_tugas($nip,$idlem,$jabatan->id) as $t){?>
+                          <div class="row">
+                            <li class="ml--2 col-9"><?=$t->tugas?> <a href="" data-toggle="modal" data-target="#modal_edit_tugas<?=$t->id?>" class="text-success">Edit</a>|<a href="<?=base_url('Lembaga/TambahJabatan/hapusTugas/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6).'/'.$t->id)?>" class="text-danger">Hapus</a> </li>
+                          </div>
+                          <div class="modal fade" id="modal_edit_tugas<?=$t->id?>" tabindex="-1" role="dialog" >
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Edit Tugas</h5>
+                                  <button class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form action="<?= base_url('Lembaga/TambahJabatan/EditTugas/'.$idlem)?>" method="POST">
+                                    <div class=row>
+                                        <label class="mr-2 col-3" for="nip">Tugas </label>
+                                        <!-- <input class="p-2" type="text" name="tugas" value=""> -->
+                                        <textarea name="tugas" id="" cols="30" rows="10" style="white-space: pre-wrap;"><?=$t->tugas?></textarea>
+                                        <input class="p-2" type="hidden" name="nip" value="<?=$t->nip?>">
+                                        <input class="p-2" type="hidden" name="nama" value="<?=$nama?>">
+                                        
+                                      </div>
+                                      <div class="row mt-2">
+                                        <input class="p-2 " type="hidden" name="id" value="<?=$t->id?>">
+                                        <label class="mr-2 col-3" for="jabatan">Jabatan </label>
+                                        <input class="p-2" type="text" name="jabatan" value="<?=$t->jabatan?>">
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                        <input type="submit" class="btn btn-primary" value="Ubah">
+                                      </div>
+                                  </form>
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </div>                  
+                      <?php } ?>
+                     </ul>
+                    </li>
                     </div>
-                    <div class="modal fade" id="modal_edit_tugas<?=$t->id?>" tabindex="-1" role="dialog" >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">Edit Tugas</h5>
-                            <button class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <form action="<?= base_url('Lembaga/TambahJabatan/EditTugas/'.$idlem)?>" method="POST">
-                              <div class=row>
-                                  <label class="mr-2 col-3" for="nip">Tugas </label>
-                                  <!-- <input class="p-2" type="text" name="tugas" value=""> -->
-                                  <textarea name="tugas" id="" cols="30" rows="10" style="white-space: pre-wrap;"><?=$t->tugas?></textarea>
-                                  <input class="p-2" type="hidden" name="nip" value="<?=$t->nip?>">
-                                  <input class="p-2" type="hidden" name="nama" value="<?=$nama?>">
-                                  
-                                </div>
-                                <div class="row mt-2">
-                                  <input class="p-2 " type="hidden" name="id" value="<?=$t->id?>">
-                                  <label class="mr-2 col-3" for="jabatan">Jabatan </label>
-                                  <input class="p-2" type="text" name="jabatan" value="<?=$t->jabatan?>">
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                  <input type="submit" class="btn btn-primary" value="Ubah">
-                                </div>
-                            </form>
-                          </div>
-                          
-                        </div>
-                      </div>
-                    </div>                  
+                    
                 <?php } ?>
-                </ul>
+                </ol>
             </div>
-            <a  data-toggle="modal" data-target="#tambah_tugas" href="#" class=" ml-4 col-1">Tambah</a>           
+                       
         </div>
+        <?php foreach($this->CI->tampil_jabatan($nip,$idlem) as $jabatan){?> 
+          
+          
+          <!--Modal Tambah Tugas  -->
+          <div class="modal fade bd-example-modal-lg" id="tambah_tugas<?=$jabatan->id?>" tabindex="-1" role="dialog" >
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Tambah Tugas</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body ">
+                    <p class="">Masukkan Tugas <strong class="ml-1"> </p>
+                    <form action="<?= base_url('Lembaga/TambahJabatan/tambah_tugas/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$this->uri->segment(6))?>" method="POST">
+                        <div class = "row mb-4">
+                          <label class="col-3" for="tugas">Jabatan</label>
+                          <p class="col-3" for="tugas"><?=$jabatan->jabatan?></p>
+                          <input class ="col-5" type="hidden" name="jabatan" value="<?=$jabatan->jabatan?>"> 
+                          <input class ="col-5" type="hidden" name="id_jabatan" value=<?=$jabatan->id?>> 
+                        </div>
+                        <div class = "row mb-4">
+                          <label class="col-3" for="tugas">Tugas</label>
+                          <textarea name="tugas" id="tugas" cols="30" rows="10" style="white-space: pre-wrap;" placeholder="masukkan tugas"></textarea> 
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary"> Tambah </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          <?php } ?>
         <div class="row pl-8">
             <h4 class="col-3">Penjenjangan </h4>
             <div class="col-6">

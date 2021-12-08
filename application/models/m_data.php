@@ -51,6 +51,14 @@ function __construct()
 		// die;
 		return $this->db->get();
 	}
+	function tampil_Tugas($idlem,$nip,$idjab,$tabel){
+		$this->db->select('*');
+		$this->db->from($tabel);
+		$this->db->where(array('nip'=>$nip, 'id_lembaga'=>$idlem, 'id_jabatan'=>$idjab));
+		// var_dump($this->db->get());
+		// die;
+		return $this->db->get();
+	}
 	function tampilJabatan($idlem,$nip,$tabel){
 		$this->db->select('*');
 		$this->db->from($tabel);

@@ -412,15 +412,27 @@ class Lembaga extends CI_Controller {
                 $isi=$pl->tahun.' - '.$pl->pengalaman;
                 array_push($list_pengalaman, $isi);
             }
-            $list_tugas =array();
-            $no=0;
-            foreach($tugas as $t){
-                $isi="(".$t->jabatan.")".$t->tugas;
-                array_push($list_tugas, $isi);
-            }
-            $phpWord->setValue('tugas',implode("</w:t><w:br/><w:t>",$list_tugas));
             $phpWord->setValue('pengalaman',implode("</w:t><w:br/><w:t>",$list_pengalaman));
+
+            // table tugas
+            $table_tugas = new Table(array('unit' => TblWidth::TWIP,'borderSize' => 6, 'borderColor' => 'ffffff', 'cellMargin' => 80, 'align'=>'left' ));
+            foreach ($jabatan as $j){
+                $table_tugas->addRow();
+                $table_tugas->addCell()->addText($j->jabatan,array('bold' => true, 'size' => 12, 'underline' => 'single'));
+    
+                $list_tugas =array();
+                $no=0;
+                foreach($this->m_data->tampil_Tugas($id, $nip, $j->id, 'tugas')->result() as $t){
+                    $isi=++$no.". ".$t->tugas;
+                    array_push($list_tugas, $isi);
+                }
+                $table_tugas->addRow();
+                $table_tugas->addCell()->addText(implode("</w:t><w:br/><w:t>",$list_tugas),array( 'size' => 12));
+                
+            }
+
             $phpWord->setComplexBlock('{table}', $table);
+            $phpWord->setComplexBlock('{table_tugas}', $table_tugas);
             header("Content-type: application/msword");
             header("Content-Disposition: attachment; filename='".$nama."-lab_uji.docx'");
             $phpWord->saveAs('php://output');
@@ -501,15 +513,26 @@ class Lembaga extends CI_Controller {
                 array_push($list_pengalaman, $isi);
             }
             $phpWord->setValue('pengalaman',implode("</w:t><w:br/><w:t>",$list_pengalaman));
-            $list_tugas =array();
-            $no=0;
-            foreach($tugas as $t){
-                $isi="(".$t->jabatan.")".$t->tugas;
-                array_push($list_tugas, $isi);
+
+            $table_tugas = new Table(array('unit' => TblWidth::TWIP,'borderSize' => 6, 'borderColor' => 'ffffff', 'cellMargin' => 80, 'align'=>'left' ));
+            // table tugas
+            foreach ($jabatan as $j){
+                $table_tugas->addRow();
+                $table_tugas->addCell()->addText($j->jabatan,array('bold' => true, 'size' => 12, 'underline' => 'single'));
+    
+                $list_tugas =array();
+                $no=0;
+                foreach($this->m_data->tampil_Tugas($id, $nip, $j->id, 'tugas')->result() as $t){
+                    $isi=++$no.". ".$t->tugas;
+                    array_push($list_tugas, $isi);
+                }
+                $table_tugas->addRow();
+                $table_tugas->addCell()->addText(implode("</w:t><w:br/><w:t>",$list_tugas),array( 'size' => 12));
+                
             }
-            $phpWord->setValue('tugas',implode("</w:t><w:br/><w:t>",$list_tugas));
             
             $phpWord->setComplexBlock('{table}', $table);
+            $phpWord->setComplexBlock('{table_tugas}', $table_tugas);
             header("Content-type: application/msword");
             header("Content-Disposition: attachment; filename='".$nama."-kalibrasi.docx'");
             $phpWord->saveAs('php://output');
