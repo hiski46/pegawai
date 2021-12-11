@@ -83,25 +83,25 @@
                       <?php 
                         foreach($this->CI->portofolio($s->nip)->result() as $p){
                           if($p->sertifikat==''){
-                              $sertifikat=base_url('Caridata');
+                              $sertifikat='#';
                               
                             }else{
                               $sertifikat=base_url('assets/sertifikat/'.$p->sertifikat);
                             }
                             if($p->form_evaluasi==''){
-                              $eval='';
+                              $eval='#';
                               
                             }else{
                               $eval=base_url('assets/sertifikat/'.$p->form_evaluasi);
                             }
                             if($p->surat_kerja==''){
-                              $surat='';
+                              $surat='#';
                               
                             }else{
                               $surat=base_url('assets/sertifikat/'.$p->surat_kerja);
                             }
                             if($p->bukti==''){
-                              $bukti='';
+                              $bukti='#';
                               
                             }else{
                               $bukti=base_url('assets/sertifikat/'.$p->bukti);
