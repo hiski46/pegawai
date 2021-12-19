@@ -119,7 +119,7 @@ class Caridata extends CI_Controller {
         $ev=$this->m_data->cari_eval($nip);
 
         foreach ($ser as $s){
-            $path_ser='./assets/sertifikat/'.$s->sertifikat;
+            $path_ser=base_url("assets/sertifikat/".$s->sertifikat);
             if (file_exists($path_ser)) {
                 // last resort setting
                 // chmod($oldPicture, 0777);
@@ -129,7 +129,7 @@ class Caridata extends CI_Controller {
                 } 
         }
         foreach ($ev as $e){
-            $path_eval='./assets/sertifikat/'.$e->form_evaluasi;
+            $path_eval=base_url("assets/sertifikat/".$s->sertifikat);
             if (file_exists($path_eval)) {
                     // last resort setting
                     // chmod($oldPicture, 0777);
@@ -154,6 +154,7 @@ class Caridata extends CI_Controller {
         $this->m_data->hapusJabatan('riwayat_jabatan',$nip);
         $this->m_data->hapusJabatan('pengalaman',$nip);
         $this->m_data->hapusJabatan('tugas',$nip);
+        $this->m_data->hapusJabatan('penjenjangan',$nip);
 
         $this->m_data->hapusSdm($nip);
 
